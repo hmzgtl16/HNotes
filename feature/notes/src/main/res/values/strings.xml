@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_notes_title">Notes</string>
+    <string name="feature_notes_loading">Loading notes…</string>
+    <string name="feature_notes_empty_error">Your note list is empty!</string>
+    <string name="feature_notes_empty_description">Jot down your thoughts, ideas, or to-dos by tapping button below.</string>
+    <string name="feature_notes_removed">Note removed</string>
+    <string name="feature_notes_undo">UNDO</string>
+    <string name="feature_notes_add_note">Add note</string>
+    <string name="feature_notes_note_untitled">Untitled note</string>
+    <string name="feature_notes_pinned_group">Pinned</string>
+    <string name="feature_notes_unpinned_group">Others</string>
+    <string name="feature_notes_select_all">Select all</string>
+    <string name="feature_notes_no_selected_notes">Select notes</string>
+    <plurals name="feature_notes_selected_notes">
+        <item quantity="one">1 note selected</item>
+        <item quantity="other">%1$d notes selected</item>
+    </plurals>
+    <plurals name="feature_notes_removed_notes">
+        <item quantity="one">1 note removed</item>
+        <item quantity="other">%1$d notes removed</item>
+    </plurals>
+</resources>
+

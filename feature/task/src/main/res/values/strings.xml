@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_task_title_placeholder">Title</string>
+    <string name="feature_task_last_edit">Edited %1$s\\</string>
+    <string name="feature_task_reminder_picker_title">Set reminder</string>
+    <string name="feature_task_reminder_picker_repeat_mode">Repeat</string>
+    <string name="feature_task_reminder_picker_cancel">Cancel</string>
+    <string name="feature_task_reminder_picker_confirm">Confirm</string>
+    <string name="feature_task_set_reminder">Set reminder</string>
+    <string name="feature_task_reminder_picker_delete">Delete</string>
+    <string name="feature_task_done">Done</string>
+    <string name="feature_task_mark_as_completed">Mark as completed</string>
+</resources>

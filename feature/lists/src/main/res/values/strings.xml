@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_lists_title">Lists</string>
+    <string name="feature_lists_loading">Loading lists…</string>
+    <string name="feature_lists_empty_error">You don\'t have any lists</string>
+    <string name="feature_lists_empty_description">Jot down your thoughts, ideas, or to-dos by tapping button below.</string>
+    <string name="feature_lists_removed">List removed</string>
+    <string name="feature_lists_undo">UNDO</string>
+    <string name="feature_lists_add_list">Add list</string>
+    <string name="feature_lists_pinned_group">Pinned</string>
+    <string name="feature_lists_unpinned_group">Others</string>
+    <string name="feature_lists_select_all">Select all</string>
+    <string name="feature_lists_no_selected_lists">Select lists</string>
+    <plurals name="feature_lists_selected_lists">
+        <item quantity="one">1 list selected</item>
+        <item quantity="other">%1$d lists selected</item>
+    </plurals>
+    <plurals name="feature_lists_removed_lists">
+        <item quantity="one">1 list removed</item>
+        <item quantity="other">%1$d lists removed</item>
+    </plurals>
+</resources>

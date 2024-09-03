@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_tasks_title">Tasks</string>
+    <string name="feature_tasks_loading">Loading tasks…</string>
+    <string name="feature_tasks_empty_error">Your task list is empty!</string>
+    <string name="feature_tasks_empty_description">Jot down your thoughts, ideas, or to-dos by tapping button below</string>
+    <string name="feature_tasks_removed">Task removed</string>
+    <string name="feature_tasks_undo">UNDO</string>
+    <string name="feature_tasks_add_task">Add task</string>
+    <string name="feature_tasks_task_untitled">Untitled task</string>
+    <string name="feature_tasks_completed_group">Completed</string>
+    <string name="feature_tasks_uncompleted_group">Upcoming</string>
+    <string name="feature_tasks_select_all">Select all</string>
+    <string name="feature_tasks_no_selected_tasks">Select tasks</string>
+    <plurals name="feature_tasks_selected_tasks">
+        <item quantity="one">1 task selected</item>
+        <item quantity="other">%1$d tasks selected</item>
+    </plurals>
+    <plurals name="feature_tasks_removed_tasks">
+        <item quantity="one">1 task removed</item>
+        <item quantity="other">%1$d tasks removed</item>
+    </plurals>
+    
+</resources>

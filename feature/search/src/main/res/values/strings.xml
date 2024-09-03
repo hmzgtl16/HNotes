@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_search_recent_searches">Recent</string>
+    <string name="feature_search_clear_all_recent_searches">Clear all</string>
+    <string name="feature_search_clear_recent_searches_content_desc">Clear searches</string>
+    <string name="feature_search_clear_search_content_desc">Clear search</string>
+    <string name="feature_search_result_not_found">Sorry, there is no content found for your search \"%1$s\"</string>
+    <string name="feature_search_loading_search_result">Loading results…</string>
+    <string name="feature_search_notes">Notes</string>
+    <string name="feature_search_tasks">Tasks</string>
+    <string name="feature_search_lists">Lists</string>
+</resources>

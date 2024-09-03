@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_list_last_edit">Edited \%1$s\</string>
+    <string name="feature_list_title_placeholder">Title</string>
+    <string name="feature_list_delete_list_confirm">Delete</string>
+    <string name="feature_list_delete_list_dismiss">Cancel</string>
+    <string name="feature_list_delete_list_title">Delete \'%1$s\'?</string>
+    <string name="feature_list_title_unspecified">Untitled note</string>
+    <string name="feature_list_delete_list_description">Are you sure you want to delete this list?</string>
+    <string name="feature_list_item_placeholder">Item</string>
+    <string name="feature_list_add_item_placeholder">List item</string>
+    <plurals name="feature_list_completed_items">
+        <item quantity="one">1 completed item</item>
+        <item quantity="other">%1$d completed items</item>
+    </plurals>
+</resources>

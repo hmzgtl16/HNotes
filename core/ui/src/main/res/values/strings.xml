@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="core_ui_repeat_mode_none">Once</string>
+    <string name="core_ui_repeat_mode_daily">Daily</string>
+    <string name="core_ui_repeat_mode_weekly">Weekly</string>
+    <string name="core_ui_repeat_mode_monthly">Monthly</string>
+    <string name="core_ui_repeat_mode_yearly">Yearly</string>
+    <string name="core_ui_note_untitled">Untitled note</string>
+    <string name="core_ui_task_untitled">Untitled task</string>
+    <string name="core_ui_list_untitled">Untitled list</string>
+    <string name="core_ui_list_item_placeholder">List item</string>
+    <string name="core_ui_palette_modal_bottom_sheet_title">Background color</string>
+</resources>

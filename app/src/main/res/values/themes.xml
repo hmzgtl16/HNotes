@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="NightAdjusted.Theme.HNotes" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.HNotes" parent="NightAdjusted.Theme.HNotes" />
+
+    <style name="NightAdjusted.Theme.SplashScreen" parent="Theme.SplashScreen">
+        <item name="android:windowLightStatusBar" >true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+    <style name="Theme.HNotes.Splash" parent="NightAdjusted.Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
+        <item name="postSplashScreenTheme">@style/Theme.HNotes</item>
+    </style>
+
+</resources>
