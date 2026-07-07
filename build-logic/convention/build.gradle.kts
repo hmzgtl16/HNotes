@@ -52,8 +52,16 @@ gradlePlugin {
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("androidFeature") {
-            id = libs.plugins.hnotes.android.feature.get().pluginId
+            id = libs.plugins.hnotes.android.feature.asProvider().get().pluginId
             implementationClass = "AndroidFeatureConventionPlugin"
+        }
+        register("androidFeatureApi") {
+            id = libs.plugins.hnotes.android.feature.api.get().pluginId
+            implementationClass = "AndroidFeatureApiConventionPlugin"
+        }
+        register("androidFeatureImpl") {
+            id = libs.plugins.hnotes.android.feature.impl.get().pluginId
+            implementationClass = "AndroidFeatureImplConventionPlugin"
         }
         register("hilt") {
             id = libs.plugins.hnotes.hilt.get().pluginId
