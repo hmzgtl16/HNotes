@@ -11,6 +11,7 @@ android {
 
 dependencies {
     api(libs.androidx.navigation.compose)
+    api(libs.androidx.navigation3.runtime)
 
     implementation(libs.org.jetbrains.kotlinx.coroutines.core)
 }
