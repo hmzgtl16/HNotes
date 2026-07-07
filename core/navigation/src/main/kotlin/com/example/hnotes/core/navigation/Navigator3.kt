@@ -1,19 +1,13 @@
 package com.example.hnotes.core.navigation
 
 import androidx.navigation3.runtime.NavKey
+import kotlinx.coroutines.flow.SharedFlow
 
-class Navigator3(
-    val state: NavigationState
-) {
+interface Navigator3 {
 
-    fun navigateTo(navKey: NavKey) {
-        state.backStack.apply {
-            remove(navKey)
-            add(navKey)
-        }
-    }
+    val events: SharedFlow<Navigation3Event>
 
-    fun navigateBack() {
-        state.backStack.removeLastOrNull()
-    }
+    suspend fun navigateTo(navKey: NavKey)
+
+    suspend fun navigateBack()
 }
