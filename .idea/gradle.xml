@@ -19,7 +19,6 @@
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="D:\Tools\Gradle\gradle-9.5.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -45,6 +44,7 @@
             <option value="$PROJECT_DIR$/feature/settings" />
           </set>
         </option>
+        <option name="myGradleHome" value="D:\Tools\Gradle\gradle-9.6.1" />
       </GradleProjectSettings>
     </option>
   </component>

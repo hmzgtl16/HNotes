@@ -33,7 +33,7 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("debug")
-            baselineProfile.automaticGenerationDuringBuild = true
+            // baselineProfile.automaticGenerationDuringBuild = true
         }
     }
 
