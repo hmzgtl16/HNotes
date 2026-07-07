@@ -31,7 +31,7 @@ class AndroidFeatureImplConventionPlugin : Plugin<Project> {
 
                 add(
                     "implementation",
-                    libs.findLibrary("androidx-hilt-navigation-compose").get()
+                    libs.findLibrary("androidx-navigation3-runtime").get()
                 )
                 add(
                     "implementation",
@@ -40,6 +40,10 @@ class AndroidFeatureImplConventionPlugin : Plugin<Project> {
                 add(
                     "implementation",
                     libs.findLibrary("androidx-lifecycle-viewmodel-compose").get()
+                )
+                add(
+                    "implementation",
+                    libs.findLibrary("androidx-hilt-navigation-compose").get()
                 )
 
                 add(
