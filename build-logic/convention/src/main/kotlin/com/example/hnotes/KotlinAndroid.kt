@@ -50,7 +50,8 @@ private inline fun <reified T : KotlinBaseExtension> Project.configureKotlin() =
         freeCompilerArgs.addAll(
             "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
             "-Xconsistent-data-class-copy-visibility",
-            "-Xannotation-default-target=param-property"
+            "-Xannotation-default-target=param-property",
+            "-XXLanguage:+ExplicitBackingFields"
         )
     }
 }
