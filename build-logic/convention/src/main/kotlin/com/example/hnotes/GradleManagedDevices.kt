@@ -5,7 +5,7 @@ import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.invoke
 
 internal fun configureGradleManagedDevices(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+    commonExtension: CommonExtension,
 ) {
     val pixel9 = DeviceConfig(
         device = "Pixel 9",
@@ -18,7 +18,8 @@ internal fun configureGradleManagedDevices(
         systemImageSource = "google"
     )
 
-    commonExtension.testOptions {
+    commonExtension.testOptions.apply {
+        @Suppress("UnstableApiUsage")
         managedDevices {
             localDevices {
                 maybeCreate(pixel9.taskName).apply {

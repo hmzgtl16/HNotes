@@ -1,4 +1,4 @@
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.example.hnotes.configureGradleManagedDevices
 import com.example.hnotes.configureKotlinAndroid
 import com.example.hnotes.libs
@@ -13,11 +13,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             apply(plugin = libs.findPlugin("com-android-library").get().get().pluginId)
-            apply(plugin = libs.findPlugin("org-jetbrains-kotlin-android").get().get().pluginId)
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
-                defaultConfig.targetSdk = 36
                 defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                 testOptions.animationsDisabled = true
                 configureGradleManagedDevices(this)

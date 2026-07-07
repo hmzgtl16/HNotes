@@ -26,13 +26,14 @@ android {
         }
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             applicationIdSuffix = BuildType.RELEASE.applicationIdSuffix
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("debug")
-            baselineProfile.automaticGenerationDuringBuild = true
+            // baselineProfile.automaticGenerationDuringBuild = true
         }
     }
 
