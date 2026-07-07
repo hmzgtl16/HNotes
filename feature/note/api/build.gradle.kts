@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.example.hnotes.feature.notes.api"
+    namespace = "com.example.hnotes.feature.note.api"
 }
