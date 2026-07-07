@@ -1,4 +1,4 @@
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.example.hnotes.configureAndroidCompose
 import com.example.hnotes.libs
 import org.gradle.api.Plugin

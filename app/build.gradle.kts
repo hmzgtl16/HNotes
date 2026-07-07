@@ -26,6 +26,7 @@ android {
         }
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             applicationIdSuffix = BuildType.RELEASE.applicationIdSuffix
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
