@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_settings_dismiss_dialog_button_text">OK</string>
+    <string name="feature_settings_loading">Loading…</string>
+    <string name="feature_settings_title">Settings</string>
+    <string name="feature_settings_theme">Theme</string>
+    <string name="feature_settings_theme_follow_system">Follow system</string>
+    <string name="feature_settings_theme_dark">Dark</string>
+    <string name="feature_settings_theme_light">Light</string>
+    <string name="feature_settings_dynamic_theme">Use Dynamic Color</string>
+</resources>
