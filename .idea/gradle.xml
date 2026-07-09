@@ -49,6 +49,7 @@
             <option value="$PROJECT_DIR$/feature/search/impl" />
             <option value="$PROJECT_DIR$/feature/settings" />
             <option value="$PROJECT_DIR$/feature/settings/api" />
+            <option value="$PROJECT_DIR$/feature/settings/impl" />
           </set>
         </option>
         <option name="myGradleHome" value="D:\Tools\Gradle\gradle-9.6.1" />
