@@ -9,4 +9,5 @@ android {
 
 dependencies {
     implementation(projects.feature.note.api)
+    implementation(projects.feature.search.api)
 }
