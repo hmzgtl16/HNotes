@@ -40,6 +40,7 @@
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/note" />
             <option value="$PROJECT_DIR$/feature/note/api" />
+            <option value="$PROJECT_DIR$/feature/note/impl" />
             <option value="$PROJECT_DIR$/feature/notes" />
             <option value="$PROJECT_DIR$/feature/notes/api" />
             <option value="$PROJECT_DIR$/feature/notes/impl" />
