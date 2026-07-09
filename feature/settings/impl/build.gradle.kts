@@ -9,4 +9,5 @@ android {
 
 dependencies {
     implementation(projects.feature.settings.api)
+    implementation(libs.androidx.navigation3.ui)
 }
