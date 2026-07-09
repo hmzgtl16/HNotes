@@ -16,7 +16,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.hnotes.core.design.theme.AppTheme
-import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.core.navigation.Navigator3
 import com.example.hnotes.ui.Nav3App
 import com.example.hnotes.ui.rememberNav3AppState
@@ -27,9 +26,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    @Inject
-    lateinit var navigator: Navigator
 
     @Inject
     lateinit var navigator3: Navigator3
