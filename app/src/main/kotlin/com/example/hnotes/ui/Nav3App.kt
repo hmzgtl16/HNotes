@@ -45,7 +45,6 @@ import com.example.hnotes.core.navigation.Navigator3
 import com.example.hnotes.feature.search.api.navigation.SearchNavKey
 import com.example.hnotes.feature.settings.api.navigation.SettingsNavKey
 import com.example.hnotes.navigation.AppNavDisplay
-import com.example.hnotes.navigation.AppNavHost
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
