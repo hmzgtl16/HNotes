@@ -8,6 +8,7 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.example.hnotes.feature.note.impl.navigation.noteEntry
 import com.example.hnotes.feature.notes.impl.navigation.notesEntry
+import com.example.hnotes.feature.search.impl.navigation.searchEntry
 import com.example.hnotes.ui.Nav3AppState
 
 @Composable
@@ -18,6 +19,7 @@ fun AppNavDisplay(
     val entryProvider = entryProvider {
         notesEntry()
         noteEntry()
+        searchEntry()
     }
 
     NavDisplay(

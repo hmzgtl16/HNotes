@@ -59,6 +59,7 @@ dependencies {
     implementation(projects.feature.note)
     implementation(projects.feature.search)
     implementation(projects.feature.search.api)
+    implementation(projects.feature.search.impl)
     implementation(projects.feature.settings)
     implementation(projects.feature.settings.api)
 
