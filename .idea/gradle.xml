@@ -46,6 +46,7 @@
             <option value="$PROJECT_DIR$/feature/notes/impl" />
             <option value="$PROJECT_DIR$/feature/search" />
             <option value="$PROJECT_DIR$/feature/search/api" />
+            <option value="$PROJECT_DIR$/feature/search/impl" />
             <option value="$PROJECT_DIR$/feature/settings" />
             <option value="$PROJECT_DIR$/feature/settings/api" />
           </set>
