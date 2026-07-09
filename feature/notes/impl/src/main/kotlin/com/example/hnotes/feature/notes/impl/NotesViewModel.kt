@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hnotes.core.data.repository.NoteRepository
 import com.example.hnotes.core.model.Note
-import com.example.hnotes.core.navigation.Navigator3
+import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.feature.note.api.navigation.NoteNavKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -20,7 +20,7 @@ import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
 class NotesViewModel @Inject constructor(
-    private val navigator3: Navigator3,
+    private val navigator: Navigator,
     private val noteRepository: NoteRepository
 ) : ViewModel() {
 
@@ -138,6 +138,6 @@ class NotesViewModel @Inject constructor(
     }
 
     private fun navigateToNote(noteId: Long?) = viewModelScope.launch {
-        navigator3.navigateTo(navKey = NoteNavKey(noteId = noteId))
+        navigator.navigateTo(navKey = NoteNavKey(noteId = noteId))
     }
 }

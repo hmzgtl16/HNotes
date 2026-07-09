@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hnotes.core.data.repository.UserDataRepository
 import com.example.hnotes.core.model.Theme
-import com.example.hnotes.core.navigation.Navigator3
+import com.example.hnotes.core.navigation.Navigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val navigator3: Navigator3,
+    private val navigator: Navigator,
     private val userDataRepository: UserDataRepository,
 ) : ViewModel() {
 
@@ -50,7 +50,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     private fun navigateBack() = viewModelScope.launch {
-        navigator3.navigateBack()
+        navigator.navigateBack()
     }
 }
 

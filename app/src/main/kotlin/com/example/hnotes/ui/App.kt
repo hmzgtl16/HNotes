@@ -40,8 +40,8 @@ import com.example.hnotes.core.design.component.AppGradientBackground
 import com.example.hnotes.core.design.component.AppIconButton
 import com.example.hnotes.core.design.component.AppTopAppBar
 import com.example.hnotes.core.design.icon.AppIcons
-import com.example.hnotes.core.navigation.Navigation3Event
-import com.example.hnotes.core.navigation.Navigator3
+import com.example.hnotes.core.navigation.NavigationEvent
+import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.feature.search.api.navigation.SearchNavKey
 import com.example.hnotes.feature.settings.api.navigation.SettingsNavKey
 import com.example.hnotes.navigation.AppNavDisplay
@@ -49,9 +49,9 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Nav3App(
-    appState: Nav3AppState,
-    navigator: Navigator3,
+fun App(
+    appState: AppState,
+    navigator: Navigator,
     modifier: Modifier = Modifier,
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
 ) {
@@ -64,12 +64,12 @@ fun Nav3App(
                 block = {
                     navigator.events.collect {
                         when (it) {
-                            is Navigation3Event.NavigateTo -> {
+                            is NavigationEvent.NavigateTo -> {
                                 appState.navigationState.backStack.add(it.navKey)
 
                             }
 
-                            is Navigation3Event.NavigateBack -> {
+                            is NavigationEvent.NavigateBack -> {
                                 appState.navigationState.backStack.removeLastOrNull()
                             }
                         }

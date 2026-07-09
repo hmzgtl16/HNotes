@@ -9,7 +9,7 @@ import com.example.hnotes.core.navigation.rememberNavigationState
 import com.example.hnotes.feature.notes.api.navigation.NotesNavKey
 
 @Stable
-class Nav3AppState (
+class AppState (
     val navigationState: NavigationState
 ) {
 
@@ -22,10 +22,10 @@ class Nav3AppState (
 }
 
 @Composable
-fun rememberNav3AppState(): Nav3AppState {
+fun rememberAppState(): AppState {
     val navigationState = rememberNavigationState(NotesNavKey)
 
     return remember(navigationState) {
-        Nav3AppState(navigationState = navigationState)
+        AppState(navigationState = navigationState)
     }
 }

@@ -7,7 +7,7 @@ import org.junit.Before
 class NavigatorTest {
 
     private lateinit var navigationState: NavigationState
-    private lateinit var navigator: Navigator3
+    private lateinit var navigator: Navigator
 
     @Before
     fun setup() {
@@ -18,7 +18,7 @@ class NavigatorTest {
             startKey = startKey,
             backStack = backStack,
         )
-        navigator = Navigator3()
+        navigator = Navigator()
     }
 
 

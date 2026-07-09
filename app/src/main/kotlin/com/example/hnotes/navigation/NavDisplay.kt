@@ -10,11 +10,11 @@ import com.example.hnotes.feature.note.impl.navigation.noteEntry
 import com.example.hnotes.feature.notes.impl.navigation.notesEntry
 import com.example.hnotes.feature.search.impl.navigation.searchEntry
 import com.example.hnotes.feature.settings.impl.navigation.settingsEntry
-import com.example.hnotes.ui.Nav3AppState
+import com.example.hnotes.ui.AppState
 
 @Composable
 fun AppNavDisplay(
-    appState: Nav3AppState,
+    appState: AppState,
     modifier: Modifier = Modifier
 ) {
     val entryProvider = entryProvider {

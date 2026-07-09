@@ -4,16 +4,16 @@ import androidx.navigation3.runtime.NavKey
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
-class Navigator3Impl : Navigator3 {
+class NavigatorImpl : Navigator {
 
-    override val events: SharedFlow<Navigation3Event>
-        field = MutableSharedFlow<Navigation3Event>()
+    override val events: SharedFlow<NavigationEvent>
+        field = MutableSharedFlow<NavigationEvent>()
 
     override suspend fun navigateTo(navKey: NavKey) {
-        events.emit(value = Navigation3Event.NavigateTo(navKey = navKey))
+        events.emit(value = NavigationEvent.NavigateTo(navKey = navKey))
     }
 
     override suspend fun navigateBack() {
-        events.emit(value = Navigation3Event.NavigateBack)
+        events.emit(value = NavigationEvent.NavigateBack)
     }
 }

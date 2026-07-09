@@ -3,9 +3,9 @@ package com.example.hnotes.core.navigation
 import androidx.navigation3.runtime.NavKey
 import kotlinx.coroutines.flow.SharedFlow
 
-interface Navigator3 {
+interface Navigator {
 
-    val events: SharedFlow<Navigation3Event>
+    val events: SharedFlow<NavigationEvent>
 
     suspend fun navigateTo(navKey: NavKey)
 

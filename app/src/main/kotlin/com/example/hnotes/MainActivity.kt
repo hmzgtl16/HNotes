@@ -16,9 +16,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.hnotes.core.design.theme.AppTheme
-import com.example.hnotes.core.navigation.Navigator3
-import com.example.hnotes.ui.Nav3App
-import com.example.hnotes.ui.rememberNav3AppState
+import com.example.hnotes.core.navigation.Navigator
+import com.example.hnotes.ui.App
+import com.example.hnotes.ui.rememberAppState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var navigator3: Navigator3
+    lateinit var navigator: Navigator
 
     private val viewModel by viewModels<MainActivityViewModel>()
 
@@ -60,15 +60,15 @@ class MainActivity : ComponentActivity() {
         splashScreen.setKeepOnScreenCondition { viewModel.uiState.value.shouldKeepSplashScreen() }
 
         setContent {
-            val nav3AppState = rememberNav3AppState()
+            val nav3AppState = rememberAppState()
 
             AppTheme(
                 darkTheme = uiState.shouldUseDarkTheme(isSystemDarkTheme = isSystemInDarkTheme()),
                 enableDynamicTheming = uiState.shouldUseDynamicTheme,
                 content = {
-                    Nav3App(
+                    App(
                         appState = nav3AppState,
-                        navigator = navigator3,
+                        navigator = navigator,
                     )
                 }
             )

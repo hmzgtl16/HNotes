@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hnotes.core.data.repository.SearchRepository
 import com.example.hnotes.core.model.SearchQuery
-import com.example.hnotes.core.navigation.Navigator3
+import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.feature.note.api.navigation.NoteNavKey
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val navigator3: Navigator3,
+    private val navigator: Navigator,
     private val searchRepository: SearchRepository
 ) : ViewModel() {
 
@@ -92,11 +92,11 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun navigateToNote(noteId: Long) = viewModelScope.launch {
-        navigator3.navigateTo(navKey = NoteNavKey(noteId = noteId))
+        navigator.navigateTo(navKey = NoteNavKey(noteId = noteId))
     }
 
     private fun navigateBack() = viewModelScope.launch {
-        navigator3.navigateBack()
+        navigator.navigateBack()
     }
 
     companion object {

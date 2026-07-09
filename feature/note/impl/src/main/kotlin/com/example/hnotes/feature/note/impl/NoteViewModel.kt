@@ -7,7 +7,7 @@ import androidx.navigation.toRoute
 import com.example.hnotes.core.data.repository.NoteRepository
 import com.example.hnotes.core.model.Item
 import com.example.hnotes.core.model.Note
-import com.example.hnotes.core.navigation.Navigator3
+import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.core.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(
-    private val navigator3: Navigator3,
+    private val navigator: Navigator,
     private val noteRepository: NoteRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -195,7 +195,7 @@ class NoteViewModel @Inject constructor(
     private fun saveNote() = viewModelScope.launch {
         val currentState = uiState.value
         if (!currentState.isEdited) {
-            navigator3.navigateBack()
+            navigator.navigateBack()
             return@launch
         }
 
@@ -208,7 +208,7 @@ class NoteViewModel @Inject constructor(
             updated = Clock.System.now()
         ) ?: Note()
         noteRepository.upsertNote(note = noteToSave)
-        navigator3.navigateBack()
+        navigator.navigateBack()
     }
 
     private fun copyNote() = viewModelScope.launch {
@@ -224,14 +224,14 @@ class NoteViewModel @Inject constructor(
         )
 
         noteRepository.upsertNote(note = noteToCopy)
-        navigator3.navigateBack()
+        navigator.navigateBack()
     }
 
     private fun deleteNote() = viewModelScope.launch {
         val currentState = uiState.value
         val noteToDelete = currentState.note ?: return@launch
         noteRepository.deleteNote(note = noteToDelete)
-        navigator3.navigateBack()
+        navigator.navigateBack()
     }
 
     companion object {
