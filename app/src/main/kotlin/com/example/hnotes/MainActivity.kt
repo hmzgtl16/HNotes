@@ -15,10 +15,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation3.runtime.rememberNavBackStack
 import com.example.hnotes.core.design.theme.AppTheme
 import com.example.hnotes.core.navigation.Navigator
+import com.example.hnotes.core.navigation.Navigator3
+import com.example.hnotes.feature.notes.api.navigation.NotesNavKey
 import com.example.hnotes.ui.App
+import com.example.hnotes.ui.Nav3App
 import com.example.hnotes.ui.rememberAppState
+import com.example.hnotes.ui.rememberNav3AppState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -29,6 +34,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var navigator: Navigator
+
+    @Inject
+    lateinit var navigator3: Navigator3
 
     private val viewModel by viewModels<MainActivityViewModel>()
 
@@ -64,10 +72,25 @@ class MainActivity : ComponentActivity() {
                 navigator = navigator
             )
 
+            val nav3AppState = rememberNav3AppState()
+
+            /*
             AppTheme(
                 darkTheme = uiState.shouldUseDarkTheme(isSystemDarkTheme = isSystemInDarkTheme()),
                 enableDynamicTheming = uiState.shouldUseDynamicTheme,
                 content = { App(appState = appState) }
+            )
+            */
+
+            AppTheme(
+                darkTheme = uiState.shouldUseDarkTheme(isSystemDarkTheme = isSystemInDarkTheme()),
+                enableDynamicTheming = uiState.shouldUseDynamicTheme,
+                content = {
+                    Nav3App(
+                        appState = nav3AppState,
+                        navigator = navigator3,
+                    )
+                }
             )
         }
     }

@@ -52,9 +52,13 @@ android {
 
 dependencies {
     implementation(projects.feature.notes)
+    implementation(projects.feature.notes.api)
+    implementation(projects.feature.notes.impl)
     implementation(projects.feature.note)
     implementation(projects.feature.search)
+    implementation(projects.feature.search.api)
     implementation(projects.feature.settings)
+    implementation(projects.feature.settings.api)
 
     implementation(projects.core.data)
     implementation(projects.core.design)
@@ -64,7 +68,9 @@ dependencies {
     implementation(libs.androidx.core)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.compose.material3.adaptive)
+    implementation(libs.androidx.lifecycle.viewmodel.navigation3)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation3.ui)
     implementation(libs.org.jetbrains.kotlinx.serialization.json)
 
     baselineProfile(projects.benchmark)
