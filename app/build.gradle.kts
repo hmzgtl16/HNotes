@@ -51,16 +51,12 @@ android {
 }
 
 dependencies {
-    implementation(projects.feature.notes)
     implementation(projects.feature.notes.api)
     implementation(projects.feature.notes.impl)
     implementation(projects.feature.note.api)
     implementation(projects.feature.note.impl)
-    implementation(projects.feature.note)
-    implementation(projects.feature.search)
     implementation(projects.feature.search.api)
     implementation(projects.feature.search.impl)
-    implementation(projects.feature.settings)
     implementation(projects.feature.settings.api)
     implementation(projects.feature.settings.impl)
 
