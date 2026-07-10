@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 
-@HiltViewModel
+@HiltViewModel(assistedFactory = NoteViewModel.Factory::class)
 class NoteViewModel @AssistedInject constructor(
     private val navigator: Navigator,
     private val noteRepository: NoteRepository,
