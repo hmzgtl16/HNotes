@@ -1,6 +1,5 @@
 package com.example.hnotes.feature.note.impl
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
@@ -9,6 +8,10 @@ import com.example.hnotes.core.model.Item
 import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.core.navigation.Route
+import com.example.hnotes.feature.note.api.navigation.NoteNavKey
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,13 +19,12 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
-import javax.inject.Inject
 
 @HiltViewModel
-class NoteViewModel @Inject constructor(
+class NoteViewModel @AssistedInject constructor(
     private val navigator: Navigator,
     private val noteRepository: NoteRepository,
-    savedStateHandle: SavedStateHandle
+    @Assisted navKey: NoteNavKey
 ) : ViewModel() {
 
     val uiState: StateFlow<NoteUiState>
@@ -32,7 +34,7 @@ class NoteViewModel @Inject constructor(
     private val redoStack = ArrayDeque<EditableNoteState>()
 
     init {
-        savedStateHandle.toRoute<Route.Note>().noteId?.let { id ->
+        navKey.noteId?.let { id ->
             viewModelScope.launch {
                 noteRepository.getNoteById(id = id)
                     .filterNotNull()
@@ -232,6 +234,11 @@ class NoteViewModel @Inject constructor(
         val noteToDelete = currentState.note ?: return@launch
         noteRepository.deleteNote(note = noteToDelete)
         navigator.navigateBack()
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(navKey: NoteNavKey): NoteViewModel
     }
 
     companion object {

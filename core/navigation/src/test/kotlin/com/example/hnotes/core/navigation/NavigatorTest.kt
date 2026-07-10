@@ -18,7 +18,7 @@ class NavigatorTest {
             startKey = startKey,
             backStack = backStack,
         )
-        navigator = Navigator()
+        navigator = NavigatorImpl()
     }
 
 
