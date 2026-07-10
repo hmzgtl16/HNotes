@@ -34,6 +34,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.NavKey
 import com.example.hnotes.R
 import com.example.hnotes.core.design.component.AppBackground
 import com.example.hnotes.core.design.component.AppGradientBackground
@@ -52,6 +54,7 @@ import kotlinx.coroutines.launch
 fun App(
     appState: AppState,
     navigator: Navigator,
+    entryProvider: (NavKey) -> NavEntry<NavKey>,
     modifier: Modifier = Modifier,
     windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
 ) {
@@ -180,6 +183,7 @@ fun App(
                                     content = {
                                         AppNavDisplay(
                                             appState = appState,
+                                            entryProvider = entryProvider
                                         )
                                     }
                                 )
