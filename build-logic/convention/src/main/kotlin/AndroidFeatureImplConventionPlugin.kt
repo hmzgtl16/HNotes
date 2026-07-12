@@ -41,11 +41,6 @@ class AndroidFeatureImplConventionPlugin : Plugin<Project> {
                     "implementation",
                     libs.findLibrary("androidx-hilt-navigation-compose").get()
                 )
-
-                add(
-                    "testImplementation",
-                    libs.findLibrary("androidx-navigation-testing").get()
-                )
                 add(
                     "androidTestImplementation",
                     libs.findLibrary("androidx-compose-ui-test").get()

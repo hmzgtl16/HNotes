@@ -135,7 +135,6 @@ io-github-takahirom-roborazzi = { id = "io.github.takahirom.roborazzi", version.
 # Plugins defined by this project
 hnotes-android-application = { id = "hnotes.android.application" }
 hnotes-android-application-compose = { id = "hnotes.android.application.compose" }
-hnotes-android-feature = { id = "hnotes.android.feature" }
 hnotes-android-feature-api = { id = "hnotes.android.feature.api" }
 hnotes-android-feature-impl = { id = "hnotes.android.feature.impl" }
 hnotes-android-library = { id = "hnotes.android.library" }
