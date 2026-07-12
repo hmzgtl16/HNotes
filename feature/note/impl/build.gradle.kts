@@ -9,4 +9,6 @@ android {
 
 dependencies {
     implementation(projects.feature.note.api)
+
+    implementation(libs.androidx.compose.material3.adaptive.navigation3)
 }
