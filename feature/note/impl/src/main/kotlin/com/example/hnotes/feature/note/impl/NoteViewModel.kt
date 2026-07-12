@@ -2,12 +2,10 @@ package com.example.hnotes.feature.note.impl
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.toRoute
 import com.example.hnotes.core.data.repository.NoteRepository
 import com.example.hnotes.core.model.Item
 import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.navigation.Navigator
-import com.example.hnotes.core.navigation.Route
 import com.example.hnotes.feature.note.api.navigation.NoteNavKey
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
