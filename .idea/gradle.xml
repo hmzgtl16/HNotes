@@ -39,9 +39,17 @@
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/note" />
+            <option value="$PROJECT_DIR$/feature/note/api" />
+            <option value="$PROJECT_DIR$/feature/note/impl" />
             <option value="$PROJECT_DIR$/feature/notes" />
+            <option value="$PROJECT_DIR$/feature/notes/api" />
+            <option value="$PROJECT_DIR$/feature/notes/impl" />
             <option value="$PROJECT_DIR$/feature/search" />
+            <option value="$PROJECT_DIR$/feature/search/api" />
+            <option value="$PROJECT_DIR$/feature/search/impl" />
             <option value="$PROJECT_DIR$/feature/settings" />
+            <option value="$PROJECT_DIR$/feature/settings/api" />
+            <option value="$PROJECT_DIR$/feature/settings/impl" />
           </set>
         </option>
         <option name="myGradleHome" value="D:\Tools\Gradle\gradle-9.6.1" />

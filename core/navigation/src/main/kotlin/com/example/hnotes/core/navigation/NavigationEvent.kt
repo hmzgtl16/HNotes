@@ -1,12 +1,9 @@
 package com.example.hnotes.core.navigation
 
-import androidx.navigation.NavOptions
+import androidx.navigation3.runtime.NavKey
 
-interface NavigationEvent {
-    data class NavigateTo(
-        val route: Route,
-        val navOptions: NavOptions? = null
-    ) : NavigationEvent
+sealed interface NavigationEvent {
 
+    data class NavigateTo(val navKey: NavKey) : NavigationEvent
     data object NavigateBack : NavigationEvent
 }

@@ -15,6 +15,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
 import com.example.hnotes.core.design.theme.AppTheme
 import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.ui.App
@@ -29,6 +32,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var navigator: Navigator
+
+    @Inject
+    lateinit var entryBuilders: Set<@JvmSuppressWildcards EntryProviderScope<NavKey>.() -> Unit>
 
     private val viewModel by viewModels<MainActivityViewModel>()
 
@@ -60,14 +66,22 @@ class MainActivity : ComponentActivity() {
         splashScreen.setKeepOnScreenCondition { viewModel.uiState.value.shouldKeepSplashScreen() }
 
         setContent {
-            val appState = rememberAppState(
-                navigator = navigator
-            )
+            val appState = rememberAppState()
 
             AppTheme(
                 darkTheme = uiState.shouldUseDarkTheme(isSystemDarkTheme = isSystemInDarkTheme()),
                 enableDynamicTheming = uiState.shouldUseDynamicTheme,
-                content = { App(appState = appState) }
+                content = {
+                    App(
+                        appState = appState,
+                        navigator = navigator,
+                        entryProvider = entryProvider {
+                            entryBuilders.forEach { builder ->
+                                this.builder()
+                            }
+                        }
+                    )
+                }
             )
         }
     }

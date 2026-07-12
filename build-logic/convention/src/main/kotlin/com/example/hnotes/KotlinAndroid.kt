@@ -14,7 +14,7 @@ internal fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension,
 ) {
     commonExtension.apply {
-        compileSdk = 36
+        compileSdk = 37
 
         defaultConfig.minSdk = 26
 
@@ -50,7 +50,6 @@ private inline fun <reified T : KotlinBaseExtension> Project.configureKotlin() =
         freeCompilerArgs.addAll(
             "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
             "-Xconsistent-data-class-copy-visibility",
-            "-Xannotation-default-target=param-property"
         )
     }
 }

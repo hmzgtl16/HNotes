@@ -22,10 +22,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.adaptive.WindowAdaptiveInfo
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -33,6 +32,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.NavKey
 import com.example.hnotes.R
 import com.example.hnotes.core.design.component.AppBackground
 import com.example.hnotes.core.design.component.AppGradientBackground
@@ -40,14 +41,19 @@ import com.example.hnotes.core.design.component.AppIconButton
 import com.example.hnotes.core.design.component.AppTopAppBar
 import com.example.hnotes.core.design.icon.AppIcons
 import com.example.hnotes.core.navigation.NavigationEvent
-import com.example.hnotes.navigation.AppNavHost
+import com.example.hnotes.core.navigation.Navigator
+import com.example.hnotes.feature.search.api.navigation.SearchNavKey
+import com.example.hnotes.feature.settings.api.navigation.SettingsNavKey
+import com.example.hnotes.navigation.AppNavDisplay
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App(
     appState: AppState,
+    navigator: Navigator,
+    entryProvider: (NavKey) -> NavEntry<NavKey>,
     modifier: Modifier = Modifier,
-    windowAdaptiveInfo: WindowAdaptiveInfo = currentWindowAdaptiveInfo(),
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
 
@@ -56,17 +62,15 @@ fun App(
             .repeatOnLifecycle(
                 state = Lifecycle.State.STARTED,
                 block = {
-                    appState.navigator.events.collect {
+                    navigator.events.collect {
                         when (it) {
                             is NavigationEvent.NavigateTo -> {
-                                appState.navController.navigate(
-                                    route = it.route,
-                                    navOptions = it.navOptions
-                                )
+                                appState.navigationState.backStack.add(it.navKey)
+
                             }
 
                             is NavigationEvent.NavigateBack -> {
-                                appState.navController.navigateUp()
+                                appState.navigationState.backStack.removeLastOrNull()
                             }
                         }
                     }
@@ -75,6 +79,8 @@ fun App(
     }
 
     val shouldShowTopAppBar = appState.isMainDestination
+
+    val coroutineScope = rememberCoroutineScope()
 
     AppBackground(
         modifier = modifier,
@@ -122,7 +128,13 @@ fun App(
                                             },
                                             navigationIcon = {
                                                 AppIconButton(
-                                                    onClick = appState::navigateToSearch,
+                                                    onClick = {
+                                                        coroutineScope.launch {
+                                                            navigator.navigateTo(
+                                                                navKey = SearchNavKey
+                                                            )
+                                                        }
+                                                    },
                                                     icon = {
                                                         Icon(
                                                             imageVector = AppIcons.Search,
@@ -134,7 +146,13 @@ fun App(
                                             },
                                             actions = {
                                                 AppIconButton(
-                                                    onClick = appState::navigateToSettings,
+                                                    onClick = {
+                                                        coroutineScope.launch {
+                                                            navigator.navigateTo(
+                                                                navKey = SettingsNavKey
+                                                            )
+                                                        }
+                                                    },
                                                     icon = {
                                                         Icon(
                                                             imageVector = AppIcons.Settings,
@@ -160,9 +178,9 @@ fun App(
                                         },
                                     ),
                                     content = {
-                                        AppNavHost(
+                                        AppNavDisplay(
                                             appState = appState,
-                                            windowAdaptiveInfo = windowAdaptiveInfo
+                                            entryProvider = entryProvider
                                         )
                                     }
                                 )

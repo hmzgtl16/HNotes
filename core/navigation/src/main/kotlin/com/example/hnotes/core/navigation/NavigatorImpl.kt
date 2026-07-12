@@ -1,25 +1,19 @@
 package com.example.hnotes.core.navigation
 
-import androidx.navigation.NavOptions
+import androidx.navigation3.runtime.NavKey
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import javax.inject.Inject
 
-class NavigatorImpl @Inject constructor() : Navigator {
-    private val _events = MutableSharedFlow<NavigationEvent>()
-    override val events: SharedFlow<NavigationEvent> = _events.asSharedFlow()
+class NavigatorImpl : Navigator {
 
-    override suspend fun navigateTo(route: Route, navOptions: NavOptions?) {
-        _events.emit(
-            value = NavigationEvent.NavigateTo(
-                route = route,
-                navOptions = navOptions
-            )
-        )
+    override val events: SharedFlow<NavigationEvent>
+        field = MutableSharedFlow<NavigationEvent>()
+
+    override suspend fun navigateTo(navKey: NavKey) {
+        events.emit(value = NavigationEvent.NavigateTo(navKey = navKey))
     }
 
     override suspend fun navigateBack() {
-        _events.emit(value = NavigationEvent.NavigateBack)
+        events.emit(value = NavigationEvent.NavigateBack)
     }
 }
