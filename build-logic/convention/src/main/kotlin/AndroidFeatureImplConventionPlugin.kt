@@ -39,7 +39,7 @@ class AndroidFeatureImplConventionPlugin : Plugin<Project> {
                 )
                 add(
                     "implementation",
-                    libs.findLibrary("androidx-hilt-navigation-compose").get()
+                    libs.findLibrary("androidx-hilt-lifecycle-viewmodel-compose").get()
                 )
                 add(
                     "androidTestImplementation",
