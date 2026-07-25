@@ -1,0 +1,3 @@
+- [x] Add label feature dependencies to `:app`
+- [x] Verify build
+- [x] Create walkthrough

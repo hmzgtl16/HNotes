@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_label_impl_loading_labels">Loading labels</string>
+    <string name="feature_label_impl_labels_empty">No labels yet. Create one above!</string>
+    <string name="feature_label_impl_labels_title">Labels</string>
+    <string name="feature_label_impl_done">Done</string>
+</resources>

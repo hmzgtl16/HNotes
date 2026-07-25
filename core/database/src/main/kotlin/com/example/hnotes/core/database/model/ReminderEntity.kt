@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.example.hnotes.core.database.util.RepeatMode
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 @Entity(
     tableName = "reminders",

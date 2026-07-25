@@ -60,11 +60,12 @@ import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.ui.DevicePreviews
 import com.example.hnotes.core.ui.NoteCard
 import com.example.hnotes.core.ui.NotesPreviewParameterProvider
+import com.example.hnotes.feature.notes.api.navigation.NotesNavKey
 
 @Composable
 internal fun NotesScreen(
     modifier: Modifier = Modifier,
-    viewModel: NotesViewModel = hiltViewModel(),
+    viewModel: NotesViewModel,
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()

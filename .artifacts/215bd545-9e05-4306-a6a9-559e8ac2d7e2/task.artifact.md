@@ -1,0 +1,10 @@
+- [x] Simplify `LabelsDialogEvent.kt`
+- [x] Simplify `LabelViewModel.kt`
+    - [x] Remove `addLabel`, `upsertLabel`, `deleteLabel`
+    - [x] Remove unused `newLabelName` and `isAddingLabel` flows
+- [x] Refactor `LabelDialog.kt`
+    - [x] Remove redundant composables
+    - [x] Update header with a "Done" button
+    - [x] Simplify label items to only show name and checkbox
+    - [x] Ensure `LazyColumn` is used correctly
+- [ ] Verify build and functionality

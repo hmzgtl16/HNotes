@@ -2,7 +2,7 @@ package com.example.hnotes.core.data
 
 import com.example.hnotes.core.alarm.AlarmScheduler
 import com.example.hnotes.core.model.RepeatMode
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 class AlarmSchedulerTest : AlarmScheduler {
     override fun schedule(

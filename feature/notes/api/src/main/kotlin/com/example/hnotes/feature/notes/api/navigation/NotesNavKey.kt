@@ -4,5 +4,4 @@ import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-object NotesNavKey: NavKey {
-}
+data class NotesNavKey(val labelIds: List<Long> = emptyList()): NavKey

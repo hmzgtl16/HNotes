@@ -20,7 +20,7 @@ import com.example.hnotes.core.design.component.ThemePreviews
 import com.example.hnotes.core.design.theme.AppTheme
 import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.model.Reminder
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
 import kotlinx.datetime.toLocalDateTime

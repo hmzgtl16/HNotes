@@ -1,6 +1,7 @@
 package com.example.hnotes.feature.note.impl
 
 import com.example.hnotes.core.model.Item
+import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.model.Reminder
 
 interface NoteScreenEvent {
@@ -19,5 +20,7 @@ interface NoteScreenEvent {
     data object SaveNote : NoteScreenEvent
     data object CopyNote : NoteScreenEvent
     data object DeleteNote : NoteScreenEvent
+
+    data object NavigateToLabel : NoteScreenEvent
 }
 

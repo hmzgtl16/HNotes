@@ -1,6 +1,6 @@
 package com.example.hnotes.core.model
 
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 data class Reminder(
     val id: Long = 0L,

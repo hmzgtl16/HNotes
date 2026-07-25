@@ -2,42 +2,76 @@ package com.example.hnotes.feature.notes.impl
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hnotes.core.data.repository.LabelRepository
 import com.example.hnotes.core.data.repository.NoteRepository
+import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.feature.note.api.navigation.NoteNavKey
+import com.example.hnotes.feature.notes.api.navigation.NotesNavKey
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
-@HiltViewModel
-class NotesViewModel @Inject constructor(
+@HiltViewModel(assistedFactory = NotesViewModel.Factory::class)
+class NotesViewModel @AssistedInject constructor(
     private val navigator: Navigator,
-    private val noteRepository: NoteRepository
+    private val noteRepository: NoteRepository,
+    private val labelRepository: LabelRepository,
+    @Assisted private val navKey: NotesNavKey
 ) : ViewModel() {
 
-    val uiState: StateFlow<NotesUiState> 
-    field = MutableStateFlow(value = NotesUiState())
+    val uiState: StateFlow<NotesUiState>
+        field = MutableStateFlow(value = NotesUiState())
 
     private var undoDeleteJob: Job? = null
 
+    private val filterLabel = MutableStateFlow<Label?>(null)
+
     init {
         viewModelScope.launch {
-            noteRepository.notes
-                .map<List<Note>, NotesState> {
-                    val groupedNotes = it
-                        .groupBy(Note::pinned)
-                        .toSortedMap(compareByDescending(Boolean::not))
-                    NotesState.Success(notes = groupedNotes)
-                }
+            navKey.labelIds.forEach { id ->
+                val label = labelRepository.getLabelById(id)
+                filterLabel.value = label
+                uiState.update { it.copy(filterLabel = label) }
+            }
+        }
+
+        labelRepository.getAllLabels()
+            .onEach { labels ->
+                uiState.update { it.copy(allLabels = labels) }
+            }
+            .launchIn(viewModelScope)
+
+        viewModelScope.launch {
+            filterLabel.flatMapLatest { label ->
+                noteRepository.notes
+                    .map { notes ->
+                        if (label == null) notes
+                        else notes.filter { it.labels.contains(label) }
+                    }
+                    .map<List<Note>, NotesState> {
+                        val groupedNotes = it
+                            .groupBy(Note::pinned)
+                            .toSortedMap(compareByDescending(Boolean::not))
+                        NotesState.Success(notes = groupedNotes)
+                    }
+            }
                 .onStart { emit(NotesState.Loading) }
                 .collect { state ->
                     uiState.update { it.copy(notesState = state) }
@@ -75,6 +109,10 @@ class NotesViewModel @Inject constructor(
             is NotesScreenEvent.PinNote -> pinNote(note = event.note)
             is NotesScreenEvent.PinNotes -> pinNotes()
             is NotesScreenEvent.NavigateToNote -> navigateToNote(noteId = event.noteId)
+            is NotesScreenEvent.FilterLabelChanged -> {
+                filterLabel.value = event.label
+                uiState.update { it.copy(filterLabel = event.label) }
+            }
         }
     }
 
@@ -139,5 +177,10 @@ class NotesViewModel @Inject constructor(
 
     private fun navigateToNote(noteId: Long?) = viewModelScope.launch {
         navigator.navigateTo(navKey = NoteNavKey(noteId = noteId))
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(navKey: NotesNavKey): NotesViewModel
     }
 }

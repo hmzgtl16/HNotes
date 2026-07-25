@@ -10,7 +10,7 @@ import com.example.hnotes.core.database.model.ReminderEntity
 import com.example.hnotes.core.database.util.RepeatMode
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test

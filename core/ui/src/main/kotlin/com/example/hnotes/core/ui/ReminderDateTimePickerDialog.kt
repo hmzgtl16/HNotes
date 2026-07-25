@@ -30,7 +30,7 @@ import com.example.hnotes.core.design.component.ThemePreviews
 import com.example.hnotes.core.design.theme.AppTheme
 import com.example.hnotes.core.model.Reminder
 import com.example.hnotes.core.model.RepeatMode
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import java.time.LocalDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)

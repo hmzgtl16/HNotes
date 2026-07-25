@@ -5,7 +5,7 @@ import com.example.hnotes.core.data.util.toModel
 import com.example.hnotes.core.database.dao.NoteDao
 import com.example.hnotes.core.database.dao.NoteFtsDao
 import com.example.hnotes.core.database.dao.SearchQueryDao
-import com.example.hnotes.core.database.model.NoteWithItemsAndReminder
+import com.example.hnotes.core.database.model.PopulatedNoteEntity
 import com.example.hnotes.core.database.model.SearchQueryEntity
 import com.example.hnotes.core.model.SearchQuery
 import com.example.hnotes.core.model.SearchResult
@@ -33,7 +33,7 @@ class SearchRepositoryImpl @Inject constructor(
             .flatMapLatest(noteDao::getNotesByIds)
 
         return noteFlow
-            .map { it.map(NoteWithItemsAndReminder::toModel) }
+            .map { it.map(PopulatedNoteEntity::toModel) }
             .map(::SearchResult)
     }
 

@@ -3,11 +3,14 @@ package com.example.hnotes.feature.note.impl
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -48,11 +51,10 @@ import com.example.hnotes.core.ui.PaletteModalBottomSheet
 import com.example.hnotes.core.ui.ReminderCard
 import com.example.hnotes.core.ui.ReminderDateTimePickerDialog
 import com.example.hnotes.core.ui.formatter
-import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
 import kotlinx.datetime.toLocalDateTime
-import kotlin.text.ifEmpty
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.hours
 
 @Composable
@@ -150,6 +152,18 @@ internal fun NoteScreen(
                     )
 
                     AppIconButton(
+                        onClick = {
+                            onEvent(NoteScreenEvent.NavigateToLabel)
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = AppIcons.Label,
+                                contentDescription = null
+                            )
+                        }
+                    )
+
+                    AppIconButton(
                         onClick = { onEvent(NoteScreenEvent.CopyNote) },
                         icon = {
                             Icon(
@@ -235,6 +249,30 @@ internal fun NoteScreen(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(horizontal = 16.dp)
+                                )
+                            }
+
+                            if (uiState.labels.isNotEmpty()) {
+                                FlowRow(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 16.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    content = {
+                                        uiState.labels.forEach { label ->
+                                            AssistChip(
+                                                onClick = {
+                                                    onEvent(NoteScreenEvent.NavigateToLabel)
+                                                },
+                                                label = {
+                                                    Text(text = label.name)
+                                                },
+                                                colors = AssistChipDefaults.assistChipColors(
+                                                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                                                )
+                                            )
+                                        }
+                                    }
                                 )
                             }
 

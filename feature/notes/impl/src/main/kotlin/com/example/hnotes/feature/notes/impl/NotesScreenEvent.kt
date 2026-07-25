@@ -1,5 +1,6 @@
 package com.example.hnotes.feature.notes.impl
 
+import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.model.Note
 
 sealed interface NotesScreenEvent {
@@ -12,4 +13,5 @@ sealed interface NotesScreenEvent {
     data class PinNote(val note: Note) : NotesScreenEvent
     data object PinNotes : NotesScreenEvent
     data class NavigateToNote(val noteId: Long? = null) : NotesScreenEvent
+    data class FilterLabelChanged(val label: Label?) : NotesScreenEvent
 }

@@ -16,12 +16,15 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
@@ -40,6 +43,7 @@ import com.example.hnotes.core.design.component.AppGradientBackground
 import com.example.hnotes.core.design.component.AppIconButton
 import com.example.hnotes.core.design.component.AppTopAppBar
 import com.example.hnotes.core.design.icon.AppIcons
+import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.navigation.NavigationEvent
 import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.feature.search.api.navigation.SearchNavKey
@@ -169,25 +173,25 @@ fun App(
                                     }
                                 )
 
-                                Box(
-                                    modifier = Modifier.consumeWindowInsets(
-                                        if (shouldShowTopAppBar) {
-                                            WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Top)
-                                        } else {
-                                            WindowInsets(left = 0, top = 0, right = 0, bottom = 0)
-                                        },
-                                    ),
-                                    content = {
-                                        AppNavDisplay(
-                                            appState = appState,
-                                            entryProvider = entryProvider
+                                        Box(
+                                            modifier = Modifier.consumeWindowInsets(
+                                                if (shouldShowTopAppBar) {
+                                                    WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Top)
+                                                } else {
+                                                    WindowInsets(left = 0, top = 0, right = 0, bottom = 0)
+                                                },
+                                            ),
+                                            content = {
+                                                AppNavDisplay(
+                                                    appState = appState,
+                                                    entryProvider = entryProvider
+                                                )
+                                            }
                                         )
                                     }
                                 )
                             }
                         )
-                    }
-                )
             }
         }
     )

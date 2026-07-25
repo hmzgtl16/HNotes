@@ -2,6 +2,7 @@ package com.example.hnotes.core.design.icon
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.Label
 import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.automirrored.outlined.Note
 import androidx.compose.material.icons.automirrored.rounded.List
@@ -22,6 +23,7 @@ import androidx.compose.material.icons.outlined.FileCopy
 import androidx.compose.material.icons.outlined.FormatColorReset
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Image
+import androidx.compose.material.icons.outlined.Label
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.PushPin
 import androidx.compose.material.icons.outlined.RadioButtonChecked
@@ -54,6 +56,7 @@ object AppIcons {
     val FormatColorReset = Icons.Outlined.FormatColorReset
     val Image = Icons.Outlined.Image
     val History = Icons.Outlined.History
+    val Label = Icons.AutoMirrored.Outlined.Label
     val Lists = Icons.AutoMirrored.Outlined.List
     val ListsBorder = Icons.AutoMirrored.Rounded.List
     val More = Icons.Rounded.MoreVert

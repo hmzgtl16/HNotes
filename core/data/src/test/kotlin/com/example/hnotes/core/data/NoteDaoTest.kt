@@ -3,7 +3,7 @@ package com.example.hnotes.core.data
 import com.example.hnotes.core.database.dao.NoteDao
 import com.example.hnotes.core.database.model.ItemEntity
 import com.example.hnotes.core.database.model.NoteEntity
-import com.example.hnotes.core.database.model.NoteWithItemsAndReminder
+import com.example.hnotes.core.database.model.PopulatedNoteEntity
 import com.example.hnotes.core.database.model.ReminderEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -76,29 +76,29 @@ class NoteDaoTest : NoteDao {
         TODO("Not yet implemented")
     }
 
-    override fun getAllNotes(): Flow<List<NoteWithItemsAndReminder>> =
+    override fun getAllNotes(): Flow<List<PopulatedNoteEntity>> =
         noteEntitiesStateFlow
             .combine(itemEntitiesStateFlow) { notes, items ->
                 notes.map { note ->
-                    NoteWithItemsAndReminder(
+                    PopulatedNoteEntity(
                         note = note,
                         items = items.filter { it.noteId == note.id }
                     )
                 }
             }
 
-    override fun getNoteById(id: Long): Flow<NoteWithItemsAndReminder?> =
+    override fun getNoteById(id: Long): Flow<PopulatedNoteEntity?> =
         noteEntitiesStateFlow
             .combine(itemEntitiesStateFlow) { notes, items ->
                 notes.find { it.id == id }?.let { note ->
-                    NoteWithItemsAndReminder(
+                    PopulatedNoteEntity(
                         note = note,
                         items = items.filter { it.noteId == note.id }
                     )
                 }
             }
 
-    override fun getNotesByIds(ids: Set<Long>): Flow<List<NoteWithItemsAndReminder>> {
+    override fun getNotesByIds(ids: Set<Long>): Flow<List<PopulatedNoteEntity>> {
         TODO("Not yet implemented")
     }
 }

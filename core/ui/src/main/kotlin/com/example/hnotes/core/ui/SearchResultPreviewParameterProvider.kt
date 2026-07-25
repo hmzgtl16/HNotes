@@ -6,7 +6,7 @@ import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.model.Reminder
 import com.example.hnotes.core.model.RepeatMode
 import com.example.hnotes.core.model.SearchResult
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 class SearchResultPreviewParameterProvider : PreviewParameterProvider<SearchResult> {
     override val values: Sequence<SearchResult> = sequenceOf(

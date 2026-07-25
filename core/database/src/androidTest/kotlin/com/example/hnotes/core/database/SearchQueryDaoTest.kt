@@ -7,7 +7,7 @@ import com.example.hnotes.core.database.dao.SearchQueryDao
 import com.example.hnotes.core.database.model.SearchQueryEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test

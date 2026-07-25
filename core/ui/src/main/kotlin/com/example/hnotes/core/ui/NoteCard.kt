@@ -3,10 +3,14 @@ package com.example.hnotes.core.ui
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -32,6 +36,7 @@ import com.example.hnotes.core.design.theme.AppTheme
 import com.example.hnotes.core.design.theme.LocalTintTheme
 import com.example.hnotes.core.model.Note
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun NoteCard(
     note: Note,
@@ -157,12 +162,39 @@ fun NoteCard(
                             }
                         )
                     }
+
+                    if (note.labels.isNotEmpty()) {
+                        FlowRow(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(space = 4.dp),
+                            content = {
+                                note.labels.forEach { label ->
+                                    AssistChip(
+                                        onClick = { },
+                                        label = {
+                                            Text(
+                                                text = label.name,
+                                                style = MaterialTheme.typography.labelSmall
+                                            )
+                                        },
+                                        colors = AssistChipDefaults.assistChipColors(
+                                            containerColor = label.backgroundColor?.let(::Color) ?: MaterialTheme.colorScheme.surfaceVariant.copy(
+                                                alpha = 0.5f
+                                            )
+                                        ),
+                                        border = null
+                                    )
+                                }
+                            }
+                        )
+                    }
                 }
             )
         }
     )
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun NoteCard(
     note: Note,
@@ -206,6 +238,32 @@ fun NoteCard(
                                     text = note.content,
                                     style = MaterialTheme.typography.bodyMedium,
                                     modifier = Modifier.fillMaxWidth()
+                                )
+                            }
+
+                            if (note.labels.isNotEmpty()) {
+                                FlowRow(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(space = 4.dp),
+                                    content = {
+                                        note.labels.forEach { label ->
+                                            AssistChip(
+                                                onClick = { },
+                                                label = {
+                                                    Text(
+                                                        text = label.name,
+                                                        style = MaterialTheme.typography.labelSmall
+                                                    )
+                                                },
+                                                colors = AssistChipDefaults.assistChipColors(
+                                                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
+                                                        alpha = 0.5f
+                                                    )
+                                                ),
+                                                border = null
+                                            )
+                                        }
+                                    }
                                 )
                             }
                         }

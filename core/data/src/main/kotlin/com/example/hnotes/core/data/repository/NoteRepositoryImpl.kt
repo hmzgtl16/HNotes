@@ -4,8 +4,9 @@ import com.example.hnotes.core.alarm.AlarmScheduler
 import com.example.hnotes.core.data.util.toEntity
 import com.example.hnotes.core.data.util.toModel
 import com.example.hnotes.core.database.dao.NoteDao
-import com.example.hnotes.core.database.model.NoteWithItemsAndReminder
+import com.example.hnotes.core.database.model.PopulatedNoteEntity
 import com.example.hnotes.core.model.Item
+import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.model.Note
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -18,7 +19,7 @@ class NoteRepositoryImpl @Inject constructor(
 
     override val notes: Flow<List<Note>> =
         noteDao.getAllNotes()
-            .map { it.map(NoteWithItemsAndReminder::toModel) }
+            .map { it.map(PopulatedNoteEntity::toModel) }
 
     override suspend fun getNoteById(id: Long): Flow<Note?> =
         noteDao.getNoteById(id = id)
@@ -28,7 +29,8 @@ class NoteRepositoryImpl @Inject constructor(
         noteDao.upsertNoteWithItems(
             note = note.toEntity(),
             reminder = note.reminder?.toEntity(),
-            items = note.items.map(Item::toEntity)
+            items = note.items.map(Item::toEntity),
+            labels = note.labels.map(Label::toEntity)
         )
 
         if (note.reminder == null) {
@@ -55,7 +57,8 @@ class NoteRepositoryImpl @Inject constructor(
             noteDao.upsertNoteWithItems(
                 note = it.toEntity(),
                 reminder = it.reminder?.toEntity(),
-                items = it.items.map(Item::toEntity)
+                items = it.items.map(Item::toEntity),
+                labels = it.labels.map(Label::toEntity)
             )
         }
     }

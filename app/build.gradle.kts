@@ -55,6 +55,8 @@ dependencies {
     implementation(projects.feature.notes.impl)
     implementation(projects.feature.note.api)
     implementation(projects.feature.note.impl)
+    implementation(projects.feature.label.api)
+    implementation(projects.feature.label.impl)
     implementation(projects.feature.search.api)
     implementation(projects.feature.search.impl)
     implementation(projects.feature.settings.api)

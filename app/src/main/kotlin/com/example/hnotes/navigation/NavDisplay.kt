@@ -22,7 +22,7 @@ fun AppNavDisplay(
         backStack = appState.navigationState.backStack,
         onBack = appState.navigationState.backStack::removeLastOrNull,
         modifier = modifier,
-        sceneStrategies = listOf(appState.sceneStrategy),
+        sceneStrategies = appState.sceneStrategies,
         entryDecorators = listOf(
             rememberSaveableStateHolderNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator(),

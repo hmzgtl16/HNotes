@@ -2,11 +2,13 @@ package com.example.hnotes.feature.note.impl
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hnotes.core.data.repository.LabelRepository
 import com.example.hnotes.core.data.repository.NoteRepository
 import com.example.hnotes.core.model.Item
 import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.feature.note.api.navigation.NoteNavKey
+import com.example.hnotes.feature.label.api.navigation.LabelNavKey
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -14,14 +16,17 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 
 @HiltViewModel(assistedFactory = NoteViewModel.Factory::class)
 class NoteViewModel @AssistedInject constructor(
     private val navigator: Navigator,
     private val noteRepository: NoteRepository,
+    private val labelRepository: LabelRepository,
     @Assisted navKey: NoteNavKey
 ) : ViewModel() {
 
@@ -33,6 +38,12 @@ class NoteViewModel @AssistedInject constructor(
 
     init {
         navKey.noteId?.let { id ->
+            labelRepository.getLabelsForNote(id)
+                .onEach { labels ->
+                    uiState.update { it.copy(labels = labels) }
+                }
+                .launchIn(viewModelScope)
+
             viewModelScope.launch {
                 noteRepository.getNoteById(id = id)
                     .filterNotNull()
@@ -42,7 +53,8 @@ class NoteViewModel @AssistedInject constructor(
                             content = note.content,
                             backgroundColor = note.backgroundColor,
                             reminder = note.reminder,
-                            items = note.items
+                            items = note.items,
+                            labels = note.labels
                         )
 
                         clearUndoRedoStacks()
@@ -55,6 +67,7 @@ class NoteViewModel @AssistedInject constructor(
                                 backgroundColor = initialEditableState.backgroundColor,
                                 reminder = initialEditableState.reminder,
                                 items = initialEditableState.items,
+                                labels = initialEditableState.labels,
                                 isEdited = false
                             )
                         }
@@ -134,6 +147,8 @@ class NoteViewModel @AssistedInject constructor(
             is NoteScreenEvent.SaveNote -> saveNote()
             is NoteScreenEvent.CopyNote -> copyNote()
             is NoteScreenEvent.DeleteNote -> deleteNote()
+
+            is NoteScreenEvent.NavigateToLabel -> navigateToLabel()
         }
     }
 
@@ -148,6 +163,7 @@ class NoteViewModel @AssistedInject constructor(
                 backgroundColor = newEditableState.backgroundColor,
                 reminder = newEditableState.reminder,
                 items = newEditableState.items,
+                labels = newEditableState.labels,
                 isEdited = if (markAsEdited) true else it.isEdited,
                 canUndo = undoStack.isNotEmpty(),
                 canRedo = redoStack.isNotEmpty()
@@ -204,6 +220,7 @@ class NoteViewModel @AssistedInject constructor(
             content = currentState.content,
             reminder = currentState.reminder,
             items = currentState.items,
+            labels = currentState.labels,
             backgroundColor = currentState.backgroundColor,
             updated = Clock.System.now()
         ) ?: Note()
@@ -219,6 +236,7 @@ class NoteViewModel @AssistedInject constructor(
             id = 0,
             reminder = originalNote.reminder?.copy(id = 0L),
             items = originalNote.items.map { it.copy(id = 0L) },
+            labels = originalNote.labels,
             created = Clock.System.now(),
             updated = Clock.System.now()
         )
@@ -232,6 +250,14 @@ class NoteViewModel @AssistedInject constructor(
         val noteToDelete = currentState.note ?: return@launch
         noteRepository.deleteNote(note = noteToDelete)
         navigator.navigateBack()
+    }
+
+    private fun navigateToLabel() = viewModelScope.launch {
+        uiState.value.note?.let {
+            if (it.id == 0L) { return@let }
+
+            navigator.navigateTo(navKey = LabelNavKey(noteId = it.id))
+        } ?: return@launch
     }
 
     @AssistedFactory

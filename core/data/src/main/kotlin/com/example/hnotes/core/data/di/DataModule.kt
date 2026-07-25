@@ -1,5 +1,7 @@
 package com.example.hnotes.core.data.di
 
+import com.example.hnotes.core.data.repository.LabelRepository
+import com.example.hnotes.core.data.repository.LabelRepositoryImpl
 import com.example.hnotes.core.data.repository.NoteRepository
 import com.example.hnotes.core.data.repository.NoteRepositoryImpl
 import com.example.hnotes.core.data.repository.SearchRepository
@@ -24,6 +26,11 @@ abstract class DataModule {
     internal abstract fun bindsNoteRepository(
         noteRepository: NoteRepositoryImpl
     ): NoteRepository
+
+    @Binds
+    internal abstract fun bindsLabelRepository(
+        labelRepository: LabelRepositoryImpl
+    ): LabelRepository
 
     @Binds
     internal abstract fun bindsSearchRepository(

@@ -8,7 +8,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.hnotes.core.model.RepeatMode
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.time.Duration.Companion.days

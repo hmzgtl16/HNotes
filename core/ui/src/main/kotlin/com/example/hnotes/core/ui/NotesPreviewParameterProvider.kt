@@ -2,10 +2,11 @@ package com.example.hnotes.core.ui
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.example.hnotes.core.model.Item
+import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.model.Reminder
 import com.example.hnotes.core.model.RepeatMode
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List<Note>>> {
     override val values: Sequence<Map<Boolean, List<Note>>>
@@ -17,15 +18,21 @@ class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List
                         title = "Note 1",
                         content = "Content of note 1",
                         backgroundColor = -8972498,
-
-                        pinned = true
+                        pinned = true,
+                        labels = listOf(
+                            Label(id = 1L, name = "Label 1"),
+                            Label(id = 2L, name = "Label 2")
+                        )
                     ),
                     Note(
                         id = 2L,
                         title = "Note 2",
                         content = "Content of note 2",
-
-                        ),
+                        labels = listOf(
+                            Label(id = 1L, name = "Label 1"),
+                            Label(id = 2L, name = "Label 2")
+                        )
+                    ),
                     Note(
                         id = 3L,
                         title = "Note 3",
@@ -48,6 +55,12 @@ class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List
                         reminder = Reminder(
                             time = Instant.parse("2024-10-01T12:00:00Z"),
                             repeatMode = RepeatMode.NONE
+                        ),
+                        labels = listOf(
+                            Label(id = 1L, name = "Label 1"),
+                            Label(id = 2L, name = "Label 2"),
+                            Label(id = 3L, name = "Label 3"),
+                            Label(id = 4L, name = "Label 4")
                         )
                     ),
                     Note(

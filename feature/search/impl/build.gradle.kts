@@ -10,4 +10,6 @@ android {
 dependencies {
     implementation(projects.feature.note.api)
     implementation(projects.feature.search.api)
+
+    implementation(libs.androidx.activity.compose)
 }

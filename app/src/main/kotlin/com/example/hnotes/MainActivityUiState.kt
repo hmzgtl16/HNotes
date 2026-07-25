@@ -1,10 +1,15 @@
 package com.example.hnotes
 
+import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.model.Theme
 
 sealed interface MainActivityUiState {
     data object Loading : MainActivityUiState
-    data class Success(val theme: Theme, val useDynamicColor: Boolean) : MainActivityUiState {
+    data class Success(
+        val theme: Theme,
+        val useDynamicColor: Boolean,
+        val labels: List<Label> = emptyList()
+    ) : MainActivityUiState {
         override val shouldUseDynamicTheme: Boolean = useDynamicColor
 
         override fun shouldUseDarkTheme(isSystemDarkTheme: Boolean): Boolean =

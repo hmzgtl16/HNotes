@@ -1,11 +1,13 @@
 package com.example.hnotes.core.data.util
 
 import com.example.hnotes.core.database.model.ItemEntity
+import com.example.hnotes.core.database.model.LabelEntity
 import com.example.hnotes.core.database.model.NoteEntity
-import com.example.hnotes.core.database.model.NoteWithItemsAndReminder
+import com.example.hnotes.core.database.model.PopulatedNoteEntity
 import com.example.hnotes.core.database.model.ReminderEntity
 import com.example.hnotes.core.database.model.SearchQueryEntity
 import com.example.hnotes.core.model.Item
+import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.model.Reminder
 import com.example.hnotes.core.model.RepeatMode
@@ -20,6 +22,18 @@ fun Note.toEntity(): NoteEntity = NoteEntity(
     backgroundColor = backgroundColor,
     createdAt = created,
     updatedAt = updated
+)
+
+fun Label.toEntity(): LabelEntity = LabelEntity(
+    id = id,
+    name = name,
+    backgroundColor = backgroundColor
+)
+
+fun LabelEntity.toModel(): Label = Label(
+    id = id,
+    name = name,
+    backgroundColor = backgroundColor
 )
 
 fun Reminder.toEntity(noteId: Long = 0L): ReminderEntity = ReminderEntity(
@@ -48,7 +62,7 @@ fun ItemEntity.toModel(): Item = Item(
     checked = checked
 )
 
-fun NoteWithItemsAndReminder.toModel(): Note = Note(
+fun PopulatedNoteEntity.toModel(): Note = Note(
     id = note.id,
     title = note.title,
     content = note.content,
@@ -57,7 +71,8 @@ fun NoteWithItemsAndReminder.toModel(): Note = Note(
     created = note.createdAt,
     updated = note.updatedAt,
     reminder = reminder?.toModel(),
-    items = items.map(ItemEntity::toModel)
+    items = items.map(ItemEntity::toModel),
+    labels = labels.map(LabelEntity::toModel)
 )
 
 fun RepeatMode.toEntity(): ReminderRepeatModeEntity = when (this) {
