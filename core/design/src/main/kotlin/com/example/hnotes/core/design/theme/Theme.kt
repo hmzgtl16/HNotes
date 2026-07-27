@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.design.theme
 
 import android.os.Build
@@ -15,116 +36,123 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 
-val LightColorScheme = lightColorScheme(
-    primary = theme_light_primary,
-    onPrimary = theme_light_onPrimary,
-    primaryContainer = theme_light_primaryContainer,
-    onPrimaryContainer = theme_light_onPrimaryContainer,
-    inversePrimary = theme_light_inversePrimary,
-    secondary = theme_light_secondary,
-    onSecondary = theme_light_onSecondary,
-    secondaryContainer = theme_light_secondaryContainer,
-    onSecondaryContainer = theme_light_onSecondaryContainer,
-    tertiary = theme_light_tertiary,
-    onTertiary = theme_light_onTertiary,
-    tertiaryContainer = theme_light_tertiaryContainer,
-    onTertiaryContainer = theme_light_onTertiaryContainer,
-    background = theme_light_background,
-    onBackground = theme_light_onBackground,
-    surface = theme_light_surface,
-    onSurface = theme_light_onSurface,
-    surfaceVariant = theme_light_surfaceVariant,
-    onSurfaceVariant = theme_light_onSurfaceVariant,
-    surfaceTint = theme_light_surfaceTint,
-    inverseSurface = theme_light_inverseSurface,
-    inverseOnSurface = theme_light_inverseOnSurface,
-    error = theme_light_error,
-    onError = theme_light_onError,
-    errorContainer = theme_light_errorContainer,
-    onErrorContainer = theme_light_onErrorContainer,
-    outline = theme_light_outline,
-    outlineVariant = theme_light_outlineVariant,
-    scrim = theme_light_scrim
-)
+val LightColorScheme =
+    lightColorScheme(
+        primary = theme_light_primary,
+        onPrimary = theme_light_onPrimary,
+        primaryContainer = theme_light_primaryContainer,
+        onPrimaryContainer = theme_light_onPrimaryContainer,
+        inversePrimary = theme_light_inversePrimary,
+        secondary = theme_light_secondary,
+        onSecondary = theme_light_onSecondary,
+        secondaryContainer = theme_light_secondaryContainer,
+        onSecondaryContainer = theme_light_onSecondaryContainer,
+        tertiary = theme_light_tertiary,
+        onTertiary = theme_light_onTertiary,
+        tertiaryContainer = theme_light_tertiaryContainer,
+        onTertiaryContainer = theme_light_onTertiaryContainer,
+        background = theme_light_background,
+        onBackground = theme_light_onBackground,
+        surface = theme_light_surface,
+        onSurface = theme_light_onSurface,
+        surfaceVariant = theme_light_surfaceVariant,
+        onSurfaceVariant = theme_light_onSurfaceVariant,
+        surfaceTint = theme_light_surfaceTint,
+        inverseSurface = theme_light_inverseSurface,
+        inverseOnSurface = theme_light_inverseOnSurface,
+        error = theme_light_error,
+        onError = theme_light_onError,
+        errorContainer = theme_light_errorContainer,
+        onErrorContainer = theme_light_onErrorContainer,
+        outline = theme_light_outline,
+        outlineVariant = theme_light_outlineVariant,
+        scrim = theme_light_scrim,
+    )
 
-val DarkColorScheme = darkColorScheme(
-    primary = theme_dark_primary,
-    onPrimary = theme_dark_onPrimary,
-    primaryContainer = theme_dark_primaryContainer,
-    onPrimaryContainer = theme_dark_onPrimaryContainer,
-    inversePrimary = theme_dark_inversePrimary,
-    secondary = theme_dark_secondary,
-    onSecondary = theme_dark_onSecondary,
-    secondaryContainer = theme_dark_secondaryContainer,
-    onSecondaryContainer = theme_dark_onSecondaryContainer,
-    tertiary = theme_dark_tertiary,
-    onTertiary = theme_dark_onTertiary,
-    tertiaryContainer = theme_dark_tertiaryContainer,
-    onTertiaryContainer = theme_dark_onTertiaryContainer,
-    background = theme_dark_background,
-    onBackground = theme_dark_onBackground,
-    surface = theme_dark_surface,
-    onSurface = theme_dark_onSurface,
-    surfaceVariant = theme_dark_surfaceVariant,
-    onSurfaceVariant = theme_dark_onSurfaceVariant,
-    surfaceTint = theme_dark_surfaceTint,
-    inverseSurface = theme_dark_inverseSurface,
-    inverseOnSurface = theme_dark_inverseOnSurface,
-    error = theme_dark_error,
-    onError = theme_dark_onError,
-    errorContainer = theme_dark_errorContainer,
-    onErrorContainer = theme_dark_onErrorContainer,
-    outline = theme_dark_outline,
-    outlineVariant = theme_dark_outlineVariant,
-    scrim = theme_dark_scrim
-)
+val DarkColorScheme =
+    darkColorScheme(
+        primary = theme_dark_primary,
+        onPrimary = theme_dark_onPrimary,
+        primaryContainer = theme_dark_primaryContainer,
+        onPrimaryContainer = theme_dark_onPrimaryContainer,
+        inversePrimary = theme_dark_inversePrimary,
+        secondary = theme_dark_secondary,
+        onSecondary = theme_dark_onSecondary,
+        secondaryContainer = theme_dark_secondaryContainer,
+        onSecondaryContainer = theme_dark_onSecondaryContainer,
+        tertiary = theme_dark_tertiary,
+        onTertiary = theme_dark_onTertiary,
+        tertiaryContainer = theme_dark_tertiaryContainer,
+        onTertiaryContainer = theme_dark_onTertiaryContainer,
+        background = theme_dark_background,
+        onBackground = theme_dark_onBackground,
+        surface = theme_dark_surface,
+        onSurface = theme_dark_onSurface,
+        surfaceVariant = theme_dark_surfaceVariant,
+        onSurfaceVariant = theme_dark_onSurfaceVariant,
+        surfaceTint = theme_dark_surfaceTint,
+        inverseSurface = theme_dark_inverseSurface,
+        inverseOnSurface = theme_dark_inverseOnSurface,
+        error = theme_dark_error,
+        onError = theme_dark_onError,
+        errorContainer = theme_dark_errorContainer,
+        onErrorContainer = theme_dark_onErrorContainer,
+        outline = theme_dark_outline,
+        outlineVariant = theme_dark_outlineVariant,
+        scrim = theme_dark_scrim,
+    )
 
 @Composable
-fun AppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    enableDynamicTheming: Boolean = true,
-    content: @Composable () -> Unit,
-) {
-
+fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), enableDynamicTheming: Boolean = true, content: @Composable () -> Unit) {
     // Color scheme
-    val colorScheme = when {
-        enableDynamicTheming && supportsDynamicTheming() -> {
-            val context = LocalContext.current
-            if (darkTheme)
-                dynamicDarkColorScheme(context = context)
-            else
-                dynamicLightColorScheme(context = context)
-        }
+    val colorScheme =
+        when {
+            enableDynamicTheming && supportsDynamicTheming() -> {
+                val context = LocalContext.current
+                if (darkTheme) {
+                    dynamicDarkColorScheme(context = context)
+                } else {
+                    dynamicLightColorScheme(context = context)
+                }
+            }
 
-        else -> if (darkTheme) DarkColorScheme else LightColorScheme
-    }
+            else -> {
+                if (darkTheme) DarkColorScheme else LightColorScheme
+            }
+        }
 
     LaunchedEffect(key1 = darkTheme, key2 = enableDynamicTheming) { }
 
     // Gradient colors
     val emptyGradientColors =
         GradientColors(container = colorScheme.surfaceColorAtElevation(elevation = 2.dp))
-    val defaultGradientColors = GradientColors(
-        top = colorScheme.inverseOnSurface,
-        bottom = colorScheme.primaryContainer,
-        container = colorScheme.surface,
-    )
-    val gradientColors = when {
-        !enableDynamicTheming && supportsDynamicTheming() -> emptyGradientColors
-        else -> defaultGradientColors
-    }
+    val defaultGradientColors =
+        GradientColors(
+            top = colorScheme.inverseOnSurface,
+            bottom = colorScheme.primaryContainer,
+            container = colorScheme.surface,
+        )
+    val gradientColors =
+        when {
+            !enableDynamicTheming && supportsDynamicTheming() -> emptyGradientColors
+            else -> defaultGradientColors
+        }
 
     // Background theme
-    val defaultBackgroundTheme = BackgroundTheme(
-        color = colorScheme.surface,
-        tonalElevation = 2.dp,
-    )
+    val defaultBackgroundTheme =
+        BackgroundTheme(
+            color = colorScheme.surface,
+            tonalElevation = 2.dp,
+        )
     val backgroundTheme = defaultBackgroundTheme
 
     // TintTheme
     val tintTheme =
-        if (!enableDynamicTheming && supportsDynamicTheming()) TintTheme(iconTint = colorScheme.primary)
-        else TintTheme()
+        if (!enableDynamicTheming && supportsDynamicTheming()) {
+            TintTheme(iconTint = colorScheme.primary)
+        } else {
+            TintTheme()
+        }
 
     // Composition locals
     CompositionLocalProvider(
@@ -132,11 +160,10 @@ fun AppTheme(
         LocalBackgroundTheme provides backgroundTheme,
         LocalTintTheme provides tintTheme,
     ) {
-
         MaterialTheme(
             colorScheme = colorScheme,
             typography = typography,
-            content = content
+            content = content,
         )
     }
 }

@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.design.component
 
 import androidx.compose.material3.Icon
@@ -18,20 +39,21 @@ fun AppIconToggleButton(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)? = null,
     enabled: Boolean = true,
-    colors: IconToggleButtonColors = IconButtonDefaults.iconToggleButtonColors(
-        checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-        disabledContainerColor = if (checked) {
-            MaterialTheme.colorScheme.onBackground.copy(
-                alpha = AppIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
-            )
-        } else {
-            Color.Transparent
-        }
-    ),
+    colors: IconToggleButtonColors =
+        IconButtonDefaults.iconToggleButtonColors(
+            checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            disabledContainerColor =
+                if (checked) {
+                    MaterialTheme.colorScheme.onBackground.copy(
+                        alpha = AppIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                    )
+                } else {
+                    Color.Transparent
+                },
+        ),
     icon: @Composable () -> Unit,
-    checkedIcon: @Composable () -> Unit = icon
+    checkedIcon: @Composable () -> Unit = icon,
 ) {
-
     IconToggleButton(
         checked = checked,
         onCheckedChange = {
@@ -44,7 +66,7 @@ fun AppIconToggleButton(
         colors = colors,
         content = {
             if (checked) checkedIcon() else icon()
-        }
+        },
     )
 }
 
@@ -55,25 +77,26 @@ fun AppOutlinedIconToggleButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     icon: @Composable () -> Unit,
-    checkedIcon: @Composable () -> Unit = icon
+    checkedIcon: @Composable () -> Unit = icon,
 ) {
-
     OutlinedIconToggleButton(
         checked = checked,
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
-        colors = IconButtonDefaults.outlinedIconToggleButtonColors(
-            checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            disabledContainerColor = if (checked) {
-                MaterialTheme.colorScheme.onBackground.copy(
-                    alpha = AppIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
-                )
-            } else {
-                Color.Transparent
-            }
-        ),
+        colors =
+            IconButtonDefaults.outlinedIconToggleButtonColors(
+                checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                disabledContainerColor =
+                    if (checked) {
+                        MaterialTheme.colorScheme.onBackground.copy(
+                            alpha = AppIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                        )
+                    } else {
+                        Color.Transparent
+                    },
+            ),
         content = {
             if (checked) checkedIcon() else icon()
         },
@@ -102,7 +125,7 @@ fun AppIconToggleButtonPreview() {
                     imageVector = AppIcons.Pin,
                     contentDescription = null,
                 )
-            }
+            },
         )
     }
 }
@@ -125,7 +148,7 @@ fun AppIconToggleButtonUncheckedPreview() {
                     imageVector = AppIcons.Pin,
                     contentDescription = null,
                 )
-            }
+            },
         )
     }
 }
@@ -148,7 +171,7 @@ fun OutlinedIconToggleButtonPreview() {
                     imageVector = AppIcons.Check,
                     contentDescription = null,
                 )
-            }
+            },
         )
     }
 }
@@ -171,7 +194,7 @@ fun OutlinedIconToggleButtonUncheckedPreview() {
                     imageVector = AppIcons.Check,
                     contentDescription = null,
                 )
-            }
+            },
         )
     }
 }

@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.ui
 
 import androidx.compose.animation.AnimatedVisibility
@@ -16,15 +37,12 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
@@ -43,7 +61,6 @@ import com.example.hnotes.core.design.component.AppGradientBackground
 import com.example.hnotes.core.design.component.AppIconButton
 import com.example.hnotes.core.design.component.AppTopAppBar
 import com.example.hnotes.core.design.icon.AppIcons
-import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.navigation.NavigationEvent
 import com.example.hnotes.core.navigation.Navigator
 import com.example.hnotes.feature.search.api.navigation.SearchNavKey
@@ -53,12 +70,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun App(
-    appState: AppState,
-    navigator: Navigator,
-    entryProvider: (NavKey) -> NavEntry<NavKey>,
-    modifier: Modifier = Modifier,
-) {
+fun App(appState: AppState, navigator: Navigator, entryProvider: (NavKey) -> NavEntry<NavKey>, modifier: Modifier = Modifier) {
     val lifecycleOwner = LocalLifecycleOwner.current
 
     LaunchedEffect(key1 = lifecycleOwner.lifecycle) {
@@ -70,7 +82,6 @@ fun App(
                         when (it) {
                             is NavigationEvent.NavigateTo -> {
                                 appState.navigationState.backStack.add(it.navKey)
-
                             }
 
                             is NavigationEvent.NavigateBack -> {
@@ -78,7 +89,7 @@ fun App(
                             }
                         }
                     }
-                }
+                },
             )
     }
 
@@ -97,37 +108,42 @@ fun App(
                     contentWindowInsets = WindowInsets(0, 0, 0, 0),
                     content = { padding ->
                         Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(paddingValues = padding)
-                                .consumeWindowInsets(paddingValues = padding)
-                                .windowInsetsPadding(
-                                    insets = WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Horizontal)
-                                ),
+                            modifier =
+                                Modifier
+                                    .fillMaxSize()
+                                    .padding(paddingValues = padding)
+                                    .consumeWindowInsets(paddingValues = padding)
+                                    .windowInsetsPadding(
+                                        insets = WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Horizontal),
+                                    ),
                             content = {
                                 AnimatedVisibility(
                                     visible = shouldShowTopAppBar,
-                                    enter = slideInVertically(
-                                        initialOffsetY = { -it },
-                                        animationSpec = tween(
-                                            durationMillis = 150,
-                                            easing = LinearOutSlowInEasing
-                                        )
-                                    ),
-                                    exit = slideOutVertically(
-                                        targetOffsetY = { -it },
-                                        animationSpec = tween(
-                                            durationMillis = 250,
-                                            easing = FastOutLinearInEasing
-                                        )
-                                    ),
+                                    enter =
+                                        slideInVertically(
+                                            initialOffsetY = { -it },
+                                            animationSpec =
+                                                tween(
+                                                    durationMillis = 150,
+                                                    easing = LinearOutSlowInEasing,
+                                                ),
+                                        ),
+                                    exit =
+                                        slideOutVertically(
+                                            targetOffsetY = { -it },
+                                            animationSpec =
+                                                tween(
+                                                    durationMillis = 250,
+                                                    easing = FastOutLinearInEasing,
+                                                ),
+                                        ),
                                     content = {
                                         AppTopAppBar(
                                             title = {
                                                 Text(
                                                     text = stringResource(id = R.string.app_name),
                                                     maxLines = 1,
-                                                    overflow = TextOverflow.Ellipsis
+                                                    overflow = TextOverflow.Ellipsis,
                                                 )
                                             },
                                             navigationIcon = {
@@ -135,7 +151,7 @@ fun App(
                                                     onClick = {
                                                         coroutineScope.launch {
                                                             navigator.navigateTo(
-                                                                navKey = SearchNavKey
+                                                                navKey = SearchNavKey,
                                                             )
                                                         }
                                                     },
@@ -143,9 +159,9 @@ fun App(
                                                         Icon(
                                                             imageVector = AppIcons.Search,
                                                             contentDescription = null,
-                                                            tint = MaterialTheme.colorScheme.onSurface
+                                                            tint = MaterialTheme.colorScheme.onSurface,
                                                         )
-                                                    }
+                                                    },
                                                 )
                                             },
                                             actions = {
@@ -153,7 +169,7 @@ fun App(
                                                     onClick = {
                                                         coroutineScope.launch {
                                                             navigator.navigateTo(
-                                                                navKey = SettingsNavKey
+                                                                navKey = SettingsNavKey,
                                                             )
                                                         }
                                                     },
@@ -161,38 +177,40 @@ fun App(
                                                         Icon(
                                                             imageVector = AppIcons.Settings,
                                                             contentDescription = null,
-                                                            tint = MaterialTheme.colorScheme.onSurface
+                                                            tint = MaterialTheme.colorScheme.onSurface,
                                                         )
-                                                    }
+                                                    },
                                                 )
                                             },
-                                            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                                                containerColor = Color.Transparent
-                                            )
+                                            colors =
+                                                TopAppBarDefaults.centerAlignedTopAppBarColors(
+                                                    containerColor = Color.Transparent,
+                                                ),
                                         )
-                                    }
+                                    },
                                 )
 
-                                        Box(
-                                            modifier = Modifier.consumeWindowInsets(
-                                                if (shouldShowTopAppBar) {
-                                                    WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Top)
-                                                } else {
-                                                    WindowInsets(left = 0, top = 0, right = 0, bottom = 0)
-                                                },
-                                            ),
-                                            content = {
-                                                AppNavDisplay(
-                                                    appState = appState,
-                                                    entryProvider = entryProvider
-                                                )
-                                            }
+                                Box(
+                                    modifier =
+                                        Modifier.consumeWindowInsets(
+                                            if (shouldShowTopAppBar) {
+                                                WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Top)
+                                            } else {
+                                                WindowInsets(left = 0, top = 0, right = 0, bottom = 0)
+                                            },
+                                        ),
+                                    content = {
+                                        AppNavDisplay(
+                                            appState = appState,
+                                            entryProvider = entryProvider,
                                         )
-                                    }
+                                    },
                                 )
-                            }
+                            },
                         )
+                    },
+                )
             }
-        }
+        },
     )
 }

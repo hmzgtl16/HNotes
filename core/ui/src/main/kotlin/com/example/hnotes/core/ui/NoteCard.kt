@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.ui
 
 import androidx.compose.foundation.combinedClickable
@@ -48,118 +69,126 @@ fun NoteCard(
     onPinClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
     ElevatedCard(
-        colors = if (note.backgroundColor != null)
-            CardDefaults.elevatedCardColors(containerColor = Color(color = note.backgroundColor!!))
-        else CardDefaults.elevatedCardColors(),
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight(align = Alignment.Top)
-            .combinedClickable(
-                onClick = {
-                    if (multiSelectionEnabled) onSelectedChanged()
-                    else onNoteClick()
-                },
-                onLongClick = {
-                    if (multiSelectionEnabled) return@combinedClickable
-                    enableMultiSelection()
-                    onSelectedChanged()
-                },
-                role = Role.RadioButton
-            )
-            .semantics { onClick(label = "Open Note", action = null) },
+        colors =
+            if (note.backgroundColor != null) {
+                CardDefaults.elevatedCardColors(containerColor = Color(color = note.backgroundColor!!))
+            } else {
+                CardDefaults.elevatedCardColors()
+            },
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .wrapContentHeight(align = Alignment.Top)
+                .combinedClickable(
+                    onClick = {
+                        if (multiSelectionEnabled) {
+                            onSelectedChanged()
+                        } else {
+                            onNoteClick()
+                        }
+                    },
+                    onLongClick = {
+                        if (multiSelectionEnabled) return@combinedClickable
+                        enableMultiSelection()
+                        onSelectedChanged()
+                    },
+                    role = Role.RadioButton,
+                )
+                .semantics { onClick(label = "Open Note", action = null) },
         content = {
-
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(all = 16.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(all = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 8.dp,
-                    alignment = Alignment.CenterVertically
-                ),
+                verticalArrangement =
+                    Arrangement.spacedBy(
+                        space = 8.dp,
+                        alignment = Alignment.CenterVertically,
+                    ),
                 content = {
-
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(
-                            space = 8.dp,
-                            alignment = Alignment.Start
-                        ),
+                        horizontalArrangement =
+                            Arrangement.spacedBy(
+                                space = 8.dp,
+                                alignment = Alignment.Start,
+                            ),
                         content = {
                             Text(
-                                text = note.title.ifEmpty(
-                                    defaultValue = { stringResource(id = R.string.core_ui_note_untitled) }
-                                ),
+                                text =
+                                    note.title.ifEmpty(
+                                        defaultValue = { stringResource(id = R.string.core_ui_note_untitled) },
+                                    ),
                                 style = MaterialTheme.typography.titleMedium,
                                 textAlign = TextAlign.Start,
-                                modifier = Modifier.weight(weight = 1f)
+                                modifier = Modifier.weight(weight = 1f),
                             )
 
                             if (!multiSelectionEnabled) {
-
                                 AppIconToggleButton(
                                     checked = note.pinned,
                                     onCheckedChange = { onPinClick() },
                                     icon = {
                                         Icon(
                                             imageVector = AppIcons.PinBorder,
-                                            contentDescription = "Pinned"
+                                            contentDescription = "Pinned",
                                         )
                                     },
                                     checkedIcon = {
                                         Icon(
                                             imageVector = AppIcons.Pin,
-                                            contentDescription = "Unpinned"
+                                            contentDescription = "Unpinned",
                                         )
-                                    }
+                                    },
                                 )
                             }
 
                             if (multiSelectionEnabled) {
-
                                 RadioButton(
                                     selected = selected,
                                     onClick = null,
-                                    colors = RadioButtonDefaults.colors(
-                                        selectedColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                                        unselectedColor = LocalTintTheme.current.iconTint
-                                    )
+                                    colors =
+                                        RadioButtonDefaults.colors(
+                                            selectedColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                                            unselectedColor = LocalTintTheme.current.iconTint,
+                                        ),
                                 )
                             }
-                        }
+                        },
                     )
 
                     if (note.content.isNotEmpty()) {
                         Text(
                             text = note.content,
                             style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
                         )
                     }
 
                     note.reminder?.let {
                         ReminderCard(
                             reminder = it,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
                         )
                     }
 
                     if (note.items.isNotEmpty()) {
                         Column(
                             modifier = Modifier.fillMaxWidth(),
-                            verticalArrangement = Arrangement.spacedBy(
-                                space = 4.dp,
-                                alignment = Alignment.Top
-                            ),
+                            verticalArrangement =
+                                Arrangement.spacedBy(
+                                    space = 4.dp,
+                                    alignment = Alignment.Top,
+                                ),
                             content = {
                                 note.items.forEach {
                                     ItemCard(item = it)
                                 }
-                            }
+                            },
                         )
                     }
 
@@ -174,70 +203,75 @@ fun NoteCard(
                                         label = {
                                             Text(
                                                 text = label.name,
-                                                style = MaterialTheme.typography.labelSmall
+                                                style = MaterialTheme.typography.labelSmall,
                                             )
                                         },
-                                        colors = AssistChipDefaults.assistChipColors(
-                                            containerColor = label.backgroundColor?.let(::Color) ?: MaterialTheme.colorScheme.surfaceVariant.copy(
-                                                alpha = 0.5f
-                                            )
-                                        ),
-                                        border = null
+                                        colors =
+                                            AssistChipDefaults.assistChipColors(
+                                                containerColor =
+                                                    label.backgroundColor?.let(::Color) ?: MaterialTheme.colorScheme.surfaceVariant.copy(
+                                                        alpha = 0.5f,
+                                                    ),
+                                            ),
+                                        border = null,
                                     )
                                 }
-                            }
+                            },
                         )
                     }
-                }
+                },
             )
-        }
+        },
     )
 }
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun NoteCard(
-    note: Note,
-    onNoteClick: (Long) -> Unit,
-    modifier: Modifier = Modifier,
-) {
+fun NoteCard(note: Note, onNoteClick: (Long) -> Unit, modifier: Modifier = Modifier) {
     ElevatedCard(
         onClick = { onNoteClick(note.id) },
-        colors = if (note.backgroundColor != null)
-            CardDefaults.elevatedCardColors(containerColor = Color(color = note.backgroundColor!!))
-        else CardDefaults.elevatedCardColors(),
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight(align = Alignment.Top)
-            .semantics { onClick(label = "Open Note", action = null) },
+        colors =
+            if (note.backgroundColor != null) {
+                CardDefaults.elevatedCardColors(containerColor = Color(color = note.backgroundColor!!))
+            } else {
+                CardDefaults.elevatedCardColors()
+            },
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .wrapContentHeight(align = Alignment.Top)
+                .semantics { onClick(label = "Open Note", action = null) },
         content = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 content = {
                     Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(all = 16.dp),
-                        verticalArrangement = Arrangement.spacedBy(
-                            space = 8.dp,
-                            alignment = Alignment.CenterVertically
-                        ),
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(all = 16.dp),
+                        verticalArrangement =
+                            Arrangement.spacedBy(
+                                space = 8.dp,
+                                alignment = Alignment.CenterVertically,
+                            ),
                         content = {
                             Text(
-                                text = note.title.ifEmpty(
-                                    defaultValue = { stringResource(id = R.string.core_ui_note_untitled) }
-                                ),
+                                text =
+                                    note.title.ifEmpty(
+                                        defaultValue = { stringResource(id = R.string.core_ui_note_untitled) },
+                                    ),
                                 style = MaterialTheme.typography.titleMedium,
                                 textAlign = TextAlign.Start,
-                                modifier = Modifier.fillMaxWidth()
+                                modifier = Modifier.fillMaxWidth(),
                             )
 
                             if (note.content.isNotEmpty()) {
                                 Text(
                                     text = note.content,
                                     style = MaterialTheme.typography.bodyMedium,
-                                    modifier = Modifier.fillMaxWidth()
+                                    modifier = Modifier.fillMaxWidth(),
                                 )
                             }
 
@@ -252,25 +286,27 @@ fun NoteCard(
                                                 label = {
                                                     Text(
                                                         text = label.name,
-                                                        style = MaterialTheme.typography.labelSmall
+                                                        style = MaterialTheme.typography.labelSmall,
                                                     )
                                                 },
-                                                colors = AssistChipDefaults.assistChipColors(
-                                                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
-                                                        alpha = 0.5f
-                                                    )
-                                                ),
-                                                border = null
+                                                colors =
+                                                    AssistChipDefaults.assistChipColors(
+                                                        containerColor =
+                                                            MaterialTheme.colorScheme.surfaceVariant.copy(
+                                                                alpha = 0.5f,
+                                                            ),
+                                                    ),
+                                                border = null,
                                             )
                                         }
-                                    }
+                                    },
                                 )
                             }
-                        }
+                        },
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
@@ -288,7 +324,7 @@ fun SelectedNoteCardWithSelectionPreview(
             selected = true,
             onSelectedChanged = {},
             onNoteClick = {},
-            onPinClick = {}
+            onPinClick = {},
         )
     }
 }
@@ -307,7 +343,7 @@ fun NoteCardWithSelectionPreview(
             selected = false,
             onSelectedChanged = {},
             onNoteClick = {},
-            onPinClick = {}
+            onPinClick = {},
         )
     }
 }
@@ -316,7 +352,7 @@ fun NoteCardWithSelectionPreview(
 @Composable
 fun NoteCardWithoutSelectionPreview(
     @PreviewParameter(NotesPreviewParameterProvider::class)
-    notes: Map<Boolean, List<Note>>
+    notes: Map<Boolean, List<Note>>,
 ) {
     AppTheme {
         NoteCard(
@@ -326,7 +362,7 @@ fun NoteCardWithoutSelectionPreview(
             selected = false,
             onSelectedChanged = {},
             onNoteClick = {},
-            onPinClick = {}
+            onPinClick = {},
         )
     }
 }
@@ -340,7 +376,7 @@ fun NoteCardPreview(
     AppTheme {
         NoteCard(
             note = notes[true]!![1],
-            onNoteClick = {}
+            onNoteClick = {},
         )
     }
 }

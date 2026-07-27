@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.design.component
 
 import androidx.compose.foundation.layout.RowScope
@@ -28,14 +49,13 @@ fun AppTopAppBar(
     colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
     isCenterAligned: Boolean = true,
 ) {
-
     if (isCenterAligned) {
         CenterAlignedTopAppBar(
             title = title,
             modifier = modifier,
             navigationIcon = navigationIcon,
             actions = actions,
-            colors = colors
+            colors = colors,
         )
     }
 
@@ -45,25 +65,19 @@ fun AppTopAppBar(
             modifier = modifier,
             navigationIcon = navigationIcon,
             actions = actions,
-            colors = colors
+            colors = colors,
         )
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppSearchAppBar(
-    searchBar: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    navigationIcon: @Composable () -> Unit,
-    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
-) {
-
+fun AppSearchAppBar(searchBar: @Composable () -> Unit, modifier: Modifier = Modifier, navigationIcon: @Composable () -> Unit, colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors()) {
     TopAppBar(
         title = searchBar,
         modifier = modifier,
         navigationIcon = navigationIcon,
-        colors = colors
+        colors = colors,
     )
 }
 
@@ -77,7 +91,7 @@ private fun AppSingleActionTopAppBarPreview() {
                 Text(
                     text = stringResource(id = android.R.string.untitled),
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
             },
             navigationIcon = {
@@ -89,7 +103,7 @@ private fun AppSingleActionTopAppBarPreview() {
                             contentDescription = "Navigation icon",
                             tint = MaterialTheme.colorScheme.onSurface,
                         )
-                    }
+                    },
                 )
             },
             actions = {
@@ -103,7 +117,7 @@ private fun AppSingleActionTopAppBarPreview() {
                         )
                     },
                 )
-            }
+            },
         )
     }
 }
@@ -118,7 +132,7 @@ private fun AppMultiActionsTopAppBarPreview() {
                 Text(
                     text = stringResource(id = android.R.string.untitled),
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
             },
             navigationIcon = {
@@ -130,7 +144,7 @@ private fun AppMultiActionsTopAppBarPreview() {
                             contentDescription = "Navigation icon",
                             tint = MaterialTheme.colorScheme.onSurface,
                         )
-                    }
+                    },
                 )
             },
             actions = {
@@ -158,7 +172,7 @@ private fun AppMultiActionsTopAppBarPreview() {
                     )
                 }
             },
-            isCenterAligned = false
+            isCenterAligned = false,
         )
     }
 }
@@ -185,7 +199,7 @@ private fun AppSearchAppBarPreview() {
                                 Icon(
                                     imageVector = AppIcons.Search,
                                     contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onSurface
+                                    tint = MaterialTheme.colorScheme.onSurface,
                                 )
                             },
                             trailingIcon = {
@@ -195,16 +209,16 @@ private fun AppSearchAppBarPreview() {
                                         Icon(
                                             imageVector = AppIcons.Close,
                                             contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.onSurface
+                                            tint = MaterialTheme.colorScheme.onSurface,
                                         )
-                                    }
+                                    },
                                 )
-                            }
+                            },
                         )
                     },
                     expanded = false,
                     onExpandedChange = {},
-                    content = {}
+                    content = {},
                 )
             },
             navigationIcon = {
@@ -216,9 +230,9 @@ private fun AppSearchAppBarPreview() {
                             contentDescription = "Navigation icon",
                             tint = MaterialTheme.colorScheme.onSurface,
                         )
-                    }
+                    },
                 )
-            }
+            },
         )
     }
 }

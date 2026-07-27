@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.feature.search.impl
 
 import androidx.activity.compose.BackHandler
@@ -53,10 +74,7 @@ import com.example.hnotes.core.ui.SearchQueryPreviewParameterProvider
 import com.example.hnotes.core.ui.SearchResultPreviewParameterProvider
 
 @Composable
-internal fun SearchScreen(
-    modifier: Modifier = Modifier,
-    viewModel: SearchViewModel = hiltViewModel(),
-) {
+internal fun SearchScreen(modifier: Modifier = Modifier, viewModel: SearchViewModel = hiltViewModel()) {
     val recentSearchQueriesUiState by viewModel.recentSearchQueriesUiState.collectAsStateWithLifecycle()
     val searchResultUiState by viewModel.searchResultUiState.collectAsStateWithLifecycle()
     val searchQuery by viewModel.currentSearchQueryUiState.collectAsStateWithLifecycle()
@@ -68,7 +86,7 @@ internal fun SearchScreen(
         searchResultUiState = searchResultUiState,
         searchQuery = searchQuery,
         onEvent = viewModel::onEvent,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -79,16 +97,17 @@ internal fun SearchScreen(
     searchResultUiState: SearchResultUiState,
     searchQuery: String,
     onEvent: (SearchScreenEvent) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter,
         content = {
             AppSearchBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(),
                 inputField = {
                     SearchBarDefaults.InputField(
                         query = searchQuery,
@@ -107,7 +126,7 @@ internal fun SearchScreen(
                                         imageVector = AppIcons.Back,
                                         contentDescription = null,
                                     )
-                                }
+                                },
                             )
                         },
                         trailingIcon = {
@@ -118,12 +137,12 @@ internal fun SearchScreen(
                                         Icon(
                                             imageVector = AppIcons.Close,
                                             contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.onSurface
+                                            tint = MaterialTheme.colorScheme.onSurface,
                                         )
-                                    }
+                                    },
                                 )
                             }
-                        }
+                        },
                     )
                 },
                 expanded = true,
@@ -136,7 +155,10 @@ internal fun SearchScreen(
                         verticalArrangement = Arrangement.Top,
                         content = {
                             when (searchResultUiState) {
-                                is SearchResultUiState.LoadFailed, SearchResultUiState.Loading -> Unit
+                                is SearchResultUiState.LoadFailed, SearchResultUiState.Loading -> {
+                                    Unit
+                                }
+
                                 is SearchResultUiState.EmptyQuery -> {
                                     if (recentSearchQueriesUiState is SearchQueryUiState.Success) {
                                         RecentSearches(
@@ -148,11 +170,11 @@ internal fun SearchScreen(
                                             onClearRecentSearch = {
                                                 onEvent(
                                                     SearchScreenEvent.ClearRecentSearch(
-                                                        it
-                                                    )
+                                                        it,
+                                                    ),
                                                 )
                                             },
-                                            onClearAllRecentSearches = { onEvent(SearchScreenEvent.ClearAllRecentSearches) }
+                                            onClearAllRecentSearches = { onEvent(SearchScreenEvent.ClearAllRecentSearches) },
                                         )
                                     }
                                 }
@@ -161,9 +183,10 @@ internal fun SearchScreen(
                                     if (searchResultUiState.isEmpty()) {
                                         SearchResultEmpty(
                                             searchQuery = searchQuery,
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(horizontal = 48.dp)
+                                            modifier =
+                                                Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(horizontal = 48.dp),
                                         )
                                         if (recentSearchQueriesUiState is SearchQueryUiState.Success) {
                                             RecentSearches(
@@ -175,15 +198,15 @@ internal fun SearchScreen(
                                                 onClearRecentSearch = {
                                                     onEvent(
                                                         SearchScreenEvent.ClearRecentSearch(
-                                                            it
-                                                        )
+                                                            it,
+                                                        ),
                                                     )
                                                 },
                                                 onClearAllRecentSearches = {
                                                     onEvent(
-                                                        SearchScreenEvent.ClearAllRecentSearches
+                                                        SearchScreenEvent.ClearAllRecentSearches,
                                                     )
-                                                }
+                                                },
                                             )
                                         }
                                     } else {
@@ -192,20 +215,20 @@ internal fun SearchScreen(
                                             onNoteClick = {
                                                 onEvent(
                                                     SearchScreenEvent.NavigateToNote(
-                                                        noteId = it
-                                                    )
+                                                        noteId = it,
+                                                    ),
                                                 )
                                             },
-                                            modifier = Modifier.fillMaxSize()
+                                            modifier = Modifier.fillMaxSize(),
                                         )
                                     }
                                 }
                             }
-                        }
+                        },
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
@@ -215,16 +238,17 @@ fun RecentSearches(
     onRecentSearchClicked: (SearchQuery) -> Unit,
     onClearRecentSearch: (SearchQuery) -> Unit,
     onClearAllRecentSearches: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxWidth(),
         contentPadding = PaddingValues(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(
-            space = 8.dp,
-            alignment = Alignment.Top
-        ),
+        verticalArrangement =
+            Arrangement.spacedBy(
+                space = 8.dp,
+                alignment = Alignment.Top,
+            ),
         content = {
             item {
                 Row(
@@ -233,14 +257,15 @@ fun RecentSearches(
                     verticalAlignment = Alignment.CenterVertically,
                     content = {
                         Text(
-                            text = buildAnnotatedString {
-                                withStyle(
-                                    style = SpanStyle(fontWeight = FontWeight.Bold),
-                                    block = {
-                                        append(text = stringResource(id = R.string.feature_search_recent_searches))
-                                    }
-                                )
-                            }
+                            text =
+                                buildAnnotatedString {
+                                    withStyle(
+                                        style = SpanStyle(fontWeight = FontWeight.Bold),
+                                        block = {
+                                            append(text = stringResource(id = R.string.feature_search_recent_searches))
+                                        },
+                                    )
+                                },
                         )
 
                         if (queries.isNotEmpty()) {
@@ -249,12 +274,12 @@ fun RecentSearches(
                                 text = {
                                     Text(
                                         text = stringResource(id = R.string.feature_search_clear_all_recent_searches),
-                                        color = MaterialTheme.colorScheme.primary
+                                        color = MaterialTheme.colorScheme.primary,
                                     )
-                                }
+                                },
                             )
                         }
-                    }
+                    },
                 )
             }
 
@@ -267,19 +292,16 @@ fun RecentSearches(
                         searchQuery = it,
                         onClick = onRecentSearchClicked,
                         onClear = onClearRecentSearch,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
 @Composable
-fun SearchResultEmpty(
-    searchQuery: String,
-    modifier: Modifier = Modifier
-) {
+fun SearchResultEmpty(searchQuery: String, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.TopCenter,
@@ -287,30 +309,28 @@ fun SearchResultEmpty(
             val message = stringResource(id = R.string.feature_search_result_not_found, searchQuery)
             val start = message.indexOf(searchQuery)
             Text(
-                text = AnnotatedString(
-                    text = message,
-                    spanStyles = listOf(
-                        AnnotatedString.Range(
-                            SpanStyle(fontWeight = FontWeight.Bold),
-                            start = start,
-                            end = start + searchQuery.length
-                        )
-                    )
-                ),
+                text =
+                    AnnotatedString(
+                        text = message,
+                        spanStyles =
+                            listOf(
+                                AnnotatedString.Range(
+                                    SpanStyle(fontWeight = FontWeight.Bold),
+                                    start = start,
+                                    end = start + searchQuery.length,
+                                ),
+                            ),
+                    ),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(vertical = 24.dp),
             )
-        }
+        },
     )
 }
 
 @Composable
-fun SearchResultContent(
-    notes: List<Note>,
-    onNoteClick: (id: Long) -> Unit,
-    modifier: Modifier = Modifier
-) {
+fun SearchResultContent(notes: List<Note>, onNoteClick: (id: Long) -> Unit, modifier: Modifier = Modifier) {
     val staggeredGridState = rememberLazyStaggeredGridState()
 
     LazyVerticalStaggeredGrid(
@@ -325,22 +345,23 @@ fun SearchResultContent(
                 item(
                     span = StaggeredGridItemSpan.FullLine,
                     content = {
-
                         Text(
-                            text = buildAnnotatedString {
-                                withStyle(
-                                    style = SpanStyle(fontWeight = FontWeight.Bold),
-                                    block = {
-                                        append(stringResource(id = R.string.feature_search_notes))
-                                    }
-                                )
-                            },
-                            modifier = Modifier.padding(
-                                horizontal = 16.dp,
-                                vertical = 8.dp
-                            ),
+                            text =
+                                buildAnnotatedString {
+                                    withStyle(
+                                        style = SpanStyle(fontWeight = FontWeight.Bold),
+                                        block = {
+                                            append(stringResource(id = R.string.feature_search_notes))
+                                        },
+                                    )
+                                },
+                            modifier =
+                                Modifier.padding(
+                                    horizontal = 16.dp,
+                                    vertical = 8.dp,
+                                ),
                         )
-                    }
+                    },
                 )
             }
 
@@ -352,13 +373,14 @@ fun SearchResultContent(
                     NoteCard(
                         note = it,
                         onNoteClick = onNoteClick,
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp)
-                            .animateItem()
+                        modifier =
+                            Modifier
+                                .padding(horizontal = 8.dp)
+                                .animateItem(),
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
@@ -371,7 +393,7 @@ private fun SearchScreenLoadingPreview() {
                 recentSearchQueriesUiState = SearchQueryUiState.Loading,
                 searchResultUiState = SearchResultUiState.Loading,
                 searchQuery = "",
-                onEvent = {}
+                onEvent = {},
             )
         }
     }
@@ -386,7 +408,7 @@ private fun SearchScreenEmptyPreview() {
                 recentSearchQueriesUiState = SearchQueryUiState.Loading,
                 searchResultUiState = SearchResultUiState.Success(searchResult = SearchResult()),
                 searchQuery = "Hello World!",
-                onEvent = {}
+                onEvent = {},
             )
         }
     }
@@ -396,21 +418,24 @@ private fun SearchScreenEmptyPreview() {
 @Composable
 private fun SearchScreenEmptyPreview(
     @PreviewParameter(SearchResultPreviewParameterProvider::class)
-    searchResult: SearchResult
+    searchResult: SearchResult,
 ) {
     AppTheme {
         AppBackground {
             SearchScreen(
                 recentSearchQueriesUiState = SearchQueryUiState.Success(),
-                searchResultUiState = SearchResultUiState.Success(
-                    searchResult = searchResult.copy(
-                        notes = searchResult.notes.filter {
-                            it.title.contains("ry0") || it.content.contains("ry0")
-                        }
-                    )
-                ),
+                searchResultUiState =
+                    SearchResultUiState.Success(
+                        searchResult =
+                            searchResult.copy(
+                                notes =
+                                    searchResult.notes.filter {
+                                        it.title.contains("ry0") || it.content.contains("ry0")
+                                    },
+                            ),
+                    ),
                 searchQuery = "ry0",
-                onEvent = {}
+                onEvent = {},
             )
         }
     }
@@ -428,7 +453,7 @@ private fun SearchScreenPreview(
                 recentSearchQueriesUiState = SearchQueryUiState.Success(queries = searchQueries),
                 searchResultUiState = SearchResultUiState.Loading,
                 searchQuery = "",
-                onEvent = {}
+                onEvent = {},
             )
         }
     }

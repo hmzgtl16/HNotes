@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.feature.notes.impl
 
 import androidx.compose.foundation.layout.Arrangement
@@ -46,7 +67,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.hnotes.core.design.component.AppBackground
 import com.example.hnotes.core.design.component.AppButton
@@ -60,34 +80,24 @@ import com.example.hnotes.core.model.Note
 import com.example.hnotes.core.ui.DevicePreviews
 import com.example.hnotes.core.ui.NoteCard
 import com.example.hnotes.core.ui.NotesPreviewParameterProvider
-import com.example.hnotes.feature.notes.api.navigation.NotesNavKey
 
 @Composable
-internal fun NotesScreen(
-    modifier: Modifier = Modifier,
-    viewModel: NotesViewModel,
-) {
-
+internal fun NotesScreen(modifier: Modifier = Modifier, viewModel: NotesViewModel) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     NotesScreen(
         uiState = uiState,
         onEvent = viewModel::onEvent,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
 @Composable
-internal fun NotesScreen(
-    uiState: NotesUiState,
-    onEvent: (NotesScreenEvent) -> Unit,
-    modifier: Modifier = Modifier,
-) {
+internal fun NotesScreen(uiState: NotesUiState, onEvent: (NotesScreenEvent) -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
-
             when (uiState.notesState) {
                 NotesState.Loading -> {
                     NotesScreenLoading()
@@ -98,17 +108,17 @@ internal fun NotesScreen(
                         NotesScreenContent(
                             uiState = uiState,
                             onEvent = onEvent,
-                            modifier = modifier
+                            modifier = modifier,
                         )
                     } else {
                         NotesScreenEmpty(
                             onEvent = onEvent,
-                            modifier = modifier
+                            modifier = modifier,
                         )
                     }
                 }
             }
-        }
+        },
     )
 }
 
@@ -116,27 +126,24 @@ internal fun NotesScreen(
 fun NotesScreenLoading(modifier: Modifier = Modifier) {
     AppLoadingWheel(
         modifier = modifier,
-        contentDescription = stringResource(id = R.string.feature_notes_loading)
+        contentDescription = stringResource(id = R.string.feature_notes_loading),
     )
 }
 
 @Composable
-fun NotesScreenEmpty(
-    onEvent: (NotesScreenEvent) -> Unit,
-    modifier: Modifier = Modifier
-) {
-
+fun NotesScreenEmpty(onEvent: (NotesScreenEvent) -> Unit, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(all = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(
-            space = 8.dp,
-            alignment = Alignment.CenterVertically
-        ),
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(all = 16.dp),
+        verticalArrangement =
+            Arrangement.spacedBy(
+                space = 8.dp,
+                alignment = Alignment.CenterVertically,
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
-
             Text(
                 text = stringResource(id = R.string.feature_notes_empty_error),
                 modifier = Modifier.fillMaxWidth(),
@@ -161,33 +168,29 @@ fun NotesScreenEmpty(
                     Icon(
                         imageVector = AppIcons.AddNote,
                         contentDescription = "Add Note",
-                        modifier = Modifier.size(size = ButtonDefaults.IconSize)
+                        modifier = Modifier.size(size = ButtonDefaults.IconSize),
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NotesScreenContent(
-    uiState: NotesUiState,
-    onEvent: (NotesScreenEvent) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-
+fun NotesScreenContent(uiState: NotesUiState, onEvent: (NotesScreenEvent) -> Unit, modifier: Modifier = Modifier) {
     val staggeredGridState = rememberLazyStaggeredGridState()
 
     val expandedFab by remember {
         derivedStateOf { staggeredGridState.firstVisibleItemIndex == 0 }
     }
 
-    val allNotesSelected = remember(
-        key1 = uiState.notesState,
-        key2 = uiState.selectedNotes,
-        calculation = { uiState.allNotesSelectedState }
-    )
+    val allNotesSelected =
+        remember(
+            key1 = uiState.notesState,
+            key2 = uiState.selectedNotes,
+            calculation = { uiState.allNotesSelectedState },
+        )
 
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
@@ -198,15 +201,17 @@ fun NotesScreenContent(
         block = {
             if (uiState.showUndoDeleteSnackbar && uiState.recentlyDeletedNotes.isNotEmpty()) {
                 val count = uiState.recentlyDeletedNotes.size
-                val message = context.resources
-                    .getQuantityString(R.plurals.feature_notes_deleted_notes, count, count)
+                val message =
+                    context.resources
+                        .getQuantityString(R.plurals.feature_notes_deleted_notes, count, count)
                 val actionLabel = context.getString(R.string.feature_notes_undo)
 
-                val result = snackbarHostState.showSnackbar(
-                    message = message,
-                    actionLabel = actionLabel,
-                    duration = SnackbarDuration.Short
-                )
+                val result =
+                    snackbarHostState.showSnackbar(
+                        message = message,
+                        actionLabel = actionLabel,
+                        duration = SnackbarDuration.Short,
+                    )
                 when (result) {
                     SnackbarResult.ActionPerformed -> {
                         onEvent(NotesScreenEvent.RestoreNotes)
@@ -217,9 +222,8 @@ fun NotesScreenContent(
                     }
                 }
             }
-        }
+        },
     )
-
 
     Scaffold(
         modifier = modifier,
@@ -228,17 +232,18 @@ fun NotesScreenContent(
                 AppTopAppBar(
                     title = {
                         Text(
-                            text = if (uiState.selectedNotes.isEmpty())
-                                stringResource(id = R.string.feature_notes_no_selected_notes)
-                            else {
-                                pluralStringResource(
-                                    id = R.plurals.feature_notes_selected_notes,
-                                    count = uiState.selectedNotes.size,
-                                    uiState.selectedNotes.size
-                                )
-                            },
+                            text =
+                                if (uiState.selectedNotes.isEmpty()) {
+                                    stringResource(id = R.string.feature_notes_no_selected_notes)
+                                } else {
+                                    pluralStringResource(
+                                        id = R.plurals.feature_notes_selected_notes,
+                                        count = uiState.selectedNotes.size,
+                                        uiState.selectedNotes.size,
+                                    )
+                                },
                             maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
+                            overflow = TextOverflow.Ellipsis,
                         )
                     },
                     navigationIcon = {
@@ -250,13 +255,12 @@ fun NotesScreenContent(
                             icon = {
                                 Icon(
                                     imageVector = AppIcons.Close,
-                                    contentDescription = null
+                                    contentDescription = null,
                                 )
-                            }
+                            },
                         )
                     },
                     actions = {
-
                         val mostPinned = uiState.selectedNotes.all(predicate = Note::pinned)
 
                         AppIconButton(
@@ -264,9 +268,9 @@ fun NotesScreenContent(
                             icon = {
                                 Icon(
                                     imageVector = if (mostPinned) AppIcons.PinBorder else AppIcons.Pin,
-                                    contentDescription = null
+                                    contentDescription = null,
                                 )
-                            }
+                            },
                         )
 
                         AppIconButton(
@@ -274,20 +278,20 @@ fun NotesScreenContent(
                             icon = {
                                 Icon(
                                     imageVector = AppIcons.Delete,
-                                    contentDescription = null
+                                    contentDescription = null,
                                 )
-                            }
+                            },
                         )
                     },
                     isCenterAligned = false,
-                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent)
+                    colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
                 )
             }
         },
         snackbarHost = {
             SnackbarHost(
                 hostState = snackbarHostState,
-                modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing)
+                modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
             )
         },
         floatingActionButton = {
@@ -297,13 +301,12 @@ fun NotesScreenContent(
                 icon = {
                     Icon(
                         imageVector = AppIcons.AddNote,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 },
                 text = {
-
                     Text(text = stringResource(id = R.string.feature_notes_add_note))
-                }
+                },
             )
         },
         floatingActionButtonPosition = FabPosition.End,
@@ -311,11 +314,11 @@ fun NotesScreenContent(
         content = { paddingValues ->
 
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues = paddingValues),
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues = paddingValues),
                 content = {
-
                     if (uiState.isMultiSelectionEnabled) {
                         AppTriStateCheckbox(
                             state = allNotesSelected,
@@ -329,7 +332,7 @@ fun NotesScreenContent(
                                     style = MaterialTheme.typography.bodyLarge,
                                 )
                             },
-                            modifier = Modifier.wrapContentWidth()
+                            modifier = Modifier.wrapContentWidth(),
                         )
                     }
 
@@ -347,12 +350,13 @@ fun NotesScreenContent(
                                             Text(
                                                 text = stringResource(id = R.string.feature_notes_pinned_group),
                                                 style = MaterialTheme.typography.titleMedium,
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .padding(horizontal = 8.dp)
-                                                    .animateItem()
+                                                modifier =
+                                                    Modifier
+                                                        .fillMaxWidth()
+                                                        .padding(horizontal = 8.dp)
+                                                        .animateItem(),
                                             )
-                                        }
+                                        },
                                     )
                                 }
 
@@ -367,31 +371,32 @@ fun NotesScreenContent(
                                             enableMultiSelection = {
                                                 onEvent(
                                                     NotesScreenEvent.MultiSelectionChanged(
-                                                        true
-                                                    )
+                                                        true,
+                                                    ),
                                                 )
                                             },
                                             selected = uiState.selectedNotes.contains(it),
                                             onSelectedChanged = {
                                                 onEvent(
                                                     NotesScreenEvent.NoteSelectedChanged(
-                                                        it
-                                                    )
+                                                        it,
+                                                    ),
                                                 )
                                             },
                                             onPinClick = { onEvent(NotesScreenEvent.PinNote(it)) },
                                             onNoteClick = {
                                                 onEvent(
                                                     NotesScreenEvent.NavigateToNote(
-                                                        it.id
-                                                    )
+                                                        it.id,
+                                                    ),
                                                 )
                                             },
-                                            modifier = Modifier
-                                                .padding(horizontal = 8.dp)
-                                                .animateItem()
+                                            modifier =
+                                                Modifier
+                                                    .padding(horizontal = 8.dp)
+                                                    .animateItem(),
                                         )
-                                    }
+                                    },
                                 )
                             }
 
@@ -403,12 +408,13 @@ fun NotesScreenContent(
                                             Text(
                                                 text = stringResource(id = R.string.feature_notes_unpinned_group),
                                                 style = MaterialTheme.typography.titleMedium,
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .padding(horizontal = 8.dp)
-                                                    .animateItem()
+                                                modifier =
+                                                    Modifier
+                                                        .fillMaxWidth()
+                                                        .padding(horizontal = 8.dp)
+                                                        .animateItem(),
                                             )
-                                        }
+                                        },
                                     )
                                 }
 
@@ -423,38 +429,39 @@ fun NotesScreenContent(
                                             enableMultiSelection = {
                                                 onEvent(
                                                     NotesScreenEvent.MultiSelectionChanged(
-                                                        true
-                                                    )
+                                                        true,
+                                                    ),
                                                 )
                                             },
                                             selected = uiState.selectedNotes.contains(it),
                                             onSelectedChanged = {
                                                 onEvent(
                                                     NotesScreenEvent.NoteSelectedChanged(
-                                                        it
-                                                    )
+                                                        it,
+                                                    ),
                                                 )
                                             },
                                             onPinClick = { onEvent(NotesScreenEvent.PinNote(it)) },
                                             onNoteClick = {
                                                 onEvent(
                                                     NotesScreenEvent.NavigateToNote(
-                                                        it.id
-                                                    )
+                                                        it.id,
+                                                    ),
                                                 )
                                             },
-                                            modifier = Modifier
-                                                .padding(horizontal = 8.dp)
-                                                .animateItem()
+                                            modifier =
+                                                Modifier
+                                                    .padding(horizontal = 8.dp)
+                                                    .animateItem(),
                                         )
-                                    }
+                                    },
                                 )
                             }
-                        }
+                        },
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
@@ -465,7 +472,7 @@ fun NotesScreenLoadingPreview() {
         AppBackground {
             NotesScreen(
                 uiState = NotesUiState(),
-                onEvent = {}
+                onEvent = {},
             )
         }
     }
@@ -478,7 +485,7 @@ fun NotesScreenEmptyPreview() {
         AppBackground {
             NotesScreen(
                 uiState = NotesUiState(notesState = NotesState.Success(notes = emptyMap())),
-                onEvent = {}
+                onEvent = {},
             )
         }
     }
@@ -488,13 +495,13 @@ fun NotesScreenEmptyPreview() {
 @Composable
 fun NotesScreenContentPreview(
     @PreviewParameter(NotesPreviewParameterProvider::class)
-    notes: Map<Boolean, List<Note>>
+    notes: Map<Boolean, List<Note>>,
 ) {
     AppTheme {
         AppBackground {
             NotesScreen(
                 uiState = NotesUiState(notesState = NotesState.Success(notes = notes)),
-                onEvent = {}
+                onEvent = {},
             )
         }
     }
@@ -504,17 +511,18 @@ fun NotesScreenContentPreview(
 @Composable
 fun NotesScreenContentMultiSelectionEnabledPreview(
     @PreviewParameter(NotesPreviewParameterProvider::class)
-    notes: Map<Boolean, List<Note>>
+    notes: Map<Boolean, List<Note>>,
 ) {
     AppTheme {
         AppBackground {
             NotesScreen(
-                uiState = NotesUiState(
-                    notesState = NotesState.Success(notes = notes),
-                    isMultiSelectionEnabled = true,
-                    selectedNotes = notes.values.flatten().filter(Note::pinned)
-                ),
-                onEvent = {}
+                uiState =
+                    NotesUiState(
+                        notesState = NotesState.Success(notes = notes),
+                        isMultiSelectionEnabled = true,
+                        selectedNotes = notes.values.flatten().filter(Note::pinned),
+                    ),
+                onEvent = {},
             )
         }
     }

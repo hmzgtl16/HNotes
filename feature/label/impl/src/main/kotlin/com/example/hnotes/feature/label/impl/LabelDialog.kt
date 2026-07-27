@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.feature.label.impl
 
 import androidx.compose.foundation.background
@@ -32,51 +53,46 @@ import com.example.hnotes.core.model.Label
 import com.example.hnotes.core.ui.LabelCard
 
 @Composable
-fun LabelDialog(
-    modifier: Modifier = Modifier,
-    viewModel: LabelViewModel = hiltViewModel()
-) {
+fun LabelDialog(modifier: Modifier = Modifier, viewModel: LabelViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LabelDialog(
         uiState = uiState,
         onEvent = viewModel::onEvent,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LabelDialog(
-    modifier: Modifier = Modifier,
-    uiState: LabelsUiState,
-    onEvent: (LabelsDialogEvent) -> Unit,
-) {
+fun LabelDialog(modifier: Modifier = Modifier, uiState: LabelsUiState, onEvent: (LabelsDialogEvent) -> Unit) {
     Box(
-        modifier = modifier
-            .background(
-                color = LocalBackgroundTheme.current.color,
-                shape = RoundedCornerShape(size = 30.dp)
-            ),
+        modifier =
+            modifier
+                .background(
+                    color = LocalBackgroundTheme.current.color,
+                    shape = RoundedCornerShape(size = 30.dp),
+                ),
         contentAlignment = Alignment.Center,
         content = {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(all = 32.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(all = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 16.dp,
-                    alignment = Alignment.Top
-                ),
+                verticalArrangement =
+                    Arrangement.spacedBy(
+                        space = 16.dp,
+                        alignment = Alignment.Top,
+                    ),
                 content = {
-
                     Text(
                         text = stringResource(R.string.feature_label_impl_labels_title),
                         textAlign = TextAlign.Start,
                         style = MaterialTheme.typography.titleLarge,
                         color = LocalContentColor.current,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
                     )
 
                     HorizontalDivider()
@@ -84,24 +100,31 @@ fun LabelDialog(
                     when (uiState) {
                         LabelsUiState.Loading -> {
                             LabelDialogLoading(
-                                modifier = Modifier
-                                    .fillMaxWidth()
+                                modifier =
+                                    Modifier
+                                        .fillMaxWidth(),
                             )
                         }
 
                         is LabelsUiState.Success -> {
                             if (uiState.allLabels.isEmpty()) {
                                 LabelDialogEmpty(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
+                                    modifier =
+                                        Modifier
+                                            .fillMaxWidth(),
                                 )
                             } else {
                                 LabelsDialogContent(
-                                    modifier = Modifier
-                                        .fillMaxWidth(),
+                                    modifier =
+                                        Modifier
+                                            .fillMaxWidth(),
                                     allLabels = uiState.allLabels,
                                     selectedLabels = uiState.selectedLabels,
-                                    onToggle = { onEvent(LabelsDialogEvent.ToggleLabelSelection(it)) }
+                                    onToggle = {
+                                        onEvent(
+                                            LabelsDialogEvent.ToggleLabelSelection(it),
+                                        )
+                                    },
                                 )
                             }
                         }
@@ -117,17 +140,20 @@ fun LabelDialog(
                                 onClick = { onEvent(LabelsDialogEvent.Dismiss) },
                                 text = {
                                     Text(
-                                        text = stringResource(id = R.string.feature_label_impl_done),
+                                        text =
+                                            stringResource(
+                                                id = R.string.feature_label_impl_done,
+                                            ),
                                         style = MaterialTheme.typography.labelLarge,
-                                        color = MaterialTheme.colorScheme.primary
+                                        color = MaterialTheme.colorScheme.primary,
                                     )
-                                }
+                                },
                             )
-                        }
+                        },
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
@@ -137,8 +163,10 @@ fun LabelDialogLoading(modifier: Modifier = Modifier) {
         modifier = modifier,
         contentAlignment = Alignment.Center,
         content = {
-            AppLoadingWheel(contentDescription = stringResource(R.string.feature_label_impl_loading_labels))
-        }
+            AppLoadingWheel(
+                contentDescription = stringResource(R.string.feature_label_impl_loading_labels),
+            )
+        },
     )
 }
 
@@ -151,26 +179,22 @@ fun LabelDialogEmpty(modifier: Modifier = Modifier) {
             Text(
                 text = stringResource(R.string.feature_label_impl_labels_empty),
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
-        }
+        },
     )
 }
 
 @Composable
-fun LabelsDialogContent(
-    modifier: Modifier = Modifier,
-    allLabels: List<Label>,
-    selectedLabels: List<Label>,
-    onToggle: (Label) -> Unit,
-) {
+fun LabelsDialogContent(modifier: Modifier = Modifier, allLabels: List<Label>, selectedLabels: List<Label>, onToggle: (Label) -> Unit) {
     LazyColumn(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(
-            space = 16.dp,
-            alignment = Alignment.CenterVertically
-        ),
+        verticalArrangement =
+            Arrangement.spacedBy(
+                space = 16.dp,
+                alignment = Alignment.CenterVertically,
+            ),
         content = {
             items(
                 items = allLabels,
@@ -181,12 +205,11 @@ fun LabelsDialogContent(
                         isSelected = selectedLabels.any { it.id == label.id },
                         onToggle = { onToggle(label) },
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
-
 
 @PreviewScreenSizes
 @Composable
@@ -194,7 +217,7 @@ private fun LabelDialogLoadingPreview() {
     AppTheme {
         LabelDialog(
             uiState = LabelsUiState.Loading,
-            onEvent = {}
+            onEvent = {},
         )
     }
 }
@@ -205,7 +228,7 @@ private fun LabelsDialogEmptyPreview() {
     AppTheme {
         LabelDialog(
             uiState = LabelsUiState.Success(allLabels = emptyList()),
-            onEvent = {}
+            onEvent = {},
         )
     }
 }
@@ -215,17 +238,20 @@ private fun LabelsDialogEmptyPreview() {
 private fun LabelsDialogContentPreview() {
     AppTheme {
         LabelDialog(
-            uiState = LabelsUiState.Success(
-                allLabels = listOf(
-                    Label(id = 1, name = "Label 1"),
-                    Label(id = 2, name = "Label 2"),
-                    Label(id = 3, name = "Label 3")
+            uiState =
+                LabelsUiState.Success(
+                    allLabels =
+                        listOf(
+                            Label(id = 1, name = "Label 1"),
+                            Label(id = 2, name = "Label 2"),
+                            Label(id = 3, name = "Label 3"),
+                        ),
+                    selectedLabels =
+                        listOf(
+                            Label(id = 1, name = "Label 1"),
+                        ),
                 ),
-                selectedLabels = listOf(
-                    Label(id = 1, name = "Label 1")
-                )
-            ),
-            onEvent = {}
+            onEvent = {},
         )
     }
 }

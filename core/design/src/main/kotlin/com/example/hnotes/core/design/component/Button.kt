@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.design.component
 
 import androidx.compose.foundation.BorderStroke
@@ -28,28 +49,29 @@ fun AppButton(
     enabled: Boolean = true,
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
-
     Button(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.onBackground,
-        ),
-        contentPadding = if (leadingIcon != null) {
-            ButtonDefaults.ButtonWithIconContentPadding
-        } else {
-            ButtonDefaults.ContentPadding
-        },
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.onBackground,
+            ),
+        contentPadding =
+            if (leadingIcon != null) {
+                ButtonDefaults.ButtonWithIconContentPadding
+            } else {
+                ButtonDefaults.ContentPadding
+            },
         content = {
             ButtonContent(
                 text = text,
                 leadingIcon = leadingIcon,
-                trailingIcon = trailingIcon
+                trailingIcon = trailingIcon,
             )
-        }
+        },
     )
 }
 
@@ -60,38 +82,41 @@ fun AppOutlinedButton(
     enabled: Boolean = true,
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
-
     OutlinedButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.outlinedButtonColors(
-            contentColor = MaterialTheme.colorScheme.onBackground,
-        ),
-        border = BorderStroke(
-            width = AppButtonDefaults.OutlinedButtonBorderWidth,
-            color = if (enabled) {
-                MaterialTheme.colorScheme.outline
+        colors =
+            ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colorScheme.onBackground,
+            ),
+        border =
+            BorderStroke(
+                width = AppButtonDefaults.OutlinedButtonBorderWidth,
+                color =
+                    if (enabled) {
+                        MaterialTheme.colorScheme.outline
+                    } else {
+                        MaterialTheme.colorScheme.onSurface.copy(
+                            alpha = AppButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
+                        )
+                    },
+            ),
+        contentPadding =
+            if (leadingIcon != null) {
+                ButtonDefaults.ButtonWithIconContentPadding
             } else {
-                MaterialTheme.colorScheme.onSurface.copy(
-                    alpha = AppButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
-                )
+                ButtonDefaults.ContentPadding
             },
-        ),
-        contentPadding = if (leadingIcon != null) {
-            ButtonDefaults.ButtonWithIconContentPadding
-        } else {
-            ButtonDefaults.ContentPadding
-        },
         content = {
             ButtonContent(
                 text = text,
                 leadingIcon = leadingIcon,
-                trailingIcon = trailingIcon
+                trailingIcon = trailingIcon,
             )
-        }
+        },
     )
 }
 
@@ -102,23 +127,23 @@ fun AppTextButton(
     enabled: Boolean = true,
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
-
     TextButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        colors = ButtonDefaults.textButtonColors(
-            contentColor = MaterialTheme.colorScheme.onBackground,
-        ),
+        colors =
+            ButtonDefaults.textButtonColors(
+                contentColor = MaterialTheme.colorScheme.onBackground,
+            ),
         content = {
             ButtonContent(
                 text = text,
                 leadingIcon = leadingIcon,
-                trailingIcon = trailingIcon
+                trailingIcon = trailingIcon,
             )
-        }
+        },
     )
 }
 
@@ -129,9 +154,8 @@ fun AppFilledTonalButton(
     enabled: Boolean = true,
     text: @Composable () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
-
     FilledTonalButton(
         onClick = onClick,
         modifier = modifier,
@@ -141,32 +165,28 @@ fun AppFilledTonalButton(
             ButtonContent(
                 text = text,
                 leadingIcon = leadingIcon,
-                trailingIcon = trailingIcon
+                trailingIcon = trailingIcon,
             )
-        }
+        },
     )
 }
 
 @Composable
-private fun ButtonContent(
-    text: @Composable () -> Unit,
-    leadingIcon: @Composable (() -> Unit)?,
-    trailingIcon: @Composable (() -> Unit)?
-) {
-
+private fun ButtonContent(text: @Composable () -> Unit, leadingIcon: @Composable (() -> Unit)?, trailingIcon: @Composable (() -> Unit)?) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(
-            space = ButtonDefaults.IconSpacing,
-            alignment = Alignment.CenterHorizontally
-        ),
+        horizontalArrangement =
+            Arrangement.spacedBy(
+                space = ButtonDefaults.IconSpacing,
+                alignment = Alignment.CenterHorizontally,
+            ),
         content = {
             if (leadingIcon != null) {
                 Box(
                     modifier = Modifier.sizeIn(maxHeight = ButtonDefaults.IconSize),
                     content = {
                         leadingIcon()
-                    }
+                    },
                 )
             }
 
@@ -177,15 +197,14 @@ private fun ButtonContent(
                     modifier = Modifier.sizeIn(maxHeight = ButtonDefaults.IconSize),
                     content = {
                         trailingIcon()
-                    }
+                    },
                 )
             }
-        }
+        },
     )
 }
 
 object AppButtonDefaults {
-
     const val DISABLED_OUTLINED_BUTTON_BORDER_ALPHA = 0.12f
     val OutlinedButtonBorderWidth = 1.dp
 }
@@ -197,7 +216,7 @@ fun AppButtonPreview() {
         AppBackground(modifier = Modifier.size(150.dp, 50.dp)) {
             AppButton(
                 onClick = {},
-                text = { Text("Test button") }
+                text = { Text("Test button") },
             )
         }
     }
@@ -214,9 +233,9 @@ fun AppButtonWithIconPreview() {
                 leadingIcon = {
                     Icon(
                         imageVector = AppIcons.AddNote,
-                        contentDescription = null
+                        contentDescription = null,
                     )
-                }
+                },
             )
         }
     }
@@ -229,7 +248,7 @@ fun AppOutlinedButtonPreview() {
         AppBackground(modifier = Modifier.size(150.dp, 50.dp)) {
             AppOutlinedButton(
                 onClick = {},
-                text = { Text("Test button") }
+                text = { Text("Test button") },
             )
         }
     }
@@ -246,9 +265,9 @@ fun AppOutlinedButtonWithIconPreview() {
                 leadingIcon = {
                     Icon(
                         imageVector = AppIcons.AddNote,
-                        contentDescription = null
+                        contentDescription = null,
                     )
-                }
+                },
             )
         }
     }
@@ -261,7 +280,7 @@ fun AppTextButtonPreview() {
         AppBackground(modifier = Modifier.size(150.dp, 50.dp)) {
             AppTextButton(
                 onClick = {},
-                text = { Text("Test button") }
+                text = { Text("Test button") },
             )
         }
     }
@@ -278,9 +297,9 @@ fun AppTextButtonWithIconPreview() {
                 leadingIcon = {
                     Icon(
                         imageVector = AppIcons.AddNote,
-                        contentDescription = null
+                        contentDescription = null,
                     )
-                }
+                },
             )
         }
     }
@@ -293,7 +312,7 @@ fun AppFilledTonalButtonPreview() {
         AppBackground(modifier = Modifier.size(150.dp, 50.dp)) {
             AppFilledTonalButton(
                 onClick = {},
-                text = { Text("Test button") }
+                text = { Text("Test button") },
             )
         }
     }
@@ -310,9 +329,9 @@ fun AppFilledTonalButtonWithIconPreview() {
                 leadingIcon = {
                     Icon(
                         imageVector = AppIcons.AddNote,
-                        contentDescription = null
+                        contentDescription = null,
                     )
-                }
+                },
             )
         }
     }

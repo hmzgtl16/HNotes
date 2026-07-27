@@ -34,8 +34,8 @@ org-jetbrains-kotlinx-coroutines = "1.11.0"
 org-jetbrains-kotlinx-datetime = "0.8.0"
 org-jetbrains-kotlinx-serialization = "1.11.0"
 org-robolectric = "4.15.1"
-appcompat = "1.6.1"
-material = "1.10.0"
+com-diffplug-spotless = "8.8.0"
+ktlint = "1.8.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -113,9 +113,7 @@ com-google-devtools-ksp-gradle-plugin = { group = "com.google.devtools.ksp", nam
 dev-iurysouza-modulegraph-gradle-plugin = { group = "dev.iurysouza.modulegraph", name = "dev.iurysouza.modulegraph.gradle.plugin", version.ref = "dev-iurysouza-modulegraph" }
 io-github-takahirom-roborazzi-gradle-plugin = { group = "io.github.takahirom.roborazzi", name = "roborazzi-gradle-plugin", version.ref = "io-github-takahirom-roborazzi" }
 org-jetbrains-kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "org-jetbrains-kotlin" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-
+com-diffplug-spotless-gradle-plugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "com-diffplug-spotless" }
 
 [plugins]
 androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
@@ -127,6 +125,7 @@ com-android-test = { id = "com.android.test", version.ref = "android-gradle-plug
 com-google-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "com-google-dagger" }
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "com-google-devtools-ksp" }
 com-google-protobuf = { id = "com.google.protobuf", version.ref = "com-google-protobuf-plugin" }
+com-diffplug-spotless = { id = "com.diffplug.spotless", version.ref = "com-diffplug-spotless" }
 dev-iurysouza-modulegraph = { id = "dev.iurysouza.modulegraph", version.ref = "dev-iurysouza-modulegraph" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin" }
 org-jetbrains-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "org-jetbrains-kotlin" }
@@ -146,3 +145,4 @@ hnotes-android-test = { id = "hnotes.android.test" }
 hnotes-hilt = { id = "hnotes.hilt" }
 hnotes-jvm-library = { id = "hnotes.jvm.library" }
 hnotes-module-graph = { id = "hnotes.module.graph" }
+hnotes-root = { id = "hnotes.root" }

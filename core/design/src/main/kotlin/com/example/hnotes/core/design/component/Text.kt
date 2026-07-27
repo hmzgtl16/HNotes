@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.design.component
 
 import androidx.compose.animation.core.Animatable
@@ -49,19 +70,20 @@ fun AppAnimatedStrikethroughText(
     onTextLayout: (TextLayoutResult) -> Unit = {},
     style: TextStyle = LocalTextStyle.current,
     visible: Boolean = true,
-    animationSpec: AnimationSpec<Int> = tween(
-        durationMillis = 700,
-        easing = FastOutLinearInEasing
-    )
+    animationSpec: AnimationSpec<Int> =
+        tween(
+            durationMillis = 700,
+            easing = FastOutLinearInEasing,
+        ),
 ) {
-
     var annotatedText by remember {
         mutableStateOf(value = AnnotatedString(text = ""))
     }
 
-    val length = remember {
-        Animatable(initialValue = 0, typeConverter = Int.VectorConverter)
-    }
+    val length =
+        remember {
+            Animatable(initialValue = 0, typeConverter = Int.VectorConverter)
+        }
 
     LaunchedEffect(key1 = length.value) {
         annotatedText = text.buildStrikethrough(length = length.value)
@@ -77,14 +99,17 @@ fun AppAnimatedStrikethroughText(
 
     LaunchedEffect(text) {
         when {
-            visible && text.length == length.value ->
+            visible && text.length == length.value -> {
                 annotatedText = text.buildStrikethrough(length = length.value)
+            }
 
-            visible && text.length != length.value ->
+            visible && text.length != length.value -> {
                 length.snapTo(targetValue = text.length)
+            }
 
-            else ->
+            else -> {
                 annotatedText = AnnotatedString(text = text)
+            }
         }
     }
 
@@ -105,15 +130,16 @@ fun AppAnimatedStrikethroughText(
         maxLines = maxLines,
         minLines = minLines,
         onTextLayout = onTextLayout,
-        style = style
+        style = style,
     )
 }
 
-private fun String.buildStrikethrough(length: Int) = buildAnnotatedString {
-    append(this@buildStrikethrough)
-    addStyle(
-        style = SpanStyle(textDecoration = TextDecoration.LineThrough),
-        start = 0,
-        end = length
-    )
-}
+private fun String.buildStrikethrough(length: Int) =
+    buildAnnotatedString {
+        append(this@buildStrikethrough)
+        addStyle(
+            style = SpanStyle(textDecoration = TextDecoration.LineThrough),
+            start = 0,
+            end = length,
+        )
+    }

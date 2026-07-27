@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.feature.settings.impl
 
 import androidx.compose.animation.AnimatedVisibility
@@ -41,57 +62,49 @@ import com.example.hnotes.core.model.Theme
 import com.example.hnotes.core.ui.DevicePreviews
 
 @Composable
-fun SettingsDialog(
-    modifier: Modifier = Modifier,
-    viewModel: SettingsViewModel = hiltViewModel()
-) {
-
+fun SettingsDialog(modifier: Modifier = Modifier, viewModel: SettingsViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     SettingsDialog(
         uiState = uiState,
         onEvent = viewModel::onEvent,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun SettingsDialog(
-    modifier: Modifier = Modifier,
-    uiState: SettingsDialogState,
-    onEvent: (SettingsDialogEvent) -> Unit,
-    supportDynamicTheme: Boolean = supportsDynamicTheming()
-) {
+fun SettingsDialog(modifier: Modifier = Modifier, uiState: SettingsDialogState, onEvent: (SettingsDialogEvent) -> Unit, supportDynamicTheme: Boolean = supportsDynamicTheming()) {
     val windowInfo = LocalWindowInfo.current
 
     Box(
-        modifier = modifier
-            .background(
-                color = LocalBackgroundTheme.current.color,
-                shape = RoundedCornerShape(size = 30.dp)
-            ),
+        modifier =
+            modifier
+                .background(
+                    color = LocalBackgroundTheme.current.color,
+                    shape = RoundedCornerShape(size = 30.dp),
+                ),
         contentAlignment = Alignment.Center,
         content = {
-
             Column(
-                modifier = Modifier
-                    .wrapContentSize(align = Alignment.TopCenter)
-                    .padding(all = 32.dp)
-                    .verticalScroll(state = rememberScrollState()),
+                modifier =
+                    Modifier
+                        .wrapContentSize(align = Alignment.TopCenter)
+                        .padding(all = 32.dp)
+                        .verticalScroll(state = rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 24.dp,
-                    alignment = Alignment.Top
-                ),
+                verticalArrangement =
+                    Arrangement.spacedBy(
+                        space = 24.dp,
+                        alignment = Alignment.Top,
+                    ),
                 content = {
-
                     Text(
                         text = stringResource(R.string.feature_settings_title),
                         textAlign = TextAlign.Start,
                         style = MaterialTheme.typography.titleLarge,
                         color = LocalContentColor.current,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
                     )
 
                     HorizontalDivider()
@@ -109,11 +122,11 @@ fun SettingsDialog(
                                 onChangeDynamicTheme = {
                                     onEvent(
                                         SettingsDialogEvent.DynamicColorEnabled(
-                                            it
-                                        )
+                                            it,
+                                        ),
                                     )
                                 },
-                                supportDynamicTheme = supportDynamicTheme
+                                supportDynamicTheme = supportDynamicTheme,
                             )
                         }
                     }
@@ -124,16 +137,19 @@ fun SettingsDialog(
                         onClick = { onEvent(SettingsDialogEvent.Dismiss) },
                         text = {
                             Text(
-                                text = stringResource(id = R.string.feature_settings_dismiss_dialog_button_text),
+                                text =
+                                    stringResource(
+                                        id = R.string.feature_settings_dismiss_dialog_button_text,
+                                    ),
                                 style = MaterialTheme.typography.labelLarge,
-                                color = MaterialTheme.colorScheme.primary
+                                color = MaterialTheme.colorScheme.primary,
                             )
                         },
-                        modifier = Modifier.align(alignment = Alignment.End)
+                        modifier = Modifier.align(alignment = Alignment.End),
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
@@ -143,72 +159,62 @@ fun SettingsDialogLoading() {
 }
 
 @Composable
-private fun SettingsDialogContent(
-    theme: Theme,
-    onChangeTheme: (Theme) -> Unit,
-    useDynamicTheme: Boolean,
-    onChangeDynamicTheme: (Boolean) -> Unit,
-    supportDynamicTheme: Boolean,
-) {
+private fun SettingsDialogContent(theme: Theme, onChangeTheme: (Theme) -> Unit, useDynamicTheme: Boolean, onChangeDynamicTheme: (Boolean) -> Unit, supportDynamicTheme: Boolean) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(
-            space = 16.dp,
-            alignment = Alignment.CenterVertically
-        ),
+        verticalArrangement =
+            Arrangement.spacedBy(
+                space = 16.dp,
+                alignment = Alignment.CenterVertically,
+            ),
         content = {
-
             SettingsDialogThemeSection(
                 theme = theme,
-                onChangeTheme = onChangeTheme
+                onChangeTheme = onChangeTheme,
             )
 
             AnimatedVisibility(visible = supportDynamicTheme) {
                 SettingsDialogThemeSection(
                     useDynamicUiTheme = useDynamicTheme,
-                    onChangeDynamicUiTheme = onChangeDynamicTheme
+                    onChangeDynamicUiTheme = onChangeDynamicTheme,
                 )
             }
-        }
+        },
     )
 }
 
 @Composable
-private fun SettingsDialogThemeSection(
-    theme: Theme,
-    onChangeTheme: (Theme) -> Unit,
-    modifier: Modifier = Modifier
-) {
-
+private fun SettingsDialogThemeSection(theme: Theme, onChangeTheme: (Theme) -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.spacedBy(
-            space = 16.dp,
-            alignment = Alignment.CenterVertically
-        ),
+        verticalArrangement =
+            Arrangement.spacedBy(
+                space = 16.dp,
+                alignment = Alignment.CenterVertically,
+            ),
         content = {
-
             Text(
                 text = stringResource(id = R.string.feature_settings_theme),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
 
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .selectableGroup(),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .selectableGroup(),
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 16.dp,
-                    alignment = Alignment.CenterVertically
-                ),
+                verticalArrangement =
+                    Arrangement.spacedBy(
+                        space = 16.dp,
+                        alignment = Alignment.CenterVertically,
+                    ),
                 content = {
-
                     Row(
                         Modifier
                             .fillMaxWidth()
@@ -217,18 +223,24 @@ private fun SettingsDialogThemeSection(
                                 role = Role.RadioButton,
                                 onClick = { onChangeTheme(Theme.FOLLOW_SYSTEM) },
                             ),
-                        horizontalArrangement = Arrangement.spacedBy(
-                            space = 8.dp,
-                            alignment = Alignment.Start
-                        ),
+                        horizontalArrangement =
+                            Arrangement.spacedBy(
+                                space = 8.dp,
+                                alignment = Alignment.Start,
+                            ),
                         verticalAlignment = Alignment.CenterVertically,
                         content = {
                             RadioButton(
                                 selected = theme == Theme.FOLLOW_SYSTEM,
-                                onClick = null
+                                onClick = null,
                             )
-                            Text(text = stringResource(id = R.string.feature_settings_theme_follow_system))
-                        }
+                            Text(
+                                text =
+                                    stringResource(
+                                        id = R.string.feature_settings_theme_follow_system,
+                                    ),
+                            )
+                        },
                     )
 
                     Row(
@@ -239,18 +251,19 @@ private fun SettingsDialogThemeSection(
                                 role = Role.RadioButton,
                                 onClick = { onChangeTheme(Theme.DARK) },
                             ),
-                        horizontalArrangement = Arrangement.spacedBy(
-                            space = 8.dp,
-                            alignment = Alignment.Start
-                        ),
+                        horizontalArrangement =
+                            Arrangement.spacedBy(
+                                space = 8.dp,
+                                alignment = Alignment.Start,
+                            ),
                         verticalAlignment = Alignment.CenterVertically,
                         content = {
                             RadioButton(
                                 selected = theme == Theme.DARK,
-                                onClick = null
+                                onClick = null,
                             )
                             Text(text = stringResource(id = R.string.feature_settings_theme_dark))
-                        }
+                        },
                     )
 
                     Row(
@@ -259,57 +272,55 @@ private fun SettingsDialogThemeSection(
                             .selectable(
                                 selected = theme == Theme.LIGHT,
                                 role = Role.RadioButton,
-                                onClick = { onChangeTheme(Theme.LIGHT) }
+                                onClick = { onChangeTheme(Theme.LIGHT) },
                             ),
-                        horizontalArrangement = Arrangement.spacedBy(
-                            space = 8.dp,
-                            alignment = Alignment.Start
-                        ),
+                        horizontalArrangement =
+                            Arrangement.spacedBy(
+                                space = 8.dp,
+                                alignment = Alignment.Start,
+                            ),
                         verticalAlignment = Alignment.CenterVertically,
                         content = {
                             RadioButton(
                                 selected = theme == Theme.LIGHT,
-                                onClick = null
+                                onClick = null,
                             )
                             Text(text = stringResource(id = R.string.feature_settings_theme_light))
-                        }
+                        },
                     )
-                }
+                },
             )
-        }
+        },
     )
 }
 
 @Composable
-private fun SettingsDialogThemeSection(
-    useDynamicUiTheme: Boolean,
-    onChangeDynamicUiTheme: (Boolean) -> Unit,
-) {
-
+private fun SettingsDialogThemeSection(useDynamicUiTheme: Boolean, onChangeDynamicUiTheme: (Boolean) -> Unit) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .selectable(
-                selected = useDynamicUiTheme,
-                role = Role.Switch,
-                onClick = {
-                    onChangeDynamicUiTheme(!useDynamicUiTheme)
-                }
-            ),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .selectable(
+                    selected = useDynamicUiTheme,
+                    role = Role.Switch,
+                    onClick = {
+                        onChangeDynamicUiTheme(!useDynamicUiTheme)
+                    },
+                ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         content = {
             Text(
                 text = stringResource(id = R.string.feature_settings_dynamic_theme),
                 style = MaterialTheme.typography.titleMedium,
-                color = LocalContentColor.current
+                color = LocalContentColor.current,
             )
 
             Switch(
                 checked = useDynamicUiTheme,
-                onCheckedChange = null
+                onCheckedChange = null,
             )
-        }
+        },
     )
 }
 
@@ -319,7 +330,7 @@ private fun SettingsDialogLoadingPreview() {
     AppTheme {
         SettingsDialog(
             uiState = SettingsDialogState.Loading,
-            onEvent = {}
+            onEvent = {},
         )
     }
 }
@@ -329,11 +340,12 @@ private fun SettingsDialogLoadingPreview() {
 private fun SettingsDialogSuccessPreview() {
     AppTheme {
         SettingsDialog(
-            uiState = SettingsDialogState.Success(
-                theme = Theme.FOLLOW_SYSTEM,
-                useDynamicColor = true
-            ),
-            onEvent = {}
+            uiState =
+                SettingsDialogState.Success(
+                    theme = Theme.FOLLOW_SYSTEM,
+                    useDynamicColor = true,
+                ),
+            onEvent = {},
         )
     }
 }

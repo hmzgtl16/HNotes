@@ -1,6 +1,8 @@
 import com.android.build.api.dsl.LibraryExtension
+import com.diffplug.gradle.spotless.SpotlessExtension
 import com.example.hnotes.configureGradleManagedDevices
 import com.example.hnotes.configureKotlinAndroid
+import com.example.hnotes.configureSpotlessAndroid
 import com.example.hnotes.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,6 +15,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             apply(plugin = libs.findPlugin("com-android-library").get().get().pluginId)
+            apply(plugin = libs.findPlugin("com-diffplug-spotless").get().get().pluginId)
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
@@ -25,6 +28,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                         .distinct()
                         .joinToString(separator = "_")
                         .lowercase() + "_"
+            }
+            extensions.configure<SpotlessExtension> {
+                configureSpotlessAndroid(this)
             }
             dependencies {
                 add(

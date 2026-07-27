@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.design.component
 
 import androidx.compose.animation.animateColor
@@ -38,11 +59,7 @@ import com.example.hnotes.core.design.theme.AppTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun AppLoadingWheel(
-    modifier: Modifier = Modifier,
-    contentDescription: String
-) {
-
+fun AppLoadingWheel(modifier: Modifier = Modifier, contentDescription: String) {
     val infiniteTransition = rememberInfiniteTransition(label = "wheel transition")
 
     val startValue = if (LocalInspectionMode.current) 0F else 1F
@@ -52,11 +69,12 @@ fun AppLoadingWheel(
             launch {
                 floatAnimValues[index].animateTo(
                     targetValue = 0F,
-                    animationSpec = tween(
-                        durationMillis = 100,
-                        easing = FastOutSlowInEasing,
-                        delayMillis = 40 * index,
-                    )
+                    animationSpec =
+                        tween(
+                            durationMillis = 100,
+                            easing = FastOutSlowInEasing,
+                            delayMillis = 40 * index,
+                        ),
                 )
             }
         }
@@ -65,43 +83,48 @@ fun AppLoadingWheel(
     val rotationAnim by infiniteTransition.animateFloat(
         initialValue = 0F,
         targetValue = 360F,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = ROTATION_TIME, easing = LinearEasing),
-        ),
+        animationSpec =
+            infiniteRepeatable(
+                animation = tween(durationMillis = ROTATION_TIME, easing = LinearEasing),
+            ),
         label = "wheel rotation animation",
     )
 
     val baseLineColor = MaterialTheme.colorScheme.onBackground
     val progressLineColor = MaterialTheme.colorScheme.inversePrimary
 
-    val colorAnimValues = (0 until NUM_OF_LINES).map { index ->
-        infiniteTransition.animateColor(
-            initialValue = baseLineColor,
-            targetValue = baseLineColor,
-            animationSpec = infiniteRepeatable(
-                animation = keyframes {
-                    durationMillis = ROTATION_TIME / 2
-                    progressLineColor at ROTATION_TIME / NUM_OF_LINES / 2 using LinearEasing
-                    baseLineColor at ROTATION_TIME / NUM_OF_LINES using LinearEasing
-                },
-                repeatMode = RepeatMode.Restart,
-                initialStartOffset = StartOffset(ROTATION_TIME / NUM_OF_LINES / 2 * index),
-            ),
-            label = "wheel color animation",
-        )
-    }
+    val colorAnimValues =
+        (0 until NUM_OF_LINES).map { index ->
+            infiniteTransition.animateColor(
+                initialValue = baseLineColor,
+                targetValue = baseLineColor,
+                animationSpec =
+                    infiniteRepeatable(
+                        animation =
+                            keyframes {
+                                durationMillis = ROTATION_TIME / 2
+                                progressLineColor at ROTATION_TIME / NUM_OF_LINES / 2 using LinearEasing
+                                baseLineColor at ROTATION_TIME / NUM_OF_LINES using LinearEasing
+                            },
+                        repeatMode = RepeatMode.Restart,
+                        initialStartOffset = StartOffset(ROTATION_TIME / NUM_OF_LINES / 2 * index),
+                    ),
+                label = "wheel color animation",
+            )
+        }
 
     Box(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.TopCenter,
         content = {
             Canvas(
-                modifier = modifier
-                    .size(48.dp)
-                    .padding(8.dp)
-                    .graphicsLayer { rotationZ = rotationAnim }
-                    .semantics { this.contentDescription = contentDescription }
-                    .testTag("loadingWheel"),
+                modifier =
+                    modifier
+                        .size(48.dp)
+                        .padding(8.dp)
+                        .graphicsLayer { rotationZ = rotationAnim }
+                        .semantics { this.contentDescription = contentDescription }
+                        .testTag("loadingWheel"),
                 onDraw = {
                     repeat(NUM_OF_LINES) { index ->
                         rotate(degrees = index * 30f) {
@@ -112,24 +135,22 @@ fun AppLoadingWheel(
                                 strokeWidth = 4F,
                                 cap = StrokeCap.Round,
                                 start = Offset(size.width / 2, size.height / 4),
-                                end = Offset(
-                                    size.width / 2,
-                                    floatAnimValues[index].value * size.height / 4
-                                ),
+                                end =
+                                    Offset(
+                                        size.width / 2,
+                                        floatAnimValues[index].value * size.height / 4,
+                                    ),
                             )
                         }
                     }
                 },
             )
-        }
+        },
     )
 }
 
 @Composable
-fun AppOverlayLoadingWheel(
-    contentDesc: String,
-    modifier: Modifier = Modifier,
-) {
+fun AppOverlayLoadingWheel(contentDesc: String, modifier: Modifier = Modifier) {
     Surface(
         shape = RoundedCornerShape(size = 60.dp),
         shadowElevation = 8.dp,
@@ -137,7 +158,7 @@ fun AppOverlayLoadingWheel(
         modifier = modifier.size(size = 60.dp),
         content = {
             AppLoadingWheel(contentDescription = contentDesc)
-        }
+        },
     )
 }
 

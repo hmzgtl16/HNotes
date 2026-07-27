@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.design.component
 
 import androidx.compose.animation.core.RepeatMode
@@ -28,21 +49,14 @@ import com.example.hnotes.core.design.theme.AppTheme
 import com.example.hnotes.core.design.theme.LocalBackgroundTheme
 
 @Composable
-fun AppDropdownMenu(
-    expanded: Boolean,
-    onDismissRequest: () -> Unit,
-    modifier: Modifier = Modifier,
-    scrollState: ScrollState = rememberScrollState(),
-    content: @Composable ColumnScope.() -> Unit,
-) {
-
+fun AppDropdownMenu(expanded: Boolean, onDismissRequest: () -> Unit, modifier: Modifier = Modifier, scrollState: ScrollState = rememberScrollState(), content: @Composable ColumnScope.() -> Unit) {
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismissRequest,
         scrollState = scrollState,
         containerColor = LocalBackgroundTheme.current.color,
         modifier = modifier,
-        content = content
+        content = content,
     )
 }
 
@@ -53,9 +67,8 @@ fun AppExposedDropdownMenuBox(
     onExpandedChange: (Boolean) -> Unit,
     text: @Composable ExposedDropdownMenuBoxScope.() -> Unit,
     menu: @Composable ExposedDropdownMenuBoxScope.() -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = onExpandedChange,
@@ -63,7 +76,7 @@ fun AppExposedDropdownMenuBox(
         content = {
             text()
             menu()
-        }
+        },
     )
 }
 
@@ -76,7 +89,6 @@ fun ExposedDropdownMenuBoxScope.AppExposedDropdownMenuTextField(
     modifier: Modifier = Modifier,
     label: @Composable (() -> Unit)? = null,
 ) {
-
     TextField(
         modifier = modifier.menuAnchor(type = MenuAnchorType.PrimaryNotEditable),
         value = value,
@@ -85,48 +97,37 @@ fun ExposedDropdownMenuBoxScope.AppExposedDropdownMenuTextField(
         singleLine = true,
         label = label,
         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-        colors = ExposedDropdownMenuDefaults.textFieldColors(
-            focusedContainerColor = Color.Transparent,
-            unfocusedContainerColor = Color.Transparent,
-            disabledContainerColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent
-        ),
+        colors =
+            ExposedDropdownMenuDefaults.textFieldColors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+            ),
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExposedDropdownMenuBoxScope.AppExposedDropdownMenu(
-    expanded: Boolean,
-    onDismissRequest: () -> Unit,
-    modifier: Modifier = Modifier,
-    content: @Composable ColumnScope.() -> Unit,
-) {
-
+fun ExposedDropdownMenuBoxScope.AppExposedDropdownMenu(expanded: Boolean, onDismissRequest: () -> Unit, modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
     ExposedDropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismissRequest,
         modifier = modifier,
-        content = content
+        content = content,
     )
 }
 
 @Composable
-fun AppDropdownMenuItem(
-    text: @Composable () -> Unit,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    leadingIcon: @Composable (() -> Unit),
-) {
-
+fun AppDropdownMenuItem(text: @Composable () -> Unit, onClick: () -> Unit, modifier: Modifier = Modifier, leadingIcon: @Composable (() -> Unit)) {
     DropdownMenuItem(
         text = text,
         onClick = onClick,
         leadingIcon = leadingIcon,
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 8.dp),
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -138,16 +139,15 @@ fun AppDropdownMenuPreview() {
             expanded = true,
             onDismissRequest = {},
             content = {
-
                 AppDropdownMenuItem(
                     text = { Text("Edit") },
                     onClick = { /* Handle edit! */ },
-                    leadingIcon = { Icon(Icons.Outlined.Edit, contentDescription = null) }
+                    leadingIcon = { Icon(Icons.Outlined.Edit, contentDescription = null) },
                 )
                 AppDropdownMenuItem(
                     text = { Text("Settings") },
                     onClick = { /* Handle settings! */ },
-                    leadingIcon = { Icon(Icons.Outlined.Settings, contentDescription = null) }
+                    leadingIcon = { Icon(Icons.Outlined.Settings, contentDescription = null) },
                 )
                 HorizontalDivider()
                 AppDropdownMenuItem(
@@ -155,7 +155,7 @@ fun AppDropdownMenuPreview() {
                     onClick = { /* Handle send feedback! */ },
                     leadingIcon = { Icon(Icons.Outlined.Email, contentDescription = null) },
                 )
-            }
+            },
         )
     }
 }
@@ -172,7 +172,7 @@ fun AppExposedDropdownMenuBoxPreview() {
                 AppExposedDropdownMenuTextField(
                     expanded = true,
                     value = "Mode",
-                    onValueChange = {}
+                    onValueChange = {},
                 )
             },
             menu = {
@@ -184,12 +184,12 @@ fun AppExposedDropdownMenuBoxPreview() {
                             AppDropdownMenuItem(
                                 text = { Text(it.name) },
                                 onClick = {},
-                                leadingIcon = {}
+                                leadingIcon = {},
                             )
                         }
-                    }
+                    },
                 )
-            }
+            },
         )
     }
 }

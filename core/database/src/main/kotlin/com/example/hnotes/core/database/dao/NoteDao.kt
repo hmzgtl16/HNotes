@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.database.dao
 
 import android.util.Log
@@ -20,8 +41,10 @@ import kotlinx.coroutines.flow.Flow
 interface NoteDao {
     @Upsert
     suspend fun upsertNote(note: NoteEntity): Long
+
     @Upsert
     suspend fun upsertReminder(reminder: ReminderEntity)
+
     @Upsert
     suspend fun upsertItems(items: List<ItemEntity>)
 
@@ -32,12 +55,7 @@ interface NoteDao {
     suspend fun deleteLabelsByNoteId(noteId: Long)
 
     @Transaction
-    suspend fun upsertNoteWithItems(
-        note: NoteEntity,
-        reminder: ReminderEntity?,
-        items: List<ItemEntity>,
-        labels: List<LabelEntity> = emptyList()
-    ) {
+    suspend fun upsertNoteWithItems(note: NoteEntity, reminder: ReminderEntity?, items: List<ItemEntity>, labels: List<LabelEntity> = emptyList()) {
         val noteId = upsertNote(note = note).takeUnless { it == -1L } ?: note.id
         reminder
             ?.copy(noteId = noteId)
@@ -56,23 +74,30 @@ interface NoteDao {
 
     @Delete
     suspend fun deleteNote(note: NoteEntity)
+
     @Delete
     suspend fun deleteNotes(notes: List<NoteEntity>)
+
     @Query("DELETE FROM reminders WHERE noteId = :noteId")
     suspend fun deleteReminderByNoteId(noteId: Long)
+
     @Delete
     suspend fun deleteItem(item: ItemEntity)
+
     @Delete
     suspend fun deleteItems(items: List<ItemEntity>)
 
     @Query("DELETE FROM items WHERE noteId = :noteId AND id NOT IN (:ids)")
     suspend fun deleteItemsExcludingIds(noteId: Long, ids: Set<Long>)
+
     @Transaction
     @Query("SELECT * FROM notes ORDER BY pinned DESC, updatedAt DESC")
     fun getAllNotes(): Flow<List<PopulatedNoteEntity>>
+
     @Transaction
     @Query("SELECT * FROM notes WHERE id = :id")
     fun getNoteById(id: Long): Flow<PopulatedNoteEntity?>
+
     @Transaction
     @Query("SELECT * FROM notes WHERE id IN (:ids)")
     fun getNotesByIds(ids: Set<Long>): Flow<List<PopulatedNoteEntity>>

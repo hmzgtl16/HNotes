@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.feature.note.impl
 
 import androidx.activity.compose.BackHandler
@@ -58,44 +79,39 @@ import kotlin.time.Clock
 import kotlin.time.Duration.Companion.hours
 
 @Composable
-internal fun NoteScreen(
-    modifier: Modifier = Modifier,
-    viewModel: NoteViewModel = hiltViewModel(),
-) {
+internal fun NoteScreen(modifier: Modifier = Modifier, viewModel: NoteViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     BackHandler(
         onBack = {
             viewModel.onEvent(event = NoteScreenEvent.SaveNote)
-        }
+        },
     )
 
     NoteScreen(
         uiState = uiState,
         onEvent = viewModel::onEvent,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun NoteScreen(
-    uiState: NoteUiState,
-    onEvent: (NoteScreenEvent) -> Unit,
-    modifier: Modifier = Modifier,
-) {
+internal fun NoteScreen(uiState: NoteUiState, onEvent: (NoteScreenEvent) -> Unit, modifier: Modifier = Modifier) {
     val focusManager = LocalFocusManager.current
     val paletteModalBottomSheetState = rememberModalBottomSheetState()
-    val formattedLastEdit = remember(uiState.note?.updated) {
-        uiState.note?.updated
-            ?.toLocalDateTime(timeZone = TimeZone.currentSystemDefault())
-            ?.format(format = formatter)
-    }
+    val formattedLastEdit =
+        remember(uiState.note?.updated) {
+            uiState.note?.updated
+                ?.toLocalDateTime(timeZone = TimeZone.currentSystemDefault())
+                ?.format(format = formatter)
+        }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        containerColor = uiState.backgroundColor
-            ?.let(::Color) ?: MaterialTheme.colorScheme.background,
+        containerColor =
+            uiState.backgroundColor
+                ?.let(::Color) ?: MaterialTheme.colorScheme.background,
         bottomBar = {
             AppBottomAppBar(
                 actions = {
@@ -107,7 +123,7 @@ internal fun NoteScreen(
                                 imageVector = AppIcons.Undo,
                                 contentDescription = null,
                             )
-                        }
+                        },
                     )
 
                     AppIconButton(
@@ -118,7 +134,7 @@ internal fun NoteScreen(
                                 imageVector = AppIcons.Redo,
                                 contentDescription = null,
                             )
-                        }
+                        },
                     )
 
                     AppIconButton(
@@ -128,7 +144,7 @@ internal fun NoteScreen(
                                 imageVector = AppIcons.Checked,
                                 contentDescription = null,
                             )
-                        }
+                        },
                     )
 
                     AppIconButton(
@@ -136,9 +152,9 @@ internal fun NoteScreen(
                         icon = {
                             Icon(
                                 imageVector = AppIcons.Reminder,
-                                contentDescription = null
+                                contentDescription = null,
                             )
-                        }
+                        },
                     )
 
                     AppIconButton(
@@ -146,9 +162,9 @@ internal fun NoteScreen(
                         icon = {
                             Icon(
                                 imageVector = AppIcons.Palette,
-                                contentDescription = null
+                                contentDescription = null,
                             )
-                        }
+                        },
                     )
 
                     AppIconButton(
@@ -158,9 +174,9 @@ internal fun NoteScreen(
                         icon = {
                             Icon(
                                 imageVector = AppIcons.Label,
-                                contentDescription = null
+                                contentDescription = null,
                             )
-                        }
+                        },
                     )
 
                     AppIconButton(
@@ -168,9 +184,9 @@ internal fun NoteScreen(
                         icon = {
                             Icon(
                                 imageVector = AppIcons.Copy,
-                                contentDescription = null
+                                contentDescription = null,
                             )
-                        }
+                        },
                     )
 
                     AppIconButton(
@@ -178,35 +194,39 @@ internal fun NoteScreen(
                         icon = {
                             Icon(
                                 imageVector = AppIcons.Delete,
-                                contentDescription = null
+                                contentDescription = null,
                             )
-                        }
+                        },
                     )
                 },
-                containerColor = uiState.backgroundColor?.let(::Color) ?: Color.Transparent
+                containerColor = uiState.backgroundColor?.let(::Color) ?: Color.Transparent,
             )
         },
         content = { padding ->
 
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues = padding),
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues = padding),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 24.dp,
-                    alignment = Alignment.Top
-                ),
+                verticalArrangement =
+                    Arrangement.spacedBy(
+                        space = 24.dp,
+                        alignment = Alignment.Top,
+                    ),
                 content = {
                     Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(weight = 1f),
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .weight(weight = 1f),
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(
-                            space = 16.dp,
-                            alignment = Alignment.Top
-                        ),
+                        verticalArrangement =
+                            Arrangement.spacedBy(
+                                space = 16.dp,
+                                alignment = Alignment.Top,
+                            ),
                         content = {
                             AppOutlinedTextField(
                                 modifier = Modifier.fillMaxWidth(),
@@ -215,17 +235,19 @@ internal fun NoteScreen(
                                 placeholder = {
                                     Text(text = stringResource(id = R.string.feature_note_title_placeholder))
                                 },
-                                keyboardOptions = KeyboardOptions.Default.copy(
-                                    capitalization = KeyboardCapitalization.Words,
-                                    autoCorrectEnabled = true,
-                                    keyboardType = KeyboardType.Text,
-                                    imeAction = ImeAction.Next
-                                ),
-                                keyboardActions = KeyboardActions(
-                                    onNext = {
-                                        focusManager.moveFocus(focusDirection = FocusDirection.Down)
-                                    }
-                                )
+                                keyboardOptions =
+                                    KeyboardOptions.Default.copy(
+                                        capitalization = KeyboardCapitalization.Words,
+                                        autoCorrectEnabled = true,
+                                        keyboardType = KeyboardType.Text,
+                                        imeAction = ImeAction.Next,
+                                    ),
+                                keyboardActions =
+                                    KeyboardActions(
+                                        onNext = {
+                                            focusManager.moveFocus(focusDirection = FocusDirection.Down)
+                                        },
+                                    ),
                             )
 
                             AppOutlinedTextField(
@@ -235,28 +257,31 @@ internal fun NoteScreen(
                                 placeholder = {
                                     Text(text = stringResource(id = R.string.feature_note_description_placeholder))
                                 },
-                                keyboardOptions = KeyboardOptions.Default.copy(
-                                    capitalization = KeyboardCapitalization.Words,
-                                    autoCorrectEnabled = true,
-                                    keyboardType = KeyboardType.Text,
-                                    imeAction = ImeAction.Done
-                                )
+                                keyboardOptions =
+                                    KeyboardOptions.Default.copy(
+                                        capitalization = KeyboardCapitalization.Words,
+                                        autoCorrectEnabled = true,
+                                        keyboardType = KeyboardType.Text,
+                                        imeAction = ImeAction.Done,
+                                    ),
                             )
 
                             uiState.reminder?.let {
                                 ReminderCard(
                                     reminder = it,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(horizontal = 16.dp)
+                                    modifier =
+                                        Modifier
+                                            .fillMaxWidth()
+                                            .padding(horizontal = 16.dp),
                                 )
                             }
 
                             if (uiState.labels.isNotEmpty()) {
                                 FlowRow(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(horizontal = 16.dp),
+                                    modifier =
+                                        Modifier
+                                            .fillMaxWidth()
+                                            .padding(horizontal = 16.dp),
                                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                                     content = {
                                         uiState.labels.forEach { label ->
@@ -267,12 +292,13 @@ internal fun NoteScreen(
                                                 label = {
                                                     Text(text = label.name)
                                                 },
-                                                colors = AssistChipDefaults.assistChipColors(
-                                                    containerColor = MaterialTheme.colorScheme.secondaryContainer
-                                                )
+                                                colors =
+                                                    AssistChipDefaults.assistChipColors(
+                                                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                                    ),
                                             )
                                         }
-                                    }
+                                    },
                                 )
                             }
 
@@ -285,37 +311,38 @@ internal fun NoteScreen(
                                                 onEvent(
                                                     NoteScreenEvent.UpdateItem(
                                                         index = index,
-                                                        item = it
-                                                    )
+                                                        item = it,
+                                                    ),
                                                 )
                                             },
                                             onDeleteItemClick = {
                                                 onEvent(
-                                                    NoteScreenEvent.RemoveItem(index = index)
+                                                    NoteScreenEvent.RemoveItem(index = index),
                                                 )
                                             },
-                                            modifier = Modifier
+                                            modifier = Modifier,
                                         )
                                     }
-                                }
+                                },
                             )
-                        }
+                        },
                     )
 
                     uiState.note?.updated?.let {
                         Text(
                             modifier = Modifier.fillMaxWidth(),
-                            text = stringResource(
-                                id = R.string.feature_note_last_edit,
-                                formattedLastEdit!!
-                            ),
+                            text =
+                                stringResource(
+                                    id = R.string.feature_note_last_edit,
+                                    formattedLastEdit!!,
+                                ),
                             textAlign = TextAlign.Center,
                             style = MaterialTheme.typography.labelSmall,
                         )
                     }
-                }
+                },
             )
-        }
+        },
     )
 
     if (uiState.isReminderPickerVisible) {
@@ -329,7 +356,7 @@ internal fun NoteScreen(
             onDeleteClick = {
                 onEvent(NoteScreenEvent.ReminderChanged(null))
                 onEvent(NoteScreenEvent.ReminderPickerVisibilityChanged(false))
-            }
+            },
         )
     }
 
@@ -341,7 +368,7 @@ internal fun NoteScreen(
             onBackgroundColorChange = {
                 onEvent(NoteScreenEvent.BackgroundColorChanged(it))
                 onEvent(NoteScreenEvent.PaletteVisibilityChanged(false))
-            }
+            },
         )
     }
 
@@ -360,9 +387,9 @@ internal fun NoteScreen(
                         Text(
                             text = stringResource(R.string.feature_note_delete_note_confirm),
                             style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.primary,
                         )
-                    }
+                    },
                 )
             },
             dismissButton = {
@@ -371,19 +398,20 @@ internal fun NoteScreen(
                     text = {
                         Text(
                             text = stringResource(R.string.feature_note_delete_note_dismiss),
-                            style = MaterialTheme.typography.labelLarge
+                            style = MaterialTheme.typography.labelLarge,
                         )
-                    }
+                    },
                 )
             },
             title = {
                 Text(
-                    text = stringResource(
-                        id = R.string.feature_note_delete_note_title,
-                        uiState.title.ifEmpty {
-                            stringResource(id = R.string.feature_note_title_unspecified)
-                        }
-                    ),
+                    text =
+                        stringResource(
+                            id = R.string.feature_note_delete_note_title,
+                            uiState.title.ifEmpty {
+                                stringResource(id = R.string.feature_note_title_unspecified)
+                            },
+                        ),
                     style = MaterialTheme.typography.titleLarge,
                 )
             },
@@ -392,7 +420,7 @@ internal fun NoteScreen(
                     text = stringResource(R.string.feature_note_delete_note_description),
                     style = MaterialTheme.typography.bodyMedium,
                 )
-            }
+            },
         )
     }
 }
@@ -404,23 +432,26 @@ internal fun NoteScreenPreview() {
     AppTheme {
         AppBackground {
             NoteScreen(
-                uiState = NoteUiState(
-                    title = "Note Title",
-                    content = "Note description for...",
-                    backgroundColor = null,
-                    reminder = Reminder(
-                        time = Clock.System.now().plus(4.hours),
-                        repeatMode = RepeatMode.DAILY
+                uiState =
+                    NoteUiState(
+                        title = "Note Title",
+                        content = "Note description for...",
+                        backgroundColor = null,
+                        reminder =
+                            Reminder(
+                                time = Clock.System.now().plus(4.hours),
+                                repeatMode = RepeatMode.DAILY,
+                            ),
+                        items =
+                            listOf(
+                                Item(id = 1L, content = "Item 1", checked = false),
+                                Item(id = 2L, content = "Item 2", checked = true),
+                                Item(id = 3L, content = "Item 3", checked = false),
+                                Item(id = 4L, content = "Item 4", checked = false),
+                                Item(id = 5L, content = "Item 5", checked = true),
+                            ),
                     ),
-                    items = listOf(
-                        Item(id = 1L, content = "Item 1", checked = false),
-                        Item(id = 2L, content = "Item 2", checked = true),
-                        Item(id = 3L, content = "Item 3", checked = false),
-                        Item(id = 4L, content = "Item 4", checked = false),
-                        Item(id = 5L, content = "Item 5", checked = true)
-                    )
-                ),
-                onEvent = {}
+                onEvent = {},
             )
         }
     }

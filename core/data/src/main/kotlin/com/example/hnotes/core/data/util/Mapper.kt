@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.data.util
 
 import com.example.hnotes.core.database.model.ItemEntity
@@ -14,89 +35,101 @@ import com.example.hnotes.core.model.RepeatMode
 import com.example.hnotes.core.model.SearchQuery
 import com.example.hnotes.core.database.util.RepeatMode as ReminderRepeatModeEntity
 
-fun Note.toEntity(): NoteEntity = NoteEntity(
-    id = id,
-    title = title,
-    content = content,
-    pinned = pinned,
-    backgroundColor = backgroundColor,
-    createdAt = created,
-    updatedAt = updated
-)
+fun Note.toEntity(): NoteEntity =
+    NoteEntity(
+        id = id,
+        title = title,
+        content = content,
+        pinned = pinned,
+        backgroundColor = backgroundColor,
+        createdAt = created,
+        updatedAt = updated,
+    )
 
-fun Label.toEntity(): LabelEntity = LabelEntity(
-    id = id,
-    name = name,
-    backgroundColor = backgroundColor
-)
+fun Label.toEntity(): LabelEntity =
+    LabelEntity(
+        id = id,
+        name = name,
+        backgroundColor = backgroundColor,
+    )
 
-fun LabelEntity.toModel(): Label = Label(
-    id = id,
-    name = name,
-    backgroundColor = backgroundColor
-)
+fun LabelEntity.toModel(): Label =
+    Label(
+        id = id,
+        name = name,
+        backgroundColor = backgroundColor,
+    )
 
-fun Reminder.toEntity(noteId: Long = 0L): ReminderEntity = ReminderEntity(
-    id = id,
-    time = time,
-    repeatMode = repeatMode.toEntity(),
-    noteId = noteId
-)
+fun Reminder.toEntity(noteId: Long = 0L): ReminderEntity =
+    ReminderEntity(
+        id = id,
+        time = time,
+        repeatMode = repeatMode.toEntity(),
+        noteId = noteId,
+    )
 
-fun Item.toEntity(noteId: Long = 0L): ItemEntity = ItemEntity(
-    id = id,
-    content = content,
-    checked = checked,
-    noteId = noteId
-)
+fun Item.toEntity(noteId: Long = 0L): ItemEntity =
+    ItemEntity(
+        id = id,
+        content = content,
+        checked = checked,
+        noteId = noteId,
+    )
 
-fun ReminderEntity.toModel(): Reminder = Reminder(
-    id = id,
-    time = time,
-    repeatMode = repeatMode.toModel()
-)
+fun ReminderEntity.toModel(): Reminder =
+    Reminder(
+        id = id,
+        time = time,
+        repeatMode = repeatMode.toModel(),
+    )
 
-fun ItemEntity.toModel(): Item = Item(
-    id = id,
-    content = content,
-    checked = checked
-)
+fun ItemEntity.toModel(): Item =
+    Item(
+        id = id,
+        content = content,
+        checked = checked,
+    )
 
-fun PopulatedNoteEntity.toModel(): Note = Note(
-    id = note.id,
-    title = note.title,
-    content = note.content,
-    pinned = note.pinned,
-    backgroundColor = note.backgroundColor,
-    created = note.createdAt,
-    updated = note.updatedAt,
-    reminder = reminder?.toModel(),
-    items = items.map(ItemEntity::toModel),
-    labels = labels.map(LabelEntity::toModel)
-)
+fun PopulatedNoteEntity.toModel(): Note =
+    Note(
+        id = note.id,
+        title = note.title,
+        content = note.content,
+        pinned = note.pinned,
+        backgroundColor = note.backgroundColor,
+        created = note.createdAt,
+        updated = note.updatedAt,
+        reminder = reminder?.toModel(),
+        items = items.map(ItemEntity::toModel),
+        labels = labels.map(LabelEntity::toModel),
+    )
 
-fun RepeatMode.toEntity(): ReminderRepeatModeEntity = when (this) {
-    RepeatMode.NONE -> ReminderRepeatModeEntity.NONE
-    RepeatMode.DAILY -> ReminderRepeatModeEntity.DAILY
-    RepeatMode.WEEKLY -> ReminderRepeatModeEntity.WEEKLY
-    RepeatMode.MONTHLY -> ReminderRepeatModeEntity.MONTHLY
-    RepeatMode.YEARLY -> ReminderRepeatModeEntity.YEARLY
-}
+fun RepeatMode.toEntity(): ReminderRepeatModeEntity =
+    when (this) {
+        RepeatMode.NONE -> ReminderRepeatModeEntity.NONE
+        RepeatMode.DAILY -> ReminderRepeatModeEntity.DAILY
+        RepeatMode.WEEKLY -> ReminderRepeatModeEntity.WEEKLY
+        RepeatMode.MONTHLY -> ReminderRepeatModeEntity.MONTHLY
+        RepeatMode.YEARLY -> ReminderRepeatModeEntity.YEARLY
+    }
 
-fun ReminderRepeatModeEntity.toModel(): RepeatMode = when (this) {
-    ReminderRepeatModeEntity.NONE -> RepeatMode.NONE
-    ReminderRepeatModeEntity.DAILY -> RepeatMode.DAILY
-    ReminderRepeatModeEntity.WEEKLY -> RepeatMode.WEEKLY
-    ReminderRepeatModeEntity.MONTHLY -> RepeatMode.MONTHLY
-    ReminderRepeatModeEntity.YEARLY -> RepeatMode.YEARLY
-}
+fun ReminderRepeatModeEntity.toModel(): RepeatMode =
+    when (this) {
+        ReminderRepeatModeEntity.NONE -> RepeatMode.NONE
+        ReminderRepeatModeEntity.DAILY -> RepeatMode.DAILY
+        ReminderRepeatModeEntity.WEEKLY -> RepeatMode.WEEKLY
+        ReminderRepeatModeEntity.MONTHLY -> RepeatMode.MONTHLY
+        ReminderRepeatModeEntity.YEARLY -> RepeatMode.YEARLY
+    }
 
-fun SearchQuery.toEntity(): SearchQueryEntity = SearchQueryEntity(
-    text = query,
-    queried = queried
-)
+fun SearchQuery.toEntity(): SearchQueryEntity =
+    SearchQueryEntity(
+        text = query,
+        queried = queried,
+    )
 
-fun SearchQueryEntity.toModel(): SearchQuery = SearchQuery(
-    query = text,
-    queried = queried
-)
+fun SearchQueryEntity.toModel(): SearchQuery =
+    SearchQuery(
+        query = text,
+        queried = queried,
+    )

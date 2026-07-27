@@ -1,3 +1,24 @@
+/*
+ * Copyright (c) 2026 GATTAL Hamza
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.example.hnotes.core.design.component
 
 import androidx.compose.foundation.text.KeyboardActions
@@ -37,7 +58,6 @@ fun AppOutlinedTextField(
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
 ) {
-
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
@@ -58,16 +78,17 @@ fun AppOutlinedTextField(
         maxLines = maxLines,
         minLines = minLines,
         shape = OutlinedTextFieldDefaults.shape,
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Color.Transparent,
-            unfocusedBorderColor = Color.Transparent,
-            disabledBorderColor = Color.Transparent,
-            focusedTextColor = LocalContentColor.current,
-            unfocusedTextColor = LocalContentColor.current,
-            disabledTextColor = LocalContentColor.current,
-            focusedLeadingIconColor = LocalContentColor.current,
-            unfocusedLeadingIconColor = LocalContentColor.current,
-        )
+        colors =
+            OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent,
+                disabledBorderColor = Color.Transparent,
+                focusedTextColor = LocalContentColor.current,
+                unfocusedTextColor = LocalContentColor.current,
+                disabledTextColor = LocalContentColor.current,
+                focusedLeadingIconColor = LocalContentColor.current,
+                unfocusedLeadingIconColor = LocalContentColor.current,
+            ),
     )
 }
 
@@ -92,7 +113,6 @@ fun AppTextField(
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     minLines: Int = 1,
 ) {
-
     TextField(
         value = value,
         onValueChange = onValueChange,
@@ -113,11 +133,12 @@ fun AppTextField(
         maxLines = maxLines,
         minLines = minLines,
         shape = TextFieldDefaults.shape,
-        colors = TextFieldDefaults.colors(
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent,
-        )
+        colors =
+            TextFieldDefaults.colors(
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+            ),
     )
 }
 
@@ -128,7 +149,7 @@ private fun AppTextFieldPreview() {
         AppTextField(
             value = "",
             onValueChange = {},
-            placeholder = { Text("Placeholder") }
+            placeholder = { Text("Placeholder") },
         )
     }
 }
@@ -140,7 +161,7 @@ private fun AppOutlinedTextFieldPreview() {
         AppOutlinedTextField(
             value = "",
             onValueChange = {},
-            placeholder = { Text("Placeholder") }
+            placeholder = { Text("Placeholder") },
         )
     }
 }
