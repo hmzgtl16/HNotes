@@ -37,83 +37,83 @@ import kotlin.time.Instant
 
 @Singleton
 class AlarmSchedulerImpl
-    @Inject
-    constructor(
-        @ApplicationContext private val context: Context,
-    ) : AlarmScheduler {
-        private val alarmManager = context.getSystemService(AlarmManager::class.java)
+@Inject
+constructor(
+    @ApplicationContext private val context: Context,
+) : AlarmScheduler {
+    private val alarmManager = context.getSystemService(AlarmManager::class.java)
 
-        @RequiresApi(Build.VERSION_CODES.S)
-        override fun schedule(id: Long, scheduleTime: Instant, repeatMode: RepeatMode) {
-            val intent =
-                Intent(context, AlarmReceiver::class.java).apply {
-                    putExtra(AlarmScheduler.ALARM_EXTRA_ID, id)
-                }
+    @RequiresApi(Build.VERSION_CODES.S)
+    override fun schedule(id: Long, scheduleTime: Instant, repeatMode: RepeatMode) {
+        val intent =
+            Intent(context, AlarmReceiver::class.java).apply {
+                putExtra(AlarmScheduler.ALARM_EXTRA_ID, id)
+            }
 
-            val pendingIntent =
-                PendingIntent.getBroadcast(
-                    context,
-                    id.toInt(),
-                    intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE,
+        val pendingIntent =
+            PendingIntent.getBroadcast(
+                context,
+                id.toInt(),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE,
+            )
+
+        when (repeatMode) {
+            RepeatMode.NONE -> {
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    scheduleTime.toEpochMilliseconds(),
+                    pendingIntent,
                 )
+            }
 
-            when (repeatMode) {
-                RepeatMode.NONE -> {
-                    alarmManager.setExactAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP,
-                        scheduleTime.toEpochMilliseconds(),
-                        pendingIntent,
-                    )
-                }
+            RepeatMode.DAILY -> {
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    scheduleTime.toEpochMilliseconds(),
+                    1.days.toLong(DurationUnit.MILLISECONDS),
+                    pendingIntent,
+                )
+            }
 
-                RepeatMode.DAILY -> {
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        scheduleTime.toEpochMilliseconds(),
-                        1.days.toLong(DurationUnit.MILLISECONDS),
-                        pendingIntent,
-                    )
-                }
+            RepeatMode.WEEKLY -> {
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    scheduleTime.toEpochMilliseconds(),
+                    7.days.toLong(DurationUnit.MILLISECONDS),
+                    pendingIntent,
+                )
+            }
 
-                RepeatMode.WEEKLY -> {
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        scheduleTime.toEpochMilliseconds(),
-                        7.days.toLong(DurationUnit.MILLISECONDS),
-                        pendingIntent,
-                    )
-                }
+            RepeatMode.MONTHLY -> {
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    scheduleTime.toEpochMilliseconds(),
+                    30.days.toLong(DurationUnit.MILLISECONDS),
+                    pendingIntent,
+                )
+            }
 
-                RepeatMode.MONTHLY -> {
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        scheduleTime.toEpochMilliseconds(),
-                        30.days.toLong(DurationUnit.MILLISECONDS),
-                        pendingIntent,
-                    )
-                }
-
-                RepeatMode.YEARLY -> {
-                    alarmManager.setRepeating(
-                        AlarmManager.RTC_WAKEUP,
-                        scheduleTime.toEpochMilliseconds(),
-                        365.days.toLong(DurationUnit.MILLISECONDS),
-                        pendingIntent,
-                    )
-                }
+            RepeatMode.YEARLY -> {
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP,
+                    scheduleTime.toEpochMilliseconds(),
+                    365.days.toLong(DurationUnit.MILLISECONDS),
+                    pendingIntent,
+                )
             }
         }
-
-        override fun cancel(id: Long) {
-            val intent = Intent(context, AlarmReceiver::class.java)
-            val pendingIntent =
-                PendingIntent.getBroadcast(
-                    context,
-                    id.toInt(),
-                    intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE,
-                )
-            alarmManager.cancel(pendingIntent)
-        }
     }
+
+    override fun cancel(id: Long) {
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pendingIntent =
+            PendingIntent.getBroadcast(
+                context,
+                id.toInt(),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE,
+            )
+        alarmManager.cancel(pendingIntent)
+    }
+}

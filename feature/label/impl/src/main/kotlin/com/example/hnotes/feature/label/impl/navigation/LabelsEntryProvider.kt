@@ -36,12 +36,12 @@ fun EntryProviderScope<NavKey>.labelEntry() {
 
         LabelDialog(
             viewModel =
-                hiltViewModel(
-                    viewModelStoreOwner = viewModelStoreOwner,
-                    creationCallback = { factory: LabelViewModel.Factory ->
-                        factory.create(navKey = it)
-                    },
-                ),
+            hiltViewModel(
+                viewModelStoreOwner = viewModelStoreOwner,
+                creationCallback = { factory: LabelViewModel.Factory ->
+                    factory.create(navKey = it)
+                },
+            ),
         )
     }
 }

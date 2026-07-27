@@ -43,20 +43,20 @@ import com.example.hnotes.core.model.Note
 fun LabelCard(label: Label, isSelected: Boolean, onToggle: () -> Unit) {
     Row(
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .toggleable(
-                    value = isSelected,
-                    onValueChange = {
-                        onToggle()
-                    },
-                    role = Role.Checkbox,
-                ),
-        horizontalArrangement =
-            Arrangement.spacedBy(
-                16.dp,
-                Alignment.Start,
+        Modifier
+            .fillMaxWidth()
+            .toggleable(
+                value = isSelected,
+                onValueChange = {
+                    onToggle()
+                },
+                role = Role.Checkbox,
             ),
+        horizontalArrangement =
+        Arrangement.spacedBy(
+            16.dp,
+            Alignment.Start,
+        ),
         verticalAlignment = Alignment.CenterVertically,
         content = {
             Checkbox(
@@ -68,8 +68,8 @@ fun LabelCard(label: Label, isSelected: Boolean, onToggle: () -> Unit) {
                 text = label.name,
                 style = MaterialTheme.typography.bodyLarge,
                 modifier =
-                    Modifier
-                        .weight(weight = 1f),
+                Modifier
+                    .weight(weight = 1f),
             )
         },
     )

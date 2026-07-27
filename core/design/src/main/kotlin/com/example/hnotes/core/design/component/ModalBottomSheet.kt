@@ -61,26 +61,26 @@ fun AppModalBottomSheet(
         dragHandle = {
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 24.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 24.dp),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement =
-                    Arrangement.spacedBy(
-                        space = 16.dp,
-                        alignment = Alignment.CenterVertically,
-                    ),
+                Arrangement.spacedBy(
+                    space = 16.dp,
+                    alignment = Alignment.CenterVertically,
+                ),
             ) {
                 Text(
                     text = stringResource(id = titleRes),
                     modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp),
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
                     style =
-                        MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.Normal,
-                        ),
+                    MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.Normal,
+                    ),
                 )
                 HorizontalDivider(thickness = 1.dp, color = Color.Black)
             }
@@ -96,11 +96,11 @@ fun AppModalBottomSheetPreview() {
     AppTheme {
         AppModalBottomSheet(
             sheetState =
-                SheetState(
-                    skipPartiallyExpanded = false,
-                    density = LocalDensity.current,
-                    initialValue = SheetValue.Expanded,
-                ),
+            SheetState(
+                skipPartiallyExpanded = false,
+                density = LocalDensity.current,
+                initialValue = SheetValue.Expanded,
+            ),
             onDismissRequest = { },
             titleRes = android.R.string.untitled,
             content = {

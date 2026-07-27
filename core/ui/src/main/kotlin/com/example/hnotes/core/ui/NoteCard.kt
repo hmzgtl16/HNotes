@@ -71,58 +71,58 @@ fun NoteCard(
 ) {
     ElevatedCard(
         colors =
-            if (note.backgroundColor != null) {
-                CardDefaults.elevatedCardColors(containerColor = Color(color = note.backgroundColor!!))
-            } else {
-                CardDefaults.elevatedCardColors()
-            },
+        if (note.backgroundColor != null) {
+            CardDefaults.elevatedCardColors(containerColor = Color(color = note.backgroundColor!!))
+        } else {
+            CardDefaults.elevatedCardColors()
+        },
         modifier =
-            modifier
-                .fillMaxWidth()
-                .wrapContentHeight(align = Alignment.Top)
-                .combinedClickable(
-                    onClick = {
-                        if (multiSelectionEnabled) {
-                            onSelectedChanged()
-                        } else {
-                            onNoteClick()
-                        }
-                    },
-                    onLongClick = {
-                        if (multiSelectionEnabled) return@combinedClickable
-                        enableMultiSelection()
+        modifier
+            .fillMaxWidth()
+            .wrapContentHeight(align = Alignment.Top)
+            .combinedClickable(
+                onClick = {
+                    if (multiSelectionEnabled) {
                         onSelectedChanged()
-                    },
-                    role = Role.RadioButton,
-                )
-                .semantics { onClick(label = "Open Note", action = null) },
+                    } else {
+                        onNoteClick()
+                    }
+                },
+                onLongClick = {
+                    if (multiSelectionEnabled) return@combinedClickable
+                    enableMultiSelection()
+                    onSelectedChanged()
+                },
+                role = Role.RadioButton,
+            )
+            .semantics { onClick(label = "Open Note", action = null) },
         content = {
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(all = 16.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(all = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement =
-                    Arrangement.spacedBy(
-                        space = 8.dp,
-                        alignment = Alignment.CenterVertically,
-                    ),
+                Arrangement.spacedBy(
+                    space = 8.dp,
+                    alignment = Alignment.CenterVertically,
+                ),
                 content = {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement =
-                            Arrangement.spacedBy(
-                                space = 8.dp,
-                                alignment = Alignment.Start,
-                            ),
+                        Arrangement.spacedBy(
+                            space = 8.dp,
+                            alignment = Alignment.Start,
+                        ),
                         content = {
                             Text(
                                 text =
-                                    note.title.ifEmpty(
-                                        defaultValue = { stringResource(id = R.string.core_ui_note_untitled) },
-                                    ),
+                                note.title.ifEmpty(
+                                    defaultValue = { stringResource(id = R.string.core_ui_note_untitled) },
+                                ),
                                 style = MaterialTheme.typography.titleMedium,
                                 textAlign = TextAlign.Start,
                                 modifier = Modifier.weight(weight = 1f),
@@ -152,10 +152,10 @@ fun NoteCard(
                                     selected = selected,
                                     onClick = null,
                                     colors =
-                                        RadioButtonDefaults.colors(
-                                            selectedColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                                            unselectedColor = LocalTintTheme.current.iconTint,
-                                        ),
+                                    RadioButtonDefaults.colors(
+                                        selectedColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                                        unselectedColor = LocalTintTheme.current.iconTint,
+                                    ),
                                 )
                             }
                         },
@@ -180,10 +180,10 @@ fun NoteCard(
                         Column(
                             modifier = Modifier.fillMaxWidth(),
                             verticalArrangement =
-                                Arrangement.spacedBy(
-                                    space = 4.dp,
-                                    alignment = Alignment.Top,
-                                ),
+                            Arrangement.spacedBy(
+                                space = 4.dp,
+                                alignment = Alignment.Top,
+                            ),
                             content = {
                                 note.items.forEach {
                                     ItemCard(item = it)
@@ -207,12 +207,12 @@ fun NoteCard(
                                             )
                                         },
                                         colors =
-                                            AssistChipDefaults.assistChipColors(
-                                                containerColor =
-                                                    label.backgroundColor?.let(::Color) ?: MaterialTheme.colorScheme.surfaceVariant.copy(
-                                                        alpha = 0.5f,
-                                                    ),
+                                        AssistChipDefaults.assistChipColors(
+                                            containerColor =
+                                            label.backgroundColor?.let(::Color) ?: MaterialTheme.colorScheme.surfaceVariant.copy(
+                                                alpha = 0.5f,
                                             ),
+                                        ),
                                         border = null,
                                     )
                                 }
@@ -231,16 +231,16 @@ fun NoteCard(note: Note, onNoteClick: (Long) -> Unit, modifier: Modifier = Modif
     ElevatedCard(
         onClick = { onNoteClick(note.id) },
         colors =
-            if (note.backgroundColor != null) {
-                CardDefaults.elevatedCardColors(containerColor = Color(color = note.backgroundColor!!))
-            } else {
-                CardDefaults.elevatedCardColors()
-            },
+        if (note.backgroundColor != null) {
+            CardDefaults.elevatedCardColors(containerColor = Color(color = note.backgroundColor!!))
+        } else {
+            CardDefaults.elevatedCardColors()
+        },
         modifier =
-            modifier
-                .fillMaxWidth()
-                .wrapContentHeight(align = Alignment.Top)
-                .semantics { onClick(label = "Open Note", action = null) },
+        modifier
+            .fillMaxWidth()
+            .wrapContentHeight(align = Alignment.Top)
+            .semantics { onClick(label = "Open Note", action = null) },
         content = {
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -248,20 +248,20 @@ fun NoteCard(note: Note, onNoteClick: (Long) -> Unit, modifier: Modifier = Modif
                 content = {
                     Column(
                         modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(all = 16.dp),
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(all = 16.dp),
                         verticalArrangement =
-                            Arrangement.spacedBy(
-                                space = 8.dp,
-                                alignment = Alignment.CenterVertically,
-                            ),
+                        Arrangement.spacedBy(
+                            space = 8.dp,
+                            alignment = Alignment.CenterVertically,
+                        ),
                         content = {
                             Text(
                                 text =
-                                    note.title.ifEmpty(
-                                        defaultValue = { stringResource(id = R.string.core_ui_note_untitled) },
-                                    ),
+                                note.title.ifEmpty(
+                                    defaultValue = { stringResource(id = R.string.core_ui_note_untitled) },
+                                ),
                                 style = MaterialTheme.typography.titleMedium,
                                 textAlign = TextAlign.Start,
                                 modifier = Modifier.fillMaxWidth(),
@@ -290,12 +290,12 @@ fun NoteCard(note: Note, onNoteClick: (Long) -> Unit, modifier: Modifier = Modif
                                                     )
                                                 },
                                                 colors =
-                                                    AssistChipDefaults.assistChipColors(
-                                                        containerColor =
-                                                            MaterialTheme.colorScheme.surfaceVariant.copy(
-                                                                alpha = 0.5f,
-                                                            ),
+                                                AssistChipDefaults.assistChipColors(
+                                                    containerColor =
+                                                    MaterialTheme.colorScheme.surfaceVariant.copy(
+                                                        alpha = 0.5f,
                                                     ),
+                                                ),
                                                 border = null,
                                             )
                                         }

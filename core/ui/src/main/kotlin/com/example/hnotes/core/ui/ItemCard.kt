@@ -72,17 +72,17 @@ fun ItemCard(item: Item, modifier: Modifier = Modifier) {
 
     Row(
         modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+        modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(space = 16.dp, alignment = Alignment.Start),
     ) {
         Icon(
             modifier =
-                Modifier
-                    .size(size = 16.dp)
-                    .alpha(alpha = alpha),
+            Modifier
+                .size(size = 16.dp)
+                .alpha(alpha = alpha),
             imageVector = if (item.checked) AppIcons.Checked else AppIcons.Unchecked,
             contentDescription = null,
         )
@@ -107,11 +107,11 @@ fun EditableItemCard(item: Item, onItemChanged: (Item) -> Unit, onDeleteItemClic
 
     AppOutlinedTextField(
         modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .onFocusChanged { isFocused = it.isFocused }
-                .graphicsLayer { this.alpha = alpha },
+        modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+            .onFocusChanged { isFocused = it.isFocused }
+            .graphicsLayer { this.alpha = alpha },
         value = item.content,
         onValueChange = { onItemChanged(item.copy(content = it)) },
         leadingIcon = {
@@ -119,9 +119,9 @@ fun EditableItemCard(item: Item, onItemChanged: (Item) -> Unit, onDeleteItemClic
                 checked = item.checked,
                 onCheckedChange = { onItemChanged(item.copy(checked = it)) },
                 colors =
-                    IconButtonDefaults.iconToggleButtonColors(
-                        checkedContentColor = LocalContentColor.current,
-                    ),
+                IconButtonDefaults.iconToggleButtonColors(
+                    checkedContentColor = LocalContentColor.current,
+                ),
                 icon = {
                     Icon(
                         imageVector = AppIcons.Unchecked,
@@ -150,9 +150,9 @@ fun EditableItemCard(item: Item, onItemChanged: (Item) -> Unit, onDeleteItemClic
             }
         },
         textStyle =
-            TextStyle.Default.copy(
-                textDecoration = if (item.checked) TextDecoration.LineThrough else null,
-            ),
+        TextStyle.Default.copy(
+            textDecoration = if (item.checked) TextDecoration.LineThrough else null,
+        ),
     )
 }
 
@@ -165,9 +165,9 @@ private fun CheckedItemCardPreview(
     AppTheme {
         AppBackground(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(height = 56.dp),
+            Modifier
+                .fillMaxWidth()
+                .height(height = 56.dp),
             content = {
                 ItemCard(item = notes[true]!![6].items.first())
             },
@@ -184,9 +184,9 @@ private fun UncheckedItemCardPreview(
     AppTheme {
         AppBackground(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(height = 56.dp),
+            Modifier
+                .fillMaxWidth()
+                .height(height = 56.dp),
             content = {
                 ItemCard(item = notes[true]!![6].items.last())
             },
@@ -203,9 +203,9 @@ private fun CheckedEditableItemCardPreview(
     AppTheme {
         AppBackground(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(height = 56.dp),
+            Modifier
+                .fillMaxWidth()
+                .height(height = 56.dp),
             content = {
                 EditableItemCard(
                     item = notes[true]!![6].items.first(),
@@ -226,9 +226,9 @@ private fun UncheckedEditableItemCardPreview(
     AppTheme {
         AppBackground(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(height = 56.dp),
+            Modifier
+                .fillMaxWidth()
+                .height(height = 56.dp),
             content = {
                 EditableItemCard(
                     item = notes[true]!![6].items.last(),

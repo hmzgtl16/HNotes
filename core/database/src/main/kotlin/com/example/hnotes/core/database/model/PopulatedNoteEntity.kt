@@ -41,11 +41,11 @@ data class PopulatedNoteEntity(
         parentColumn = "id",
         entityColumn = "id",
         associateBy =
-            Junction(
-                value = NoteLabelCrossRef::class,
-                parentColumn = "noteId",
-                entityColumn = "labelId",
-            ),
+        Junction(
+            value = NoteLabelCrossRef::class,
+            parentColumn = "noteId",
+            entityColumn = "labelId",
+        ),
     )
     val labels: List<LabelEntity>,
 )

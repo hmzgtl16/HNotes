@@ -58,9 +58,9 @@ fun LabelPickerModalBottomSheet(
         content = {
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 32.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 32.dp),
                 content = {
                     Text(
                         text = "Labels",
@@ -101,10 +101,10 @@ fun LabelPickerModalBottomSheet(
 private fun LabelItem(label: Label, selected: Boolean, onLabelClick: () -> Unit, modifier: Modifier = Modifier) {
     Row(
         modifier =
-            modifier
-                .fillMaxWidth()
-                .clickable(onClick = onLabelClick)
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+        modifier
+            .fillMaxWidth()
+            .clickable(onClick = onLabelClick)
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {

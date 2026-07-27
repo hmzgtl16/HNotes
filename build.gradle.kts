@@ -12,5 +12,6 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.compose) apply false
     alias(libs.plugins.org.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.org.jetbrains.kotlin.serialization) apply false
-    alias(libs.plugins.hnotes.root) apply false
+
+    alias(libs.plugins.hnotes.root)
 }

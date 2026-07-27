@@ -32,27 +32,27 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LabelRepositoryImpl
-    @Inject
-    constructor(private val labelDao: LabelDao) : LabelRepository {
-        override suspend fun upsertLabel(label: Label): Long = labelDao.upsertLabel(label.toEntity())
+@Inject
+constructor(private val labelDao: LabelDao) : LabelRepository {
+    override suspend fun upsertLabel(label: Label): Long = labelDao.upsertLabel(label.toEntity())
 
-        override suspend fun deleteLabel(label: Label) {
-            labelDao.deleteLabel(label.toEntity())
-        }
-
-        override fun getAllLabels(): Flow<List<Label>> = labelDao.getAllLabels().map { it.map(LabelEntity::toModel) }
-
-        override suspend fun getLabelById(id: Long): Label? = labelDao.getLabelById(id)?.toModel()
-
-        override suspend fun getLabelByName(name: String): Label? = labelDao.getLabelByName(name)?.toModel()
-
-        override fun getLabelsForNote(noteId: Long): Flow<List<Label>> = labelDao.getLabelsForNote(noteId).map { it.map(LabelEntity::toModel) }
-
-        override suspend fun linkLabelToNote(noteId: Long, labelId: Long) {
-            labelDao.insertNoteLabelCrossRef(NoteLabelCrossRef(noteId, labelId))
-        }
-
-        override suspend fun unlinkLabelFromNote(noteId: Long, labelId: Long) {
-            labelDao.deleteNoteLabelCrossRef(NoteLabelCrossRef(noteId, labelId))
-        }
+    override suspend fun deleteLabel(label: Label) {
+        labelDao.deleteLabel(label.toEntity())
     }
+
+    override fun getAllLabels(): Flow<List<Label>> = labelDao.getAllLabels().map { it.map(LabelEntity::toModel) }
+
+    override suspend fun getLabelById(id: Long): Label? = labelDao.getLabelById(id)?.toModel()
+
+    override suspend fun getLabelByName(name: String): Label? = labelDao.getLabelByName(name)?.toModel()
+
+    override fun getLabelsForNote(noteId: Long): Flow<List<Label>> = labelDao.getLabelsForNote(noteId).map { it.map(LabelEntity::toModel) }
+
+    override suspend fun linkLabelToNote(noteId: Long, labelId: Long) {
+        labelDao.insertNoteLabelCrossRef(NoteLabelCrossRef(noteId, labelId))
+    }
+
+    override suspend fun unlinkLabelFromNote(noteId: Long, labelId: Long) {
+        labelDao.deleteNoteLabelCrossRef(NoteLabelCrossRef(noteId, labelId))
+    }
+}

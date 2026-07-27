@@ -35,11 +35,11 @@ fun EntryProviderScope<NavKey>.notesEntry() {
     entry<NotesNavKey>(metadata = ListDetailSceneStrategy.listPane()) {
         NotesScreen(
             viewModel =
-                hiltViewModel<NotesViewModel, NotesViewModel.Factory>(
-                    creationCallback = { factory ->
-                        factory.create(it)
-                    },
-                ),
+            hiltViewModel<NotesViewModel, NotesViewModel.Factory>(
+                creationCallback = { factory ->
+                    factory.create(it)
+                },
+            ),
         )
     }
 }

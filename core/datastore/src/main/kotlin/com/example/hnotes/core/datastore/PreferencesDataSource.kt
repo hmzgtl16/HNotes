@@ -28,28 +28,28 @@ import jakarta.inject.Inject
 import kotlinx.coroutines.flow.map
 
 class PreferencesDataSource
-    @Inject
-    constructor(private val userPreferences: DataStore<UserPreferences>) {
-        val userData =
-            userPreferences.data
-                .map {
-                    UserData(
-                        theme = it.uiThemeConfig.asTheme(),
-                        useDynamicColor = it.useDynamicUiTheme,
-                    )
-                }
-
-        suspend fun setTheme(theme: Theme) {
-            userPreferences.updateData {
-                it.copy {
-                    uiThemeConfig = theme.asProto()
-                }
+@Inject
+constructor(private val userPreferences: DataStore<UserPreferences>) {
+    val userData =
+        userPreferences.data
+            .map {
+                UserData(
+                    theme = it.uiThemeConfig.asTheme(),
+                    useDynamicColor = it.useDynamicUiTheme,
+                )
             }
-        }
 
-        suspend fun setDynamicColor(useDynamicColor: Boolean) {
-            userPreferences.updateData {
-                it.copy { useDynamicUiTheme = useDynamicColor }
+    suspend fun setTheme(theme: Theme) {
+        userPreferences.updateData {
+            it.copy {
+                uiThemeConfig = theme.asProto()
             }
         }
     }
+
+    suspend fun setDynamicColor(useDynamicColor: Boolean) {
+        userPreferences.updateData {
+            it.copy { useDynamicUiTheme = useDynamicColor }
+        }
+    }
+}

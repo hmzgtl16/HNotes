@@ -62,15 +62,15 @@ fun ReminderCard(reminder: Reminder, modifier: Modifier = Modifier) {
 
     Row(
         modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
+        modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement =
-            Arrangement.spacedBy(
-                space = 8.dp,
-                alignment = Alignment.Start,
-            ),
+        Arrangement.spacedBy(
+            space = 8.dp,
+            alignment = Alignment.Start,
+        ),
         content = {
             Text(
                 text = formattedTime,
@@ -97,9 +97,9 @@ fun ReminderCardPreview(
     AppTheme {
         AppBackground(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(height = 80.dp),
+            Modifier
+                .fillMaxWidth()
+                .height(height = 80.dp),
             content = {
                 notes[true]!![5].reminder?.let {
                     ReminderCard(

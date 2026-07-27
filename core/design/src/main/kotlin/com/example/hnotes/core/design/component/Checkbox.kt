@@ -47,13 +47,13 @@ import com.example.hnotes.core.design.theme.AppTheme
 fun AppCheckbox(checked: Boolean, onCheckedChange: (Boolean) -> Unit, text: @Composable () -> Unit, modifier: Modifier = Modifier) {
     Row(
         modifier =
-            modifier
-                .toggleable(
-                    value = checked,
-                    onValueChange = onCheckedChange,
-                    role = Role.Checkbox,
-                )
-                .padding(horizontal = 16.dp),
+        modifier
+            .toggleable(
+                value = checked,
+                onValueChange = onCheckedChange,
+                role = Role.Checkbox,
+            )
+            .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(space = 16.dp, alignment = Alignment.Start),
         verticalAlignment = Alignment.CenterVertically,
         content = {
@@ -72,13 +72,13 @@ fun AppCheckbox(checked: Boolean, onCheckedChange: (Boolean) -> Unit, text: @Com
 fun AppTriStateCheckbox(state: ToggleableState, onClick: () -> Unit, text: @Composable () -> Unit, modifier: Modifier = Modifier) {
     Row(
         modifier =
-            modifier
-                .triStateToggleable(
-                    state = state,
-                    onClick = onClick,
-                    role = Role.Checkbox,
-                )
-                .padding(horizontal = 16.dp),
+        modifier
+            .triStateToggleable(
+                state = state,
+                onClick = onClick,
+                role = Role.Checkbox,
+            )
+            .padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(space = 16.dp, alignment = Alignment.Start),
         verticalAlignment = Alignment.CenterVertically,
         content = {
@@ -104,9 +104,9 @@ fun AppCheckboxPreview() {
     AppTheme {
         AppBackground(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(height = 56.dp),
+            Modifier
+                .fillMaxWidth()
+                .height(height = 56.dp),
             content = {
                 AppCheckbox(
                     checked = true,
@@ -129,9 +129,9 @@ fun AppTriStateCheckboxPreview() {
     AppTheme {
         AppBackground(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .height(height = 56.dp),
+            Modifier
+                .fillMaxWidth()
+                .height(height = 56.dp),
             content = {
                 AppTriStateCheckbox(
                     state = ToggleableState.Indeterminate,

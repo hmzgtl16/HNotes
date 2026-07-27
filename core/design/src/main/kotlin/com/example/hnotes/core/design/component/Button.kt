@@ -56,15 +56,15 @@ fun AppButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.onBackground,
-            ),
+        ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.onBackground,
+        ),
         contentPadding =
-            if (leadingIcon != null) {
-                ButtonDefaults.ButtonWithIconContentPadding
-            } else {
-                ButtonDefaults.ContentPadding
-            },
+        if (leadingIcon != null) {
+            ButtonDefaults.ButtonWithIconContentPadding
+        } else {
+            ButtonDefaults.ContentPadding
+        },
         content = {
             ButtonContent(
                 text = text,
@@ -89,27 +89,27 @@ fun AppOutlinedButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            ButtonDefaults.outlinedButtonColors(
-                contentColor = MaterialTheme.colorScheme.onBackground,
-            ),
+        ButtonDefaults.outlinedButtonColors(
+            contentColor = MaterialTheme.colorScheme.onBackground,
+        ),
         border =
-            BorderStroke(
-                width = AppButtonDefaults.OutlinedButtonBorderWidth,
-                color =
-                    if (enabled) {
-                        MaterialTheme.colorScheme.outline
-                    } else {
-                        MaterialTheme.colorScheme.onSurface.copy(
-                            alpha = AppButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
-                        )
-                    },
-            ),
-        contentPadding =
-            if (leadingIcon != null) {
-                ButtonDefaults.ButtonWithIconContentPadding
+        BorderStroke(
+            width = AppButtonDefaults.OutlinedButtonBorderWidth,
+            color =
+            if (enabled) {
+                MaterialTheme.colorScheme.outline
             } else {
-                ButtonDefaults.ContentPadding
+                MaterialTheme.colorScheme.onSurface.copy(
+                    alpha = AppButtonDefaults.DISABLED_OUTLINED_BUTTON_BORDER_ALPHA,
+                )
             },
+        ),
+        contentPadding =
+        if (leadingIcon != null) {
+            ButtonDefaults.ButtonWithIconContentPadding
+        } else {
+            ButtonDefaults.ContentPadding
+        },
         content = {
             ButtonContent(
                 text = text,
@@ -134,9 +134,9 @@ fun AppTextButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            ButtonDefaults.textButtonColors(
-                contentColor = MaterialTheme.colorScheme.onBackground,
-            ),
+        ButtonDefaults.textButtonColors(
+            contentColor = MaterialTheme.colorScheme.onBackground,
+        ),
         content = {
             ButtonContent(
                 text = text,
@@ -176,10 +176,10 @@ private fun ButtonContent(text: @Composable () -> Unit, leadingIcon: @Composable
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement =
-            Arrangement.spacedBy(
-                space = ButtonDefaults.IconSpacing,
-                alignment = Alignment.CenterHorizontally,
-            ),
+        Arrangement.spacedBy(
+            space = ButtonDefaults.IconSpacing,
+            alignment = Alignment.CenterHorizontally,
+        ),
         content = {
             if (leadingIcon != null) {
                 Box(

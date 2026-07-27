@@ -68,24 +68,24 @@ fun LabelDialog(modifier: Modifier = Modifier, viewModel: LabelViewModel = hiltV
 fun LabelDialog(modifier: Modifier = Modifier, uiState: LabelsUiState, onEvent: (LabelsDialogEvent) -> Unit) {
     Box(
         modifier =
-            modifier
-                .background(
-                    color = LocalBackgroundTheme.current.color,
-                    shape = RoundedCornerShape(size = 30.dp),
-                ),
+        modifier
+            .background(
+                color = LocalBackgroundTheme.current.color,
+                shape = RoundedCornerShape(size = 30.dp),
+            ),
         contentAlignment = Alignment.Center,
         content = {
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(all = 32.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(all = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement =
-                    Arrangement.spacedBy(
-                        space = 16.dp,
-                        alignment = Alignment.Top,
-                    ),
+                Arrangement.spacedBy(
+                    space = 16.dp,
+                    alignment = Alignment.Top,
+                ),
                 content = {
                     Text(
                         text = stringResource(R.string.feature_label_impl_labels_title),
@@ -101,8 +101,8 @@ fun LabelDialog(modifier: Modifier = Modifier, uiState: LabelsUiState, onEvent: 
                         LabelsUiState.Loading -> {
                             LabelDialogLoading(
                                 modifier =
-                                    Modifier
-                                        .fillMaxWidth(),
+                                Modifier
+                                    .fillMaxWidth(),
                             )
                         }
 
@@ -110,14 +110,14 @@ fun LabelDialog(modifier: Modifier = Modifier, uiState: LabelsUiState, onEvent: 
                             if (uiState.allLabels.isEmpty()) {
                                 LabelDialogEmpty(
                                     modifier =
-                                        Modifier
-                                            .fillMaxWidth(),
+                                    Modifier
+                                        .fillMaxWidth(),
                                 )
                             } else {
                                 LabelsDialogContent(
                                     modifier =
-                                        Modifier
-                                            .fillMaxWidth(),
+                                    Modifier
+                                        .fillMaxWidth(),
                                     allLabels = uiState.allLabels,
                                     selectedLabels = uiState.selectedLabels,
                                     onToggle = {
@@ -141,9 +141,9 @@ fun LabelDialog(modifier: Modifier = Modifier, uiState: LabelsUiState, onEvent: 
                                 text = {
                                     Text(
                                         text =
-                                            stringResource(
-                                                id = R.string.feature_label_impl_done,
-                                            ),
+                                        stringResource(
+                                            id = R.string.feature_label_impl_done,
+                                        ),
                                         style = MaterialTheme.typography.labelLarge,
                                         color = MaterialTheme.colorScheme.primary,
                                     )
@@ -191,10 +191,10 @@ fun LabelsDialogContent(modifier: Modifier = Modifier, allLabels: List<Label>, s
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =
-            Arrangement.spacedBy(
-                space = 16.dp,
-                alignment = Alignment.CenterVertically,
-            ),
+        Arrangement.spacedBy(
+            space = 16.dp,
+            alignment = Alignment.CenterVertically,
+        ),
         content = {
             items(
                 items = allLabels,
@@ -239,18 +239,18 @@ private fun LabelsDialogContentPreview() {
     AppTheme {
         LabelDialog(
             uiState =
-                LabelsUiState.Success(
-                    allLabels =
-                        listOf(
-                            Label(id = 1, name = "Label 1"),
-                            Label(id = 2, name = "Label 2"),
-                            Label(id = 3, name = "Label 3"),
-                        ),
-                    selectedLabels =
-                        listOf(
-                            Label(id = 1, name = "Label 1"),
-                        ),
+            LabelsUiState.Success(
+                allLabels =
+                listOf(
+                    Label(id = 1, name = "Label 1"),
+                    Label(id = 2, name = "Label 2"),
+                    Label(id = 3, name = "Label 3"),
                 ),
+                selectedLabels =
+                listOf(
+                    Label(id = 1, name = "Label 1"),
+                ),
+            ),
             onEvent = {},
         )
     }

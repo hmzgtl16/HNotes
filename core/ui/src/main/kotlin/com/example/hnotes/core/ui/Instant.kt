@@ -38,26 +38,26 @@ val formatter =
     LocalDateTime.Format {
         date(
             format =
-                LocalDate.Format {
-                    dayOfWeek(names = DayOfWeekNames.ENGLISH_ABBREVIATED)
-                    char(value = Char(code = 44))
-                    char(value = Char(code = 32))
-                    monthName(names = MonthNames.ENGLISH_ABBREVIATED)
-                    char(value = Char(code = 32))
-                    dayOfMonth()
-                    char(value = Char(code = 44))
-                    char(value = Char(code = 32))
-                    year()
-                },
+            LocalDate.Format {
+                dayOfWeek(names = DayOfWeekNames.ENGLISH_ABBREVIATED)
+                char(value = Char(code = 44))
+                char(value = Char(code = 32))
+                monthName(names = MonthNames.ENGLISH_ABBREVIATED)
+                char(value = Char(code = 32))
+                dayOfMonth()
+                char(value = Char(code = 44))
+                char(value = Char(code = 32))
+                year()
+            },
         )
         char(value = Char(code = 32))
         time(
             format =
-                LocalTime.Format {
-                    hour()
-                    char(value = Char(code = 58))
-                    minute()
-                },
+            LocalTime.Format {
+                hour()
+                char(value = Char(code = 58))
+                minute()
+            },
         )
     }
 

@@ -110,8 +110,8 @@ internal fun NoteScreen(uiState: NoteUiState, onEvent: (NoteScreenEvent) -> Unit
     Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor =
-            uiState.backgroundColor
-                ?.let(::Color) ?: MaterialTheme.colorScheme.background,
+        uiState.backgroundColor
+            ?.let(::Color) ?: MaterialTheme.colorScheme.background,
         bottomBar = {
             AppBottomAppBar(
                 actions = {
@@ -206,27 +206,27 @@ internal fun NoteScreen(uiState: NoteUiState, onEvent: (NoteScreenEvent) -> Unit
 
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues = padding),
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues = padding),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement =
-                    Arrangement.spacedBy(
-                        space = 24.dp,
-                        alignment = Alignment.Top,
-                    ),
+                Arrangement.spacedBy(
+                    space = 24.dp,
+                    alignment = Alignment.Top,
+                ),
                 content = {
                     Column(
                         modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .weight(weight = 1f),
+                        Modifier
+                            .fillMaxWidth()
+                            .weight(weight = 1f),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement =
-                            Arrangement.spacedBy(
-                                space = 16.dp,
-                                alignment = Alignment.Top,
-                            ),
+                        Arrangement.spacedBy(
+                            space = 16.dp,
+                            alignment = Alignment.Top,
+                        ),
                         content = {
                             AppOutlinedTextField(
                                 modifier = Modifier.fillMaxWidth(),
@@ -236,18 +236,18 @@ internal fun NoteScreen(uiState: NoteUiState, onEvent: (NoteScreenEvent) -> Unit
                                     Text(text = stringResource(id = R.string.feature_note_title_placeholder))
                                 },
                                 keyboardOptions =
-                                    KeyboardOptions.Default.copy(
-                                        capitalization = KeyboardCapitalization.Words,
-                                        autoCorrectEnabled = true,
-                                        keyboardType = KeyboardType.Text,
-                                        imeAction = ImeAction.Next,
-                                    ),
+                                KeyboardOptions.Default.copy(
+                                    capitalization = KeyboardCapitalization.Words,
+                                    autoCorrectEnabled = true,
+                                    keyboardType = KeyboardType.Text,
+                                    imeAction = ImeAction.Next,
+                                ),
                                 keyboardActions =
-                                    KeyboardActions(
-                                        onNext = {
-                                            focusManager.moveFocus(focusDirection = FocusDirection.Down)
-                                        },
-                                    ),
+                                KeyboardActions(
+                                    onNext = {
+                                        focusManager.moveFocus(focusDirection = FocusDirection.Down)
+                                    },
+                                ),
                             )
 
                             AppOutlinedTextField(
@@ -258,30 +258,30 @@ internal fun NoteScreen(uiState: NoteUiState, onEvent: (NoteScreenEvent) -> Unit
                                     Text(text = stringResource(id = R.string.feature_note_description_placeholder))
                                 },
                                 keyboardOptions =
-                                    KeyboardOptions.Default.copy(
-                                        capitalization = KeyboardCapitalization.Words,
-                                        autoCorrectEnabled = true,
-                                        keyboardType = KeyboardType.Text,
-                                        imeAction = ImeAction.Done,
-                                    ),
+                                KeyboardOptions.Default.copy(
+                                    capitalization = KeyboardCapitalization.Words,
+                                    autoCorrectEnabled = true,
+                                    keyboardType = KeyboardType.Text,
+                                    imeAction = ImeAction.Done,
+                                ),
                             )
 
                             uiState.reminder?.let {
                                 ReminderCard(
                                     reminder = it,
                                     modifier =
-                                        Modifier
-                                            .fillMaxWidth()
-                                            .padding(horizontal = 16.dp),
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 16.dp),
                                 )
                             }
 
                             if (uiState.labels.isNotEmpty()) {
                                 FlowRow(
                                     modifier =
-                                        Modifier
-                                            .fillMaxWidth()
-                                            .padding(horizontal = 16.dp),
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 16.dp),
                                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                                     content = {
                                         uiState.labels.forEach { label ->
@@ -293,9 +293,9 @@ internal fun NoteScreen(uiState: NoteUiState, onEvent: (NoteScreenEvent) -> Unit
                                                     Text(text = label.name)
                                                 },
                                                 colors =
-                                                    AssistChipDefaults.assistChipColors(
-                                                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                                    ),
+                                                AssistChipDefaults.assistChipColors(
+                                                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                                ),
                                             )
                                         }
                                     },
@@ -332,10 +332,10 @@ internal fun NoteScreen(uiState: NoteUiState, onEvent: (NoteScreenEvent) -> Unit
                         Text(
                             modifier = Modifier.fillMaxWidth(),
                             text =
-                                stringResource(
-                                    id = R.string.feature_note_last_edit,
-                                    formattedLastEdit!!,
-                                ),
+                            stringResource(
+                                id = R.string.feature_note_last_edit,
+                                formattedLastEdit!!,
+                            ),
                             textAlign = TextAlign.Center,
                             style = MaterialTheme.typography.labelSmall,
                         )
@@ -406,12 +406,12 @@ internal fun NoteScreen(uiState: NoteUiState, onEvent: (NoteScreenEvent) -> Unit
             title = {
                 Text(
                     text =
-                        stringResource(
-                            id = R.string.feature_note_delete_note_title,
-                            uiState.title.ifEmpty {
-                                stringResource(id = R.string.feature_note_title_unspecified)
-                            },
-                        ),
+                    stringResource(
+                        id = R.string.feature_note_delete_note_title,
+                        uiState.title.ifEmpty {
+                            stringResource(id = R.string.feature_note_title_unspecified)
+                        },
+                    ),
                     style = MaterialTheme.typography.titleLarge,
                 )
             },
@@ -433,24 +433,24 @@ internal fun NoteScreenPreview() {
         AppBackground {
             NoteScreen(
                 uiState =
-                    NoteUiState(
-                        title = "Note Title",
-                        content = "Note description for...",
-                        backgroundColor = null,
-                        reminder =
-                            Reminder(
-                                time = Clock.System.now().plus(4.hours),
-                                repeatMode = RepeatMode.DAILY,
-                            ),
-                        items =
-                            listOf(
-                                Item(id = 1L, content = "Item 1", checked = false),
-                                Item(id = 2L, content = "Item 2", checked = true),
-                                Item(id = 3L, content = "Item 3", checked = false),
-                                Item(id = 4L, content = "Item 4", checked = false),
-                                Item(id = 5L, content = "Item 5", checked = true),
-                            ),
+                NoteUiState(
+                    title = "Note Title",
+                    content = "Note description for...",
+                    backgroundColor = null,
+                    reminder =
+                    Reminder(
+                        time = Clock.System.now().plus(4.hours),
+                        repeatMode = RepeatMode.DAILY,
                     ),
+                    items =
+                    listOf(
+                        Item(id = 1L, content = "Item 1", checked = false),
+                        Item(id = 2L, content = "Item 2", checked = true),
+                        Item(id = 3L, content = "Item 3", checked = false),
+                        Item(id = 4L, content = "Item 4", checked = false),
+                        Item(id = 5L, content = "Item 5", checked = true),
+                    ),
+                ),
                 onEvent = {},
             )
         }

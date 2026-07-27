@@ -36,42 +36,42 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel
-    @Inject
-    constructor(private val navigator: Navigator, private val userDataRepository: UserDataRepository) : ViewModel() {
-        val uiState: StateFlow<SettingsDialogState> =
-            userDataRepository.userData
-                .map {
-                    SettingsDialogState.Success(
-                        theme = it.theme,
-                        useDynamicColor = it.useDynamicColor,
-                    )
-                }
-                .stateIn(
-                    scope = viewModelScope,
-                    started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
-                    initialValue = SettingsDialogState.Loading,
+@Inject
+constructor(private val navigator: Navigator, private val userDataRepository: UserDataRepository) : ViewModel() {
+    val uiState: StateFlow<SettingsDialogState> =
+        userDataRepository.userData
+            .map {
+                SettingsDialogState.Success(
+                    theme = it.theme,
+                    useDynamicColor = it.useDynamicColor,
                 )
-
-        fun onEvent(event: SettingsDialogEvent) {
-            when (event) {
-                is SettingsDialogEvent.Dismiss -> navigateBack()
-                is SettingsDialogEvent.DynamicColorEnabled -> updateDynamicColor(event.enabled)
-                is SettingsDialogEvent.ThemeChanged -> updateTheme(event.theme)
             }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
+                initialValue = SettingsDialogState.Loading,
+            )
+
+    fun onEvent(event: SettingsDialogEvent) {
+        when (event) {
+            is SettingsDialogEvent.Dismiss -> navigateBack()
+            is SettingsDialogEvent.DynamicColorEnabled -> updateDynamicColor(event.enabled)
+            is SettingsDialogEvent.ThemeChanged -> updateTheme(event.theme)
+        }
+    }
+
+    fun updateTheme(theme: Theme) =
+        viewModelScope.launch {
+            userDataRepository.setTheme(theme = theme)
         }
 
-        fun updateTheme(theme: Theme) =
-            viewModelScope.launch {
-                userDataRepository.setTheme(theme = theme)
-            }
+    fun updateDynamicColor(useDynamicColor: Boolean) =
+        viewModelScope.launch {
+            userDataRepository.setDynamicColorPreference(useDynamicColor)
+        }
 
-        fun updateDynamicColor(useDynamicColor: Boolean) =
-            viewModelScope.launch {
-                userDataRepository.setDynamicColorPreference(useDynamicColor)
-            }
-
-        private fun navigateBack() =
-            viewModelScope.launch {
-                navigator.navigateBack()
-            }
-    }
+    private fun navigateBack() =
+        viewModelScope.launch {
+            navigator.navigateBack()
+        }
+}

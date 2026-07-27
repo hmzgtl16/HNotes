@@ -43,20 +43,20 @@ class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List
                                 backgroundColor = -8972498,
                                 pinned = true,
                                 labels =
-                                    listOf(
-                                        Label(id = 1L, name = "Label 1"),
-                                        Label(id = 2L, name = "Label 2"),
-                                    ),
+                                listOf(
+                                    Label(id = 1L, name = "Label 1"),
+                                    Label(id = 2L, name = "Label 2"),
+                                ),
                             ),
                             Note(
                                 id = 2L,
                                 title = "Note 2",
                                 content = "Content of note 2",
                                 labels =
-                                    listOf(
-                                        Label(id = 1L, name = "Label 1"),
-                                        Label(id = 2L, name = "Label 2"),
-                                    ),
+                                listOf(
+                                    Label(id = 1L, name = "Label 1"),
+                                    Label(id = 2L, name = "Label 2"),
+                                ),
                             ),
                             Note(
                                 id = 3L,
@@ -75,17 +75,17 @@ class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List
                                 content = "Content of note 5",
                                 pinned = true,
                                 reminder =
-                                    Reminder(
-                                        time = Instant.parse("2024-10-01T12:00:00Z"),
-                                        repeatMode = RepeatMode.NONE,
-                                    ),
+                                Reminder(
+                                    time = Instant.parse("2024-10-01T12:00:00Z"),
+                                    repeatMode = RepeatMode.NONE,
+                                ),
                                 labels =
-                                    listOf(
-                                        Label(id = 1L, name = "Label 1"),
-                                        Label(id = 2L, name = "Label 2"),
-                                        Label(id = 3L, name = "Label 3"),
-                                        Label(id = 4L, name = "Label 4"),
-                                    ),
+                                listOf(
+                                    Label(id = 1L, name = "Label 1"),
+                                    Label(id = 2L, name = "Label 2"),
+                                    Label(id = 3L, name = "Label 3"),
+                                    Label(id = 4L, name = "Label 4"),
+                                ),
                             ),
                             Note(
                                 id = 6L,
@@ -93,10 +93,10 @@ class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List
                                 content = "Content of note 6",
                                 pinned = true,
                                 reminder =
-                                    Reminder(
-                                        time = Instant.parse("2024-10-01T12:00:00Z"),
-                                        repeatMode = RepeatMode.DAILY,
-                                    ),
+                                Reminder(
+                                    time = Instant.parse("2024-10-01T12:00:00Z"),
+                                    repeatMode = RepeatMode.DAILY,
+                                ),
                             ),
                             Note(
                                 id = 7L,
@@ -104,23 +104,23 @@ class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List
                                 content = "Content of note 7",
                                 pinned = true,
                                 items =
-                                    listOf(
-                                        Item(
-                                            id = 1L,
-                                            content = "Item 1",
-                                            checked = false,
-                                        ),
-                                        Item(
-                                            id = 2L,
-                                            content = "Item 2",
-                                            checked = true,
-                                        ),
-                                        Item(
-                                            id = 3L,
-                                            content = "Item 3",
-                                            checked = true,
-                                        ),
+                                listOf(
+                                    Item(
+                                        id = 1L,
+                                        content = "Item 1",
+                                        checked = false,
                                     ),
+                                    Item(
+                                        id = 2L,
+                                        content = "Item 2",
+                                        checked = true,
+                                    ),
+                                    Item(
+                                        id = 3L,
+                                        content = "Item 3",
+                                        checked = true,
+                                    ),
+                                ),
                             ),
                             Note(
                                 id = 8L,
@@ -128,23 +128,23 @@ class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List
                                 content = "Content of note 8",
                                 pinned = true,
                                 items =
-                                    listOf(
-                                        Item(
-                                            id = 4L,
-                                            content = "Item 4",
-                                            checked = false,
-                                        ),
-                                        Item(
-                                            id = 5L,
-                                            content = "Item 5",
-                                            checked = true,
-                                        ),
-                                        Item(
-                                            id = 6L,
-                                            content = "Item 6",
-                                            checked = false,
-                                        ),
+                                listOf(
+                                    Item(
+                                        id = 4L,
+                                        content = "Item 4",
+                                        checked = false,
                                     ),
+                                    Item(
+                                        id = 5L,
+                                        content = "Item 5",
+                                        checked = true,
+                                    ),
+                                    Item(
+                                        id = 6L,
+                                        content = "Item 6",
+                                        checked = false,
+                                    ),
+                                ),
                             ),
                         ),
                     false to
@@ -167,10 +167,10 @@ class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List
                                 content = "Content of note 11",
                                 pinned = false,
                                 reminder =
-                                    Reminder(
-                                        time = Instant.parse("2024-10-01T12:00:00Z"),
-                                        repeatMode = RepeatMode.DAILY,
-                                    ),
+                                Reminder(
+                                    time = Instant.parse("2024-10-01T12:00:00Z"),
+                                    repeatMode = RepeatMode.DAILY,
+                                ),
                             ),
                             Note(
                                 id = 12L,
@@ -178,56 +178,56 @@ class NotesPreviewParameterProvider : PreviewParameterProvider<Map<Boolean, List
                                 content = "Content of note 12",
                                 pinned = false,
                                 reminder =
-                                    Reminder(
-                                        time = Instant.parse("2024-10-01T12:00:00Z"),
-                                        repeatMode = RepeatMode.WEEKLY,
-                                    ),
+                                Reminder(
+                                    time = Instant.parse("2024-10-01T12:00:00Z"),
+                                    repeatMode = RepeatMode.WEEKLY,
+                                ),
                             ),
                             Note(
                                 id = 13L,
                                 title = "Note 13",
                                 content = "Content of note 13",
                                 items =
-                                    listOf(
-                                        Item(
-                                            id = 7L,
-                                            content = "Item 7",
-                                            checked = false,
-                                        ),
-                                        Item(
-                                            id = 8L,
-                                            content = "Item 8",
-                                            checked = true,
-                                        ),
-                                        Item(
-                                            id = 9L,
-                                            content = "Item 9",
-                                            checked = false,
-                                        ),
+                                listOf(
+                                    Item(
+                                        id = 7L,
+                                        content = "Item 7",
+                                        checked = false,
                                     ),
+                                    Item(
+                                        id = 8L,
+                                        content = "Item 8",
+                                        checked = true,
+                                    ),
+                                    Item(
+                                        id = 9L,
+                                        content = "Item 9",
+                                        checked = false,
+                                    ),
+                                ),
                             ),
                             Note(
                                 id = 14L,
                                 title = "Note 14",
                                 content = "Content of note 14",
                                 items =
-                                    listOf(
-                                        Item(
-                                            id = 10L,
-                                            content = "Item 10",
-                                            checked = false,
-                                        ),
-                                        Item(
-                                            id = 11L,
-                                            content = "Item 11",
-                                            checked = true,
-                                        ),
-                                        Item(
-                                            id = 12L,
-                                            content = "Item 12",
-                                            checked = false,
-                                        ),
+                                listOf(
+                                    Item(
+                                        id = 10L,
+                                        content = "Item 10",
+                                        checked = false,
                                     ),
+                                    Item(
+                                        id = 11L,
+                                        content = "Item 11",
+                                        checked = true,
+                                    ),
+                                    Item(
+                                        id = 12L,
+                                        content = "Item 12",
+                                        checked = false,
+                                    ),
+                                ),
                             ),
                         ),
                 ),

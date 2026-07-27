@@ -79,16 +79,16 @@ fun AppOutlinedTextField(
         minLines = minLines,
         shape = OutlinedTextFieldDefaults.shape,
         colors =
-            OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.Transparent,
-                unfocusedBorderColor = Color.Transparent,
-                disabledBorderColor = Color.Transparent,
-                focusedTextColor = LocalContentColor.current,
-                unfocusedTextColor = LocalContentColor.current,
-                disabledTextColor = LocalContentColor.current,
-                focusedLeadingIconColor = LocalContentColor.current,
-                unfocusedLeadingIconColor = LocalContentColor.current,
-            ),
+        OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = Color.Transparent,
+            unfocusedBorderColor = Color.Transparent,
+            disabledBorderColor = Color.Transparent,
+            focusedTextColor = LocalContentColor.current,
+            unfocusedTextColor = LocalContentColor.current,
+            disabledTextColor = LocalContentColor.current,
+            focusedLeadingIconColor = LocalContentColor.current,
+            unfocusedLeadingIconColor = LocalContentColor.current,
+        ),
     )
 }
 
@@ -134,11 +134,11 @@ fun AppTextField(
         minLines = minLines,
         shape = TextFieldDefaults.shape,
         colors =
-            TextFieldDefaults.colors(
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-            ),
+        TextFieldDefaults.colors(
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
+        ),
     )
 }
 

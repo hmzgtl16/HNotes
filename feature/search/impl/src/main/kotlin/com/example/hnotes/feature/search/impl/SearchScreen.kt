@@ -105,9 +105,9 @@ internal fun SearchScreen(
         content = {
             AppSearchBar(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(),
                 inputField = {
                     SearchBarDefaults.InputField(
                         query = searchQuery,
@@ -184,9 +184,9 @@ internal fun SearchScreen(
                                         SearchResultEmpty(
                                             searchQuery = searchQuery,
                                             modifier =
-                                                Modifier
-                                                    .fillMaxWidth()
-                                                    .padding(horizontal = 48.dp),
+                                            Modifier
+                                                .fillMaxWidth()
+                                                .padding(horizontal = 48.dp),
                                         )
                                         if (recentSearchQueriesUiState is SearchQueryUiState.Success) {
                                             RecentSearches(
@@ -245,10 +245,10 @@ fun RecentSearches(
         contentPadding = PaddingValues(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =
-            Arrangement.spacedBy(
-                space = 8.dp,
-                alignment = Alignment.Top,
-            ),
+        Arrangement.spacedBy(
+            space = 8.dp,
+            alignment = Alignment.Top,
+        ),
         content = {
             item {
                 Row(
@@ -258,14 +258,14 @@ fun RecentSearches(
                     content = {
                         Text(
                             text =
-                                buildAnnotatedString {
-                                    withStyle(
-                                        style = SpanStyle(fontWeight = FontWeight.Bold),
-                                        block = {
-                                            append(text = stringResource(id = R.string.feature_search_recent_searches))
-                                        },
-                                    )
-                                },
+                            buildAnnotatedString {
+                                withStyle(
+                                    style = SpanStyle(fontWeight = FontWeight.Bold),
+                                    block = {
+                                        append(text = stringResource(id = R.string.feature_search_recent_searches))
+                                    },
+                                )
+                            },
                         )
 
                         if (queries.isNotEmpty()) {
@@ -310,17 +310,17 @@ fun SearchResultEmpty(searchQuery: String, modifier: Modifier = Modifier) {
             val start = message.indexOf(searchQuery)
             Text(
                 text =
-                    AnnotatedString(
-                        text = message,
-                        spanStyles =
-                            listOf(
-                                AnnotatedString.Range(
-                                    SpanStyle(fontWeight = FontWeight.Bold),
-                                    start = start,
-                                    end = start + searchQuery.length,
-                                ),
-                            ),
+                AnnotatedString(
+                    text = message,
+                    spanStyles =
+                    listOf(
+                        AnnotatedString.Range(
+                            SpanStyle(fontWeight = FontWeight.Bold),
+                            start = start,
+                            end = start + searchQuery.length,
+                        ),
                     ),
+                ),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(vertical = 24.dp),
@@ -347,19 +347,19 @@ fun SearchResultContent(notes: List<Note>, onNoteClick: (id: Long) -> Unit, modi
                     content = {
                         Text(
                             text =
-                                buildAnnotatedString {
-                                    withStyle(
-                                        style = SpanStyle(fontWeight = FontWeight.Bold),
-                                        block = {
-                                            append(stringResource(id = R.string.feature_search_notes))
-                                        },
-                                    )
-                                },
+                            buildAnnotatedString {
+                                withStyle(
+                                    style = SpanStyle(fontWeight = FontWeight.Bold),
+                                    block = {
+                                        append(stringResource(id = R.string.feature_search_notes))
+                                    },
+                                )
+                            },
                             modifier =
-                                Modifier.padding(
-                                    horizontal = 16.dp,
-                                    vertical = 8.dp,
-                                ),
+                            Modifier.padding(
+                                horizontal = 16.dp,
+                                vertical = 8.dp,
+                            ),
                         )
                     },
                 )
@@ -374,9 +374,9 @@ fun SearchResultContent(notes: List<Note>, onNoteClick: (id: Long) -> Unit, modi
                         note = it,
                         onNoteClick = onNoteClick,
                         modifier =
-                            Modifier
-                                .padding(horizontal = 8.dp)
-                                .animateItem(),
+                        Modifier
+                            .padding(horizontal = 8.dp)
+                            .animateItem(),
                     )
                 },
             )
@@ -425,15 +425,15 @@ private fun SearchScreenEmptyPreview(
             SearchScreen(
                 recentSearchQueriesUiState = SearchQueryUiState.Success(),
                 searchResultUiState =
-                    SearchResultUiState.Success(
-                        searchResult =
-                            searchResult.copy(
-                                notes =
-                                    searchResult.notes.filter {
-                                        it.title.contains("ry0") || it.content.contains("ry0")
-                                    },
-                            ),
+                SearchResultUiState.Success(
+                    searchResult =
+                    searchResult.copy(
+                        notes =
+                        searchResult.notes.filter {
+                            it.title.contains("ry0") || it.content.contains("ry0")
+                        },
                     ),
+                ),
                 searchQuery = "ry0",
                 onEvent = {},
             )

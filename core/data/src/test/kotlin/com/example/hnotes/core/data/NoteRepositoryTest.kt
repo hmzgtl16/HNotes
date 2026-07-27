@@ -78,11 +78,11 @@ class NoteRepositoryTest {
                     title = "Test Note with Items",
                     content = "This is a test note with items.",
                     items =
-                        listOf(
-                            Item(id = 1L, content = "Item 1"),
-                            Item(id = 2L, content = "Item 2"),
-                            Item(id = 3L, content = "Item 3"),
-                        ),
+                    listOf(
+                        Item(id = 1L, content = "Item 1"),
+                        Item(id = 2L, content = "Item 2"),
+                        Item(id = 3L, content = "Item 3"),
+                    ),
                 )
             repository.upsertNote(note = note)
 
@@ -120,11 +120,11 @@ class NoteRepositoryTest {
                     title = "Test Note with Items",
                     content = "This is a test note with items.",
                     items =
-                        listOf(
-                            Item(id = 1L, content = "Item 1"),
-                            Item(id = 2L, content = "Item 2"),
-                            Item(id = 3L, content = "Item 3"),
-                        ),
+                    listOf(
+                        Item(id = 1L, content = "Item 1"),
+                        Item(id = 2L, content = "Item 2"),
+                        Item(id = 3L, content = "Item 3"),
+                    ),
                 )
             repository.upsertNote(note = note)
 
@@ -177,10 +177,10 @@ class NoteRepositoryTest {
                     title = "Test Note 1 with Items",
                     content = "This is a test note 1 with items.",
                     items =
-                        listOf(
-                            Item(id = 1L, content = "Item 1"),
-                            Item(id = 2L, content = "Item 2"),
-                        ),
+                    listOf(
+                        Item(id = 1L, content = "Item 1"),
+                        Item(id = 2L, content = "Item 2"),
+                    ),
                 )
             val note2 =
                 Note(
@@ -188,10 +188,10 @@ class NoteRepositoryTest {
                     title = "Test Note 2 with Items",
                     content = "This is a test note 2 with items.",
                     items =
-                        listOf(
-                            Item(id = 3L, content = "Item 3"),
-                            Item(id = 4L, content = "Item 4"),
-                        ),
+                    listOf(
+                        Item(id = 3L, content = "Item 3"),
+                        Item(id = 4L, content = "Item 4"),
+                    ),
                 )
             repository.upsertNote(note = note1)
             repository.upsertNote(note = note2)
@@ -273,10 +273,10 @@ class NoteRepositoryTest {
                     title = "Test Note with Items",
                     content = "This is a test note with items.",
                     items =
-                        listOf(
-                            Item(id = 1L, content = "Item 1"),
-                            Item(id = 2L, content = "Item 2"),
-                        ),
+                    listOf(
+                        Item(id = 1L, content = "Item 1"),
+                        Item(id = 2L, content = "Item 2"),
+                    ),
                 )
             repository.upsertNote(note = note)
 
@@ -297,11 +297,11 @@ class NoteRepositoryTest {
                     title = "Test Note with Items",
                     content = "This is a test note with items.",
                     items =
-                        listOf(
-                            Item(id = 1L, content = "Item 1"),
-                            Item(id = 2L, content = "Item 2"),
-                            Item(id = 3L, content = "Item 3"),
-                        ),
+                    listOf(
+                        Item(id = 1L, content = "Item 1"),
+                        Item(id = 2L, content = "Item 2"),
+                        Item(id = 3L, content = "Item 3"),
+                    ),
                 )
             repository.upsertNote(note = note)
 

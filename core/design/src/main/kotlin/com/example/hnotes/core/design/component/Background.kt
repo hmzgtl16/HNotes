@@ -66,54 +66,54 @@ fun AppGradientBackground(modifier: Modifier = Modifier, gradientColors: Gradien
     val currentBottomColor by rememberUpdatedState(newValue = gradientColors.bottom)
     Surface(
         color =
-            if (gradientColors.container == Color.Unspecified) {
-                Color.Transparent
-            } else {
-                gradientColors.container
-            },
+        if (gradientColors.container == Color.Unspecified) {
+            Color.Transparent
+        } else {
+            gradientColors.container
+        },
         modifier = modifier.fillMaxSize(),
         content = {
             Box(
                 modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .drawWithCache {
-                            val offset = size.height * tan(Math.toRadians(11.06).toFloat())
+                Modifier
+                    .fillMaxSize()
+                    .drawWithCache {
+                        val offset = size.height * tan(Math.toRadians(11.06).toFloat())
 
-                            val start = Offset(size.width / 2 + offset / 2, 0f)
-                            val end = Offset(size.width / 2 - offset / 2, size.height)
+                        val start = Offset(size.width / 2 + offset / 2, 0f)
+                        val end = Offset(size.width / 2 - offset / 2, size.height)
 
-                            val topGradient =
-                                Brush.linearGradient(
-                                    0f to
-                                        if (currentTopColor == Color.Unspecified) {
-                                            Color.Transparent
-                                        } else {
-                                            currentTopColor
-                                        },
-                                    0.724f to Color.Transparent,
-                                    start = start,
-                                    end = end,
-                                )
+                        val topGradient =
+                            Brush.linearGradient(
+                                0f to
+                                    if (currentTopColor == Color.Unspecified) {
+                                        Color.Transparent
+                                    } else {
+                                        currentTopColor
+                                    },
+                                0.724f to Color.Transparent,
+                                start = start,
+                                end = end,
+                            )
 
-                            val bottomGradient =
-                                Brush.linearGradient(
-                                    0.2552f to Color.Transparent,
-                                    1f to
-                                        if (currentBottomColor == Color.Unspecified) {
-                                            Color.Transparent
-                                        } else {
-                                            currentBottomColor
-                                        },
-                                    start = start,
-                                    end = end,
-                                )
+                        val bottomGradient =
+                            Brush.linearGradient(
+                                0.2552f to Color.Transparent,
+                                1f to
+                                    if (currentBottomColor == Color.Unspecified) {
+                                        Color.Transparent
+                                    } else {
+                                        currentBottomColor
+                                    },
+                                start = start,
+                                end = end,
+                            )
 
-                            onDrawBehind {
-                                drawRect(topGradient)
-                                drawRect(bottomGradient)
-                            }
-                        },
+                        onDrawBehind {
+                            drawRect(topGradient)
+                            drawRect(bottomGradient)
+                        }
+                    },
                 content = { content() },
             )
         },

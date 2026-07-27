@@ -38,14 +38,14 @@ import com.example.hnotes.feature.notes.api.navigation.NotesNavKey
 
 @Stable
 class AppState
-    @OptIn(ExperimentalMaterial3AdaptiveApi::class)
-    constructor(val navigationState: NavigationState, val sceneStrategies: List<SceneStrategy<NavKey>>) {
-        val currentNavKey: NavKey
-            get() = navigationState.currentKey
+@OptIn(ExperimentalMaterial3AdaptiveApi::class)
+constructor(val navigationState: NavigationState, val sceneStrategies: List<SceneStrategy<NavKey>>) {
+    val currentNavKey: NavKey
+        get() = navigationState.currentKey
 
-        val isMainDestination: Boolean
-            @Composable get() = currentNavKey is NotesNavKey
-    }
+    val isMainDestination: Boolean
+        @Composable get() = currentNavKey is NotesNavKey
+}
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable

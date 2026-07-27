@@ -43,13 +43,13 @@ fun AppIconToggleButton(
         IconButtonDefaults.iconToggleButtonColors(
             checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             disabledContainerColor =
-                if (checked) {
-                    MaterialTheme.colorScheme.onBackground.copy(
-                        alpha = AppIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
-                    )
-                } else {
-                    Color.Transparent
-                },
+            if (checked) {
+                MaterialTheme.colorScheme.onBackground.copy(
+                    alpha = AppIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                )
+            } else {
+                Color.Transparent
+            },
         ),
     icon: @Composable () -> Unit,
     checkedIcon: @Composable () -> Unit = icon,
@@ -85,18 +85,18 @@ fun AppOutlinedIconToggleButton(
         modifier = modifier,
         enabled = enabled,
         colors =
-            IconButtonDefaults.outlinedIconToggleButtonColors(
-                checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                disabledContainerColor =
-                    if (checked) {
-                        MaterialTheme.colorScheme.onBackground.copy(
-                            alpha = AppIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
-                        )
-                    } else {
-                        Color.Transparent
-                    },
-            ),
+        IconButtonDefaults.outlinedIconToggleButtonColors(
+            checkedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            checkedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            disabledContainerColor =
+            if (checked) {
+                MaterialTheme.colorScheme.onBackground.copy(
+                    alpha = AppIconButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                )
+            } else {
+                Color.Transparent
+            },
+        ),
         content = {
             if (checked) checkedIcon() else icon()
         },

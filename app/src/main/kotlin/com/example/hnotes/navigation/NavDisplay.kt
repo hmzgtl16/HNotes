@@ -41,10 +41,10 @@ fun AppNavDisplay(appState: AppState, entryProvider: (NavKey) -> NavEntry<NavKey
         modifier = modifier,
         sceneStrategies = appState.sceneStrategies,
         entryDecorators =
-            listOf(
-                rememberSaveableStateHolderNavEntryDecorator(),
-                rememberViewModelStoreNavEntryDecorator(),
-            ),
+        listOf(
+            rememberSaveableStateHolderNavEntryDecorator(),
+            rememberViewModelStoreNavEntryDecorator(),
+        ),
         entryProvider = entryProvider,
     )
 }

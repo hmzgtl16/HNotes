@@ -71,15 +71,15 @@ class MainActivity : ComponentActivity() {
                     .collect {
                         enableEdgeToEdge(
                             statusBarStyle =
-                                SystemBarStyle.auto(
-                                    darkScrim = Color.TRANSPARENT,
-                                    lightScrim = Color.TRANSPARENT,
-                                ),
+                            SystemBarStyle.auto(
+                                darkScrim = Color.TRANSPARENT,
+                                lightScrim = Color.TRANSPARENT,
+                            ),
                             navigationBarStyle =
-                                SystemBarStyle.auto(
-                                    lightScrim = lightScrim,
-                                    darkScrim = darkScrim,
-                                ),
+                            SystemBarStyle.auto(
+                                lightScrim = lightScrim,
+                                darkScrim = darkScrim,
+                            ),
                         )
                     }
             }
@@ -98,11 +98,11 @@ class MainActivity : ComponentActivity() {
                         appState = appState,
                         navigator = navigator,
                         entryProvider =
-                            entryProvider {
-                                entryBuilders.forEach { builder ->
-                                    this.builder()
-                                }
-                            },
+                        entryProvider {
+                            entryBuilders.forEach { builder ->
+                                this.builder()
+                            }
+                        },
                     )
                 },
             )

@@ -109,34 +109,34 @@ fun App(appState: AppState, navigator: Navigator, entryProvider: (NavKey) -> Nav
                     content = { padding ->
                         Column(
                             modifier =
-                                Modifier
-                                    .fillMaxSize()
-                                    .padding(paddingValues = padding)
-                                    .consumeWindowInsets(paddingValues = padding)
-                                    .windowInsetsPadding(
-                                        insets = WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Horizontal),
-                                    ),
+                            Modifier
+                                .fillMaxSize()
+                                .padding(paddingValues = padding)
+                                .consumeWindowInsets(paddingValues = padding)
+                                .windowInsetsPadding(
+                                    insets = WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Horizontal),
+                                ),
                             content = {
                                 AnimatedVisibility(
                                     visible = shouldShowTopAppBar,
                                     enter =
-                                        slideInVertically(
-                                            initialOffsetY = { -it },
-                                            animationSpec =
-                                                tween(
-                                                    durationMillis = 150,
-                                                    easing = LinearOutSlowInEasing,
-                                                ),
+                                    slideInVertically(
+                                        initialOffsetY = { -it },
+                                        animationSpec =
+                                        tween(
+                                            durationMillis = 150,
+                                            easing = LinearOutSlowInEasing,
                                         ),
+                                    ),
                                     exit =
-                                        slideOutVertically(
-                                            targetOffsetY = { -it },
-                                            animationSpec =
-                                                tween(
-                                                    durationMillis = 250,
-                                                    easing = FastOutLinearInEasing,
-                                                ),
+                                    slideOutVertically(
+                                        targetOffsetY = { -it },
+                                        animationSpec =
+                                        tween(
+                                            durationMillis = 250,
+                                            easing = FastOutLinearInEasing,
                                         ),
+                                    ),
                                     content = {
                                         AppTopAppBar(
                                             title = {
@@ -183,22 +183,22 @@ fun App(appState: AppState, navigator: Navigator, entryProvider: (NavKey) -> Nav
                                                 )
                                             },
                                             colors =
-                                                TopAppBarDefaults.centerAlignedTopAppBarColors(
-                                                    containerColor = Color.Transparent,
-                                                ),
+                                            TopAppBarDefaults.centerAlignedTopAppBarColors(
+                                                containerColor = Color.Transparent,
+                                            ),
                                         )
                                     },
                                 )
 
                                 Box(
                                     modifier =
-                                        Modifier.consumeWindowInsets(
-                                            if (shouldShowTopAppBar) {
-                                                WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Top)
-                                            } else {
-                                                WindowInsets(left = 0, top = 0, right = 0, bottom = 0)
-                                            },
-                                        ),
+                                    Modifier.consumeWindowInsets(
+                                        if (shouldShowTopAppBar) {
+                                            WindowInsets.safeDrawing.only(sides = WindowInsetsSides.Top)
+                                        } else {
+                                            WindowInsets(left = 0, top = 0, right = 0, bottom = 0)
+                                        },
+                                    ),
                                     content = {
                                         AppNavDisplay(
                                             appState = appState,

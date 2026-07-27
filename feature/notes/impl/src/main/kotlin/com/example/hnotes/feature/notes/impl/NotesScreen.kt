@@ -134,14 +134,14 @@ fun NotesScreenLoading(modifier: Modifier = Modifier) {
 fun NotesScreenEmpty(onEvent: (NotesScreenEvent) -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier =
-            modifier
-                .fillMaxSize()
-                .padding(all = 16.dp),
+        modifier
+            .fillMaxSize()
+            .padding(all = 16.dp),
         verticalArrangement =
-            Arrangement.spacedBy(
-                space = 8.dp,
-                alignment = Alignment.CenterVertically,
-            ),
+        Arrangement.spacedBy(
+            space = 8.dp,
+            alignment = Alignment.CenterVertically,
+        ),
         horizontalAlignment = Alignment.CenterHorizontally,
         content = {
             Text(
@@ -233,15 +233,15 @@ fun NotesScreenContent(uiState: NotesUiState, onEvent: (NotesScreenEvent) -> Uni
                     title = {
                         Text(
                             text =
-                                if (uiState.selectedNotes.isEmpty()) {
-                                    stringResource(id = R.string.feature_notes_no_selected_notes)
-                                } else {
-                                    pluralStringResource(
-                                        id = R.plurals.feature_notes_selected_notes,
-                                        count = uiState.selectedNotes.size,
-                                        uiState.selectedNotes.size,
-                                    )
-                                },
+                            if (uiState.selectedNotes.isEmpty()) {
+                                stringResource(id = R.string.feature_notes_no_selected_notes)
+                            } else {
+                                pluralStringResource(
+                                    id = R.plurals.feature_notes_selected_notes,
+                                    count = uiState.selectedNotes.size,
+                                    uiState.selectedNotes.size,
+                                )
+                            },
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -315,9 +315,9 @@ fun NotesScreenContent(uiState: NotesUiState, onEvent: (NotesScreenEvent) -> Uni
 
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues = paddingValues),
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues = paddingValues),
                 content = {
                     if (uiState.isMultiSelectionEnabled) {
                         AppTriStateCheckbox(
@@ -351,10 +351,10 @@ fun NotesScreenContent(uiState: NotesUiState, onEvent: (NotesScreenEvent) -> Uni
                                                 text = stringResource(id = R.string.feature_notes_pinned_group),
                                                 style = MaterialTheme.typography.titleMedium,
                                                 modifier =
-                                                    Modifier
-                                                        .fillMaxWidth()
-                                                        .padding(horizontal = 8.dp)
-                                                        .animateItem(),
+                                                Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(horizontal = 8.dp)
+                                                    .animateItem(),
                                             )
                                         },
                                     )
@@ -392,9 +392,9 @@ fun NotesScreenContent(uiState: NotesUiState, onEvent: (NotesScreenEvent) -> Uni
                                                 )
                                             },
                                             modifier =
-                                                Modifier
-                                                    .padding(horizontal = 8.dp)
-                                                    .animateItem(),
+                                            Modifier
+                                                .padding(horizontal = 8.dp)
+                                                .animateItem(),
                                         )
                                     },
                                 )
@@ -409,10 +409,10 @@ fun NotesScreenContent(uiState: NotesUiState, onEvent: (NotesScreenEvent) -> Uni
                                                 text = stringResource(id = R.string.feature_notes_unpinned_group),
                                                 style = MaterialTheme.typography.titleMedium,
                                                 modifier =
-                                                    Modifier
-                                                        .fillMaxWidth()
-                                                        .padding(horizontal = 8.dp)
-                                                        .animateItem(),
+                                                Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(horizontal = 8.dp)
+                                                    .animateItem(),
                                             )
                                         },
                                     )
@@ -450,9 +450,9 @@ fun NotesScreenContent(uiState: NotesUiState, onEvent: (NotesScreenEvent) -> Uni
                                                 )
                                             },
                                             modifier =
-                                                Modifier
-                                                    .padding(horizontal = 8.dp)
-                                                    .animateItem(),
+                                            Modifier
+                                                .padding(horizontal = 8.dp)
+                                                .animateItem(),
                                         )
                                     },
                                 )
@@ -517,11 +517,11 @@ fun NotesScreenContentMultiSelectionEnabledPreview(
         AppBackground {
             NotesScreen(
                 uiState =
-                    NotesUiState(
-                        notesState = NotesState.Success(notes = notes),
-                        isMultiSelectionEnabled = true,
-                        selectedNotes = notes.values.flatten().filter(Note::pinned),
-                    ),
+                NotesUiState(
+                    notesState = NotesState.Success(notes = notes),
+                    isMultiSelectionEnabled = true,
+                    selectedNotes = notes.values.flatten().filter(Note::pinned),
+                ),
                 onEvent = {},
             )
         }

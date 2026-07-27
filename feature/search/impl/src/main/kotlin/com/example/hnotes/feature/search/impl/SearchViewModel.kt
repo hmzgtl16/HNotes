@@ -42,95 +42,95 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel
-    @Inject
-    constructor(private val navigator: Navigator, private val searchRepository: SearchRepository) : ViewModel() {
-        val currentSearchQueryUiState: StateFlow<String>
-            field = MutableStateFlow(value = "")
+@Inject
+constructor(private val navigator: Navigator, private val searchRepository: SearchRepository) : ViewModel() {
+    val currentSearchQueryUiState: StateFlow<String>
+        field = MutableStateFlow(value = "")
 
-        val searchResultUiState: StateFlow<SearchResultUiState> =
-            currentSearchQueryUiState
-                .flatMapLatest {
-                    if (it.length <= SEARCH_QUERY_MIN_LENGTH) {
-                        flowOf(value = SearchResultUiState.EmptyQuery)
-                    } else {
-                        searchRepository.getSearchContents(searchQuery = SearchQuery(query = it))
-                            .map(SearchResultUiState::Success)
-                            .catch { SearchResultUiState.LoadFailed }
-                    }
-                }.stateIn(
-                    scope = viewModelScope,
-                    started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
-                    initialValue = SearchResultUiState.Loading,
-                )
-
-        val recentSearchQueriesUiState: StateFlow<SearchQueryUiState> =
-            searchRepository.getAllSearchQueries(limit = RECENT_SEARCH_QUERIES_LIMIT)
-                .map(SearchQueryUiState::Success)
-                .stateIn(
-                    scope = viewModelScope,
-                    started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
-                    initialValue = SearchQueryUiState.Loading,
-                )
-
-        fun onEvent(event: SearchScreenEvent) {
-            when (event) {
-                is SearchScreenEvent.SearchQueryChanged -> {
-                    updateSearchQuery(query = event.query)
+    val searchResultUiState: StateFlow<SearchResultUiState> =
+        currentSearchQueryUiState
+            .flatMapLatest {
+                if (it.length <= SEARCH_QUERY_MIN_LENGTH) {
+                    flowOf(value = SearchResultUiState.EmptyQuery)
+                } else {
+                    searchRepository.getSearchContents(searchQuery = SearchQuery(query = it))
+                        .map(SearchResultUiState::Success)
+                        .catch { SearchResultUiState.LoadFailed }
                 }
+            }.stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
+                initialValue = SearchResultUiState.Loading,
+            )
 
-                is SearchScreenEvent.SearchTriggered -> {
-                    savaSearchQuery(query = event.query)
-                }
+    val recentSearchQueriesUiState: StateFlow<SearchQueryUiState> =
+        searchRepository.getAllSearchQueries(limit = RECENT_SEARCH_QUERIES_LIMIT)
+            .map(SearchQueryUiState::Success)
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
+                initialValue = SearchQueryUiState.Loading,
+            )
 
-                is SearchScreenEvent.ClearRecentSearch -> {
-                    deleteSearchQuery(searchQuery = event.searchQuery)
-                }
-
-                is SearchScreenEvent.ClearAllRecentSearches -> {
-                    deleteAllSearchQueries()
-                }
-
-                is SearchScreenEvent.NavigateToNote -> {
-                    navigateToNote(noteId = event.noteId)
-                }
-
-                is SearchScreenEvent.NavigateBack -> {
-                    navigateBack()
-                }
-            }
-        }
-
-        private fun updateSearchQuery(query: String) {
-            currentSearchQueryUiState.update { query.trim() }
-        }
-
-        private fun savaSearchQuery(query: String) =
-            viewModelScope.launch {
-                searchRepository.insertOrReplaceSearchQuery(searchQuery = SearchQuery(query = query))
+    fun onEvent(event: SearchScreenEvent) {
+        when (event) {
+            is SearchScreenEvent.SearchQueryChanged -> {
+                updateSearchQuery(query = event.query)
             }
 
-        private fun deleteSearchQuery(searchQuery: SearchQuery) =
-            viewModelScope.launch {
-                searchRepository.delete(searchQuery = searchQuery)
+            is SearchScreenEvent.SearchTriggered -> {
+                savaSearchQuery(query = event.query)
             }
 
-        private fun deleteAllSearchQueries() =
-            viewModelScope.launch {
-                searchRepository.deleteAll()
+            is SearchScreenEvent.ClearRecentSearch -> {
+                deleteSearchQuery(searchQuery = event.searchQuery)
             }
 
-        private fun navigateToNote(noteId: Long) =
-            viewModelScope.launch {
-                navigator.navigateTo(navKey = NoteNavKey(noteId = noteId))
+            is SearchScreenEvent.ClearAllRecentSearches -> {
+                deleteAllSearchQueries()
             }
 
-        private fun navigateBack() =
-            viewModelScope.launch {
-                navigator.navigateBack()
+            is SearchScreenEvent.NavigateToNote -> {
+                navigateToNote(noteId = event.noteId)
             }
 
-        companion object {
-            private const val SEARCH_QUERY_MIN_LENGTH = 2
-            private const val RECENT_SEARCH_QUERIES_LIMIT = 10
+            is SearchScreenEvent.NavigateBack -> {
+                navigateBack()
+            }
         }
     }
+
+    private fun updateSearchQuery(query: String) {
+        currentSearchQueryUiState.update { query.trim() }
+    }
+
+    private fun savaSearchQuery(query: String) =
+        viewModelScope.launch {
+            searchRepository.insertOrReplaceSearchQuery(searchQuery = SearchQuery(query = query))
+        }
+
+    private fun deleteSearchQuery(searchQuery: SearchQuery) =
+        viewModelScope.launch {
+            searchRepository.delete(searchQuery = searchQuery)
+        }
+
+    private fun deleteAllSearchQueries() =
+        viewModelScope.launch {
+            searchRepository.deleteAll()
+        }
+
+    private fun navigateToNote(noteId: Long) =
+        viewModelScope.launch {
+            navigator.navigateTo(navKey = NoteNavKey(noteId = noteId))
+        }
+
+    private fun navigateBack() =
+        viewModelScope.launch {
+            navigator.navigateBack()
+        }
+
+    companion object {
+        private const val SEARCH_QUERY_MIN_LENGTH = 2
+        private const val RECENT_SEARCH_QUERIES_LIMIT = 10
+    }
+}

@@ -160,9 +160,9 @@ private fun AppSearchBarExpandedPreview() {
                             leadingContent = { Icon(Icons.Filled.Star, contentDescription = null) },
                             colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                             modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp, vertical = 4.dp),
                         )
                     }
                 }

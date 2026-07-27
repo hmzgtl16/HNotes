@@ -79,25 +79,25 @@ fun SettingsDialog(modifier: Modifier = Modifier, uiState: SettingsDialogState, 
 
     Box(
         modifier =
-            modifier
-                .background(
-                    color = LocalBackgroundTheme.current.color,
-                    shape = RoundedCornerShape(size = 30.dp),
-                ),
+        modifier
+            .background(
+                color = LocalBackgroundTheme.current.color,
+                shape = RoundedCornerShape(size = 30.dp),
+            ),
         contentAlignment = Alignment.Center,
         content = {
             Column(
                 modifier =
-                    Modifier
-                        .wrapContentSize(align = Alignment.TopCenter)
-                        .padding(all = 32.dp)
-                        .verticalScroll(state = rememberScrollState()),
+                Modifier
+                    .wrapContentSize(align = Alignment.TopCenter)
+                    .padding(all = 32.dp)
+                    .verticalScroll(state = rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement =
-                    Arrangement.spacedBy(
-                        space = 24.dp,
-                        alignment = Alignment.Top,
-                    ),
+                Arrangement.spacedBy(
+                    space = 24.dp,
+                    alignment = Alignment.Top,
+                ),
                 content = {
                     Text(
                         text = stringResource(R.string.feature_settings_title),
@@ -138,9 +138,9 @@ fun SettingsDialog(modifier: Modifier = Modifier, uiState: SettingsDialogState, 
                         text = {
                             Text(
                                 text =
-                                    stringResource(
-                                        id = R.string.feature_settings_dismiss_dialog_button_text,
-                                    ),
+                                stringResource(
+                                    id = R.string.feature_settings_dismiss_dialog_button_text,
+                                ),
                                 style = MaterialTheme.typography.labelLarge,
                                 color = MaterialTheme.colorScheme.primary,
                             )
@@ -164,10 +164,10 @@ private fun SettingsDialogContent(theme: Theme, onChangeTheme: (Theme) -> Unit, 
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement =
-            Arrangement.spacedBy(
-                space = 16.dp,
-                alignment = Alignment.CenterVertically,
-            ),
+        Arrangement.spacedBy(
+            space = 16.dp,
+            alignment = Alignment.CenterVertically,
+        ),
         content = {
             SettingsDialogThemeSection(
                 theme = theme,
@@ -190,10 +190,10 @@ private fun SettingsDialogThemeSection(theme: Theme, onChangeTheme: (Theme) -> U
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.Start,
         verticalArrangement =
-            Arrangement.spacedBy(
-                space = 16.dp,
-                alignment = Alignment.CenterVertically,
-            ),
+        Arrangement.spacedBy(
+            space = 16.dp,
+            alignment = Alignment.CenterVertically,
+        ),
         content = {
             Text(
                 text = stringResource(id = R.string.feature_settings_theme),
@@ -204,16 +204,16 @@ private fun SettingsDialogThemeSection(theme: Theme, onChangeTheme: (Theme) -> U
 
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                        .selectableGroup(),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .selectableGroup(),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement =
-                    Arrangement.spacedBy(
-                        space = 16.dp,
-                        alignment = Alignment.CenterVertically,
-                    ),
+                Arrangement.spacedBy(
+                    space = 16.dp,
+                    alignment = Alignment.CenterVertically,
+                ),
                 content = {
                     Row(
                         Modifier
@@ -224,10 +224,10 @@ private fun SettingsDialogThemeSection(theme: Theme, onChangeTheme: (Theme) -> U
                                 onClick = { onChangeTheme(Theme.FOLLOW_SYSTEM) },
                             ),
                         horizontalArrangement =
-                            Arrangement.spacedBy(
-                                space = 8.dp,
-                                alignment = Alignment.Start,
-                            ),
+                        Arrangement.spacedBy(
+                            space = 8.dp,
+                            alignment = Alignment.Start,
+                        ),
                         verticalAlignment = Alignment.CenterVertically,
                         content = {
                             RadioButton(
@@ -236,9 +236,9 @@ private fun SettingsDialogThemeSection(theme: Theme, onChangeTheme: (Theme) -> U
                             )
                             Text(
                                 text =
-                                    stringResource(
-                                        id = R.string.feature_settings_theme_follow_system,
-                                    ),
+                                stringResource(
+                                    id = R.string.feature_settings_theme_follow_system,
+                                ),
                             )
                         },
                     )
@@ -252,10 +252,10 @@ private fun SettingsDialogThemeSection(theme: Theme, onChangeTheme: (Theme) -> U
                                 onClick = { onChangeTheme(Theme.DARK) },
                             ),
                         horizontalArrangement =
-                            Arrangement.spacedBy(
-                                space = 8.dp,
-                                alignment = Alignment.Start,
-                            ),
+                        Arrangement.spacedBy(
+                            space = 8.dp,
+                            alignment = Alignment.Start,
+                        ),
                         verticalAlignment = Alignment.CenterVertically,
                         content = {
                             RadioButton(
@@ -275,10 +275,10 @@ private fun SettingsDialogThemeSection(theme: Theme, onChangeTheme: (Theme) -> U
                                 onClick = { onChangeTheme(Theme.LIGHT) },
                             ),
                         horizontalArrangement =
-                            Arrangement.spacedBy(
-                                space = 8.dp,
-                                alignment = Alignment.Start,
-                            ),
+                        Arrangement.spacedBy(
+                            space = 8.dp,
+                            alignment = Alignment.Start,
+                        ),
                         verticalAlignment = Alignment.CenterVertically,
                         content = {
                             RadioButton(
@@ -298,15 +298,15 @@ private fun SettingsDialogThemeSection(theme: Theme, onChangeTheme: (Theme) -> U
 private fun SettingsDialogThemeSection(useDynamicUiTheme: Boolean, onChangeDynamicUiTheme: (Boolean) -> Unit) {
     Row(
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .selectable(
-                    selected = useDynamicUiTheme,
-                    role = Role.Switch,
-                    onClick = {
-                        onChangeDynamicUiTheme(!useDynamicUiTheme)
-                    },
-                ),
+        Modifier
+            .fillMaxWidth()
+            .selectable(
+                selected = useDynamicUiTheme,
+                role = Role.Switch,
+                onClick = {
+                    onChangeDynamicUiTheme(!useDynamicUiTheme)
+                },
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         content = {
@@ -341,10 +341,10 @@ private fun SettingsDialogSuccessPreview() {
     AppTheme {
         SettingsDialog(
             uiState =
-                SettingsDialogState.Success(
-                    theme = Theme.FOLLOW_SYSTEM,
-                    useDynamicColor = true,
-                ),
+            SettingsDialogState.Success(
+                theme = Theme.FOLLOW_SYSTEM,
+                useDynamicColor = true,
+            ),
             onEvent = {},
         )
     }

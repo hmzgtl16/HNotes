@@ -75,10 +75,10 @@ fun PaletteModalBottomSheet(sheetState: SheetState, onDismissRequest: () -> Unit
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(start = 8.dp, end = 8.dp, bottom = 16.dp),
                 horizontalArrangement =
-                    Arrangement.spacedBy(
-                        space = 16.dp,
-                        alignment = Alignment.CenterHorizontally,
-                    ),
+                Arrangement.spacedBy(
+                    space = 16.dp,
+                    alignment = Alignment.CenterHorizontally,
+                ),
                 verticalAlignment = Alignment.CenterVertically,
                 content = {
                     item {
@@ -102,10 +102,10 @@ fun PaletteModalBottomSheet(sheetState: SheetState, onDismissRequest: () -> Unit
 
                     items(
                         items =
-                            options.subList(
-                                fromIndex = 1,
-                                toIndex = options.size,
-                            ),
+                        options.subList(
+                            fromIndex = 1,
+                            toIndex = options.size,
+                        ),
                         itemContent = {
                             AppOutlinedIconToggleButton(
                                 checked = backgroundColor == it.toArgb(),
@@ -115,23 +115,23 @@ fun PaletteModalBottomSheet(sheetState: SheetState, onDismissRequest: () -> Unit
                                 icon = {
                                     Box(
                                         modifier =
-                                            Modifier
-                                                .background(
-                                                    color = it,
-                                                    shape = CircleShape,
-                                                )
-                                                .size(size = 48.dp),
+                                        Modifier
+                                            .background(
+                                                color = it,
+                                                shape = CircleShape,
+                                            )
+                                            .size(size = 48.dp),
                                     )
                                 },
                                 checkedIcon = {
                                     Box(
                                         modifier =
-                                            Modifier
-                                                .background(
-                                                    color = it,
-                                                    shape = CircleShape,
-                                                )
-                                                .size(size = 48.dp),
+                                        Modifier
+                                            .background(
+                                                color = it,
+                                                shape = CircleShape,
+                                            )
+                                            .size(size = 48.dp),
                                         contentAlignment = Alignment.Center,
                                         content = {
                                             Icon(AppIcons.Check, contentDescription = null)
@@ -158,11 +158,11 @@ fun PaletteModalBottomSheetPreview(
         AppBackground {
             PaletteModalBottomSheet(
                 sheetState =
-                    SheetState(
-                        skipPartiallyExpanded = false,
-                        density = LocalDensity.current,
-                        initialValue = SheetValue.Expanded,
-                    ),
+                SheetState(
+                    skipPartiallyExpanded = false,
+                    density = LocalDensity.current,
+                    initialValue = SheetValue.Expanded,
+                ),
                 onDismissRequest = {},
                 backgroundColor = backgroundColors[1].toArgb(),
                 onBackgroundColorChange = {},

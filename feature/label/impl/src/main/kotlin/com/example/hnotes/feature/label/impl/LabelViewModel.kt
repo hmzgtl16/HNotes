@@ -39,56 +39,56 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel(assistedFactory = LabelViewModel.Factory::class)
 class LabelViewModel
-    @AssistedInject
-    constructor(
-        private val navigator: Navigator,
-        private val labelRepository: LabelRepository,
-        @Assisted private val navKey: LabelNavKey,
-    ) : ViewModel() {
-        val uiState: StateFlow<LabelsUiState> =
-            labelRepository
-                .getAllLabels()
-                .combine(
-                    labelRepository.getLabelsForNote(navKey.noteId),
-                ) { allLabels, selectedLabels ->
-                    LabelsUiState.Success(
-                        allLabels = allLabels,
-                        selectedLabels = selectedLabels,
-                    )
-                }.stateIn(
-                    scope = viewModelScope,
-                    started = SharingStarted.WhileSubscribed(5000L),
-                    initialValue = LabelsUiState.Loading,
+@AssistedInject
+constructor(
+    private val navigator: Navigator,
+    private val labelRepository: LabelRepository,
+    @Assisted private val navKey: LabelNavKey,
+) : ViewModel() {
+    val uiState: StateFlow<LabelsUiState> =
+        labelRepository
+            .getAllLabels()
+            .combine(
+                labelRepository.getLabelsForNote(navKey.noteId),
+            ) { allLabels, selectedLabels ->
+                LabelsUiState.Success(
+                    allLabels = allLabels,
+                    selectedLabels = selectedLabels,
                 )
+            }.stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000L),
+                initialValue = LabelsUiState.Loading,
+            )
 
-        fun onEvent(event: LabelsDialogEvent) {
-            when (event) {
-                is LabelsDialogEvent.Dismiss -> navigateBack()
-                is LabelsDialogEvent.ToggleLabelSelection -> toggleLabelSelection(event.label)
-            }
-        }
-
-        private fun toggleLabelSelection(label: Label) =
-            viewModelScope.launch {
-                val currentNoteId = navKey.noteId
-                val isSelected =
-                    (uiState.value as? LabelsUiState.Success)
-                        ?.selectedLabels?.any { it.id == label.id } ?: false
-
-                if (isSelected) {
-                    labelRepository.unlinkLabelFromNote(currentNoteId, label.id)
-                } else {
-                    labelRepository.linkLabelToNote(currentNoteId, label.id)
-                }
-            }
-
-        private fun navigateBack() =
-            viewModelScope.launch {
-                navigator.navigateBack()
-            }
-
-        @AssistedFactory
-        interface Factory {
-            fun create(navKey: LabelNavKey): LabelViewModel
+    fun onEvent(event: LabelsDialogEvent) {
+        when (event) {
+            is LabelsDialogEvent.Dismiss -> navigateBack()
+            is LabelsDialogEvent.ToggleLabelSelection -> toggleLabelSelection(event.label)
         }
     }
+
+    private fun toggleLabelSelection(label: Label) =
+        viewModelScope.launch {
+            val currentNoteId = navKey.noteId
+            val isSelected =
+                (uiState.value as? LabelsUiState.Success)
+                    ?.selectedLabels?.any { it.id == label.id } ?: false
+
+            if (isSelected) {
+                labelRepository.unlinkLabelFromNote(currentNoteId, label.id)
+            } else {
+                labelRepository.linkLabelToNote(currentNoteId, label.id)
+            }
+        }
+
+    private fun navigateBack() =
+        viewModelScope.launch {
+            navigator.navigateBack()
+        }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(navKey: LabelNavKey): LabelViewModel
+    }
+}

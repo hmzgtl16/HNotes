@@ -34,21 +34,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel
-    @Inject
-    constructor(userDataRepository: UserDataRepository, labelRepository: LabelRepository) : ViewModel() {
-        val uiState: StateFlow<MainActivityUiState> =
-            combine(
-                userDataRepository.userData,
-                labelRepository.getAllLabels(),
-            ) { userData, labels ->
-                MainActivityUiState.Success(
-                    theme = userData.theme,
-                    useDynamicColor = userData.useDynamicColor,
-                    labels = labels,
-                )
-            }.stateIn(
-                scope = viewModelScope,
-                initialValue = MainActivityUiState.Loading,
-                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000),
+@Inject
+constructor(userDataRepository: UserDataRepository, labelRepository: LabelRepository) : ViewModel() {
+    val uiState: StateFlow<MainActivityUiState> =
+        combine(
+            userDataRepository.userData,
+            labelRepository.getAllLabels(),
+        ) { userData, labels ->
+            MainActivityUiState.Success(
+                theme = userData.theme,
+                useDynamicColor = userData.useDynamicColor,
+                labels = labels,
             )
-    }
+        }.stateIn(
+            scope = viewModelScope,
+            initialValue = MainActivityUiState.Loading,
+            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000),
+        )
+}

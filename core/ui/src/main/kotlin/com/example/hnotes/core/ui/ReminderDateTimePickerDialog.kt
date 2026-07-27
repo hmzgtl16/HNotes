@@ -60,10 +60,10 @@ fun ReminderDateTimePickerDialog(reminder: Reminder?, onConfirmClick: (Reminder?
     var newReminder by remember {
         mutableStateOf(
             value =
-                reminder ?: Reminder(
-                    time = Clock.System.now(),
-                    repeatMode = RepeatMode.NONE,
-                ),
+            reminder ?: Reminder(
+                time = Clock.System.now(),
+                repeatMode = RepeatMode.NONE,
+            ),
         )
     }
     var repeatModeMenuExpanded by remember { mutableStateOf(value = false) }
@@ -84,10 +84,10 @@ fun ReminderDateTimePickerDialog(reminder: Reminder?, onConfirmClick: (Reminder?
         dismissButton = {
             Row(
                 horizontalArrangement =
-                    Arrangement.spacedBy(
-                        space = 16.dp,
-                        alignment = Alignment.CenterHorizontally,
-                    ),
+                Arrangement.spacedBy(
+                    space = 16.dp,
+                    alignment = Alignment.CenterHorizontally,
+                ),
                 verticalAlignment = Alignment.CenterVertically,
                 content = {
                     AppTextButton(
@@ -124,20 +124,20 @@ fun ReminderDateTimePickerDialog(reminder: Reminder?, onConfirmClick: (Reminder?
                 modifier = Modifier.padding(all = 24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement =
-                    Arrangement.spacedBy(
-                        space = 24.dp,
-                        alignment = Alignment.CenterVertically,
-                    ),
+                Arrangement.spacedBy(
+                    space = 24.dp,
+                    alignment = Alignment.CenterVertically,
+                ),
                 content = {
                     AppDateTimePicker(
                         startDateTime =
-                            reminder?.time?.toJavaLocalDateTime()
-                                ?: LocalDateTime.now().plusHours(1),
+                        reminder?.time?.toJavaLocalDateTime()
+                            ?: LocalDateTime.now().plusHours(1),
                         yearsRange =
-                            IntRange(
-                                start = LocalDateTime.now().year,
-                                endInclusive = 2100,
-                            ),
+                        IntRange(
+                            start = LocalDateTime.now().year,
+                            endInclusive = 2100,
+                        ),
                         onSnappedDateTime = {
                             newReminder = newReminder.copy(time = it.toKotlinInstant())
                         },
