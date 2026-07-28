@@ -19,35 +19,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.example.hnotes
+
 import com.android.build.api.dsl.ApplicationExtension
-import com.diffplug.gradle.spotless.SpotlessExtension
-import com.example.hnotes.configureGradleManagedDevices
-import com.example.hnotes.configureKotlinAndroid
-import com.example.hnotes.configureLintApplication
-import com.example.hnotes.configureSpotlessAndroid
-import com.example.hnotes.libs
-import org.gradle.api.Plugin
+import com.android.build.api.dsl.LibraryExtension
+import com.android.build.api.dsl.Lint
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 
-class AndroidApplicationConventionPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            apply(plugin = libs.findPlugin("com-android-application").get().get().pluginId)
-            apply(plugin = libs.findPlugin("com-diffplug-spotless").get().get().pluginId)
-
-            extensions.configure<ApplicationExtension> {
-                configureKotlinAndroid(this)
-                configureLintApplication()
-                defaultConfig.targetSdk = 36
-                testOptions.animationsDisabled = true
-                configureGradleManagedDevices(this)
-            }
-
-            extensions.configure<SpotlessExtension> {
-                configureSpotlessAndroid(this)
-            }
-        }
+internal fun Project.configureLintApplication() {
+    configure<ApplicationExtension> {
+        lint(Lint::configure)
     }
+}
+
+internal fun Project.configureLintLibrary() {
+    configure<LibraryExtension> {
+        lint(Lint::configure)
+    }
+}
+
+internal fun Project.configureLint() {
+    configure<Lint> {
+        configure()
+    }
+}
+
+private fun Lint.configure() {
+    xmlReport = true
+    sarifReport = true
+    checkDependencies = true
+    disable += "GradleDependency"
 }

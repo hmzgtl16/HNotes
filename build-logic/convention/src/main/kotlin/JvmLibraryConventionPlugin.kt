@@ -21,6 +21,7 @@
  */
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.example.hnotes.configureKotlinJvm
+import com.example.hnotes.configureLint
 import com.example.hnotes.configureSpotlessJvm
 import com.example.hnotes.libs
 import org.gradle.api.Plugin
@@ -33,9 +34,11 @@ class JvmLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             apply(plugin = libs.findPlugin("org-jetbrains-kotlin-jvm").get().get().pluginId)
+            apply(plugin = libs.findPlugin("com-android-lint").get().get().pluginId)
             apply(plugin = libs.findPlugin("com-diffplug-spotless").get().get().pluginId)
 
             configureKotlinJvm()
+            configureLint()
             extensions.configure<SpotlessExtension> {
                 configureSpotlessJvm(this)
             }

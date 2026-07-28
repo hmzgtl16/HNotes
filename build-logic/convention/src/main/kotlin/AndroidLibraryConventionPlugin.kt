@@ -23,6 +23,7 @@ import com.android.build.api.dsl.LibraryExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.example.hnotes.configureGradleManagedDevices
 import com.example.hnotes.configureKotlinAndroid
+import com.example.hnotes.configureLintLibrary
 import com.example.hnotes.configureSpotlessAndroid
 import com.example.hnotes.libs
 import org.gradle.api.Plugin
@@ -39,6 +40,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
+                configureLintLibrary()
                 defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                 testOptions.animationsDisabled = true
                 configureGradleManagedDevices(this)

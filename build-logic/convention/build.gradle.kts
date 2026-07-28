@@ -23,6 +23,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.com.android.lint)
 }
 
 group = "com.example.hnotes.buildlogic"
@@ -46,6 +47,7 @@ dependencies {
     compileOnly(libs.com.google.devtools.ksp.gradle.plugin)
     compileOnly(libs.dev.iurysouza.modulegraph.gradle.plugin)
     compileOnly(libs.org.jetbrains.kotlin.gradle.plugin)
+    lintChecks(libs.androidx.lint.gradle)
 }
 
 tasks {
