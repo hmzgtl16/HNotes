@@ -20,8 +20,10 @@
  * SOFTWARE.
  */
 import com.android.build.api.dsl.LibraryExtension
+import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.example.hnotes.configureGradleManagedDevices
+import com.example.hnotes.configureJacoco
 import com.example.hnotes.configureKotlinAndroid
 import com.example.hnotes.configureLintLibrary
 import com.example.hnotes.configureSpotlessAndroid
@@ -31,16 +33,19 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.testing.jacoco.plugins.JacocoPlugin
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             apply(plugin = libs.findPlugin("com-android-library").get().get().pluginId)
             apply(plugin = libs.findPlugin("com-diffplug-spotless").get().get().pluginId)
+            apply<JacocoPlugin>()
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
                 configureLintLibrary()
+                configureJacoco(this)
                 defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                 testOptions.animationsDisabled = true
                 configureGradleManagedDevices(this)
@@ -50,6 +55,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                         .distinct()
                         .joinToString(separator = "_")
                         .lowercase() + "_"
+            }
+            extensions.configure<LibraryAndroidComponentsExtension> {
+                configureJacoco(this)
             }
             extensions.configure<SpotlessExtension> {
                 configureSpotlessAndroid(this)

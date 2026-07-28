@@ -35,6 +35,7 @@ org-jetbrains-kotlin = "2.4.0"
 org-jetbrains-kotlinx-coroutines = "1.11.0"
 org-jetbrains-kotlinx-datetime = "0.8.0"
 org-jetbrains-kotlinx-serialization = "1.11.0"
+org-jacoco = "0.8.15"
 org-robolectric = "4.15.1"
 com-diffplug-spotless = "8.8.0"
 

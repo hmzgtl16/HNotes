@@ -20,8 +20,10 @@
  * SOFTWARE.
  */
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.example.hnotes.configureGradleManagedDevices
+import com.example.hnotes.configureJacoco
 import com.example.hnotes.configureKotlinAndroid
 import com.example.hnotes.configureLintApplication
 import com.example.hnotes.configureSpotlessAndroid
@@ -30,19 +32,26 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
+import org.gradle.testing.jacoco.plugins.JacocoPlugin
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             apply(plugin = libs.findPlugin("com-android-application").get().get().pluginId)
             apply(plugin = libs.findPlugin("com-diffplug-spotless").get().get().pluginId)
+            apply<JacocoPlugin>()
 
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
                 configureLintApplication()
+                configureJacoco(this)
                 defaultConfig.targetSdk = 36
                 testOptions.animationsDisabled = true
                 configureGradleManagedDevices(this)
+            }
+
+            extensions.configure<ApplicationAndroidComponentsExtension> {
+                configureJacoco(this)
             }
 
             extensions.configure<SpotlessExtension> {
