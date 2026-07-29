@@ -22,6 +22,7 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
+import com.example.hnotes.configureFlavors
 import com.example.hnotes.configureGradleManagedDevices
 import com.example.hnotes.configureJacoco
 import com.example.hnotes.configureKotlinAndroid
@@ -43,6 +44,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
 
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
+                configureFlavors(this)
                 configureLintApplication()
                 configureJacoco(this)
                 defaultConfig.targetSdk = 36
